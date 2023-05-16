@@ -23,7 +23,7 @@ section {
     font-size: 100px; ;
     overflow: hidden;
     white-space: nowrap;
-    animation: typing 3s steps(40, end), blink-caret 1s step-end infinite;
+    animation: typing 1.5s steps(40, end), blink-caret 1s step-end infinite;
   }
   
   /* The typing effect */

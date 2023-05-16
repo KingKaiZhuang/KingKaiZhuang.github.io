@@ -15,9 +15,8 @@ nav a {
     font-weight: bold;
     color: #000;
 }
-nav a:active {
-    background-color: aquamarine;
-    color: rgb(149, 246, 255);
+nav a:hover {
+    color: #ffffff;
 }
 .menu-group {
     display: flex;
@@ -25,10 +24,16 @@ nav a:active {
     width: 100%;
 }
 
-
+.logo {
+    width: 100px;
+}
 .logo a {
-    letter-spacing: 3px;
+    width: auto;
+    letter-spacing: 2px;
     font-weight: bold;
+}
+.logo a:hover {
+    color: blanchedalmond;
 }
 .menu a {
     margin-inline: 3px;
