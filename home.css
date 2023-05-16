@@ -16,27 +16,52 @@ section {
 #home {
     background-image: url("/images/home.jpg");  
 }
-
-.title h1 {
-    width: auto;
-    height: 250px;
-    font-size: 100px; ;
-    overflow: hidden;
-    white-space: nowrap;
-    animation: typing 1.5s steps(40, end), blink-caret 1s step-end infinite;
-  }
+#home2 {
+    background-image: url("/images/home2.jpg");  
+}
+#home3 {
+    background-image: url("/images/home3.jpg");  
+    filter: blur(.1);
+}
+.title1 h1 {
+  width: auto;
+  height: 250px;
+  font-size: 100px; ;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 1.5s steps(40, end), blink-caret 1s step-end infinite; 
+}
+.title2 h1 {
+  width: auto;
+  height: 250px;
+  font-size: 100px; ;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 1.5s steps(40, end), blink-caret 1s step-end infinite;   
+  color: rgb(255, 255, 255);
+}
+.title3 h1 {
+  width: auto;
+  height: 250px;
+  font-size: 100px; ;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 1.5s steps(40, end), blink-caret 1s step-end infinite;   
+  color: rgb(255, 255, 255);
+  filter: brightness(1);
+}
   
-  /* The typing effect */
-  @keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
-  }
+/* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
   
-  /* The typewriter cursor effect */
-  @keyframes blink-caret {
-    from, to { border-color: transparent }
-    50% { border-color: orange }
-  }
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange }
+}
   
   
   
