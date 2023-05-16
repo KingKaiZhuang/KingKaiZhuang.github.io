@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>  
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kai's home</title>
+    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/home.css">  
+        <!-- nav style && javascript -->
+        <style>
+            nav {
+                top: 0;
+                left: 0;                
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                background-color: rgba(84, 84, 84, 0.798);
+                backdrop-filter: blur(8px);
+                height: 60px;
+                font-size: large;
+                position: fixed;
+                z-index: 100;
+                opacity: 0;
+                transform: translateY(-100%);
+                transition: opacity 2s ease-in-out, transform 0.5s ease-in-out;                
+            }
+            nav.show {
+                opacity: 1;
+                transform: translateY(0);
+            }            
+        </style>
+        <script>
+            window.addEventListener('load', () => {
+                const nav = document.querySelector('nav');
+                nav.classList.add('show');
+            });
+        </script>
+        <!-- logo style -->
+        <style> 
+            .logo {
+                /* padding: 10px; */
+                font-size: 25px;
+                font-weight: bold;
+                margin-right: 10px;
+                position: relative;
+                top: 12px;
+                left: 15px;
+            }
+
+            .logo a {
+                color: white;
+                text-decoration: none;
+                position: relative;
+            }
+
+            .logo a::before {
+                content: "";
+                position: absolute;
+                bottom: -4px;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background-color: #ffffff;
+                opacity: 0;
+                transition: opacity 0.3s ease-out;
+            }
+
+            .logo a:hover::before {
+                opacity: 1;
+            }                
+        </style>
+        <!-- menu style -->
+        <style>
+            .menu-group {
+                display: flex;
+                width: 100%;
+                position: relative;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
+            .menu-left {
+                flex-grow: 1;
+                display: flex;
+            }
+            .menu-right {
+                display: flex;
+            }
+            .menu {
+                display: flex;
+                position: relative;
+                justify-content: center;
+            }
+            .menu a {
+                color: white;
+                text-decoration: none;
+                padding: 5px;
+                margin-right: 10px;
+                font-size: 23px;
+                position: relative;
+            }
+            .menu-group a {
+                color: #ffffff;
+                transition: color 0.3s ease-in-out;
+                position: relative;
+                justify-content: center;
+            }                
+            .menu-group a:hover {
+                background-color: #ffffffa3;
+                color: #2a85fc;
+                border-radius: 15px;
+            }
+        </style> 
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <a href="./ZK_KAI.html">ZK_KAI</a>
+        </div>
+
+        <div class="menu-group">
+            <div class="menu menu-left">
+                <a href="./MidJourey.html">MidJourney</a>
+            </div>
+            <div class="menu menu-right">
+                <a href="./contact.html">聯絡我們</a>
+                <a href="./login.html">登入</a>
+            </div>
+        </div>
+    </nav>
+<!-- ==================================================================================================== -->
+
+    <!-- page1 title style -->
+    <style>
+        .title {
+            width: 100%;
+            height: auto;
+            background-color: rgba(167, 167, 167, 0.729);
+            /* margin-bottom: auto; */
+            font-size: 25px;
+            position: relative;
+            left: 0;
+            align-items: center;
+            transform-origin: center;
+            animation: expand 1.5s ease-in-out;
+            position: relative;
+            top: 60px;
+            padding: 10px;
+        }
+
+        @keyframes expand {
+            from {
+                transform: scaleX(0);
+            }
+            to {
+                transform: scaleX(1);
+            }
+        }
+    </style>
+    <!-- mid_photo style -->
+    <style>
+        .mid_photo {
+            position: absolute;
+            top: 215px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 50%;
+            animation: bounce-in 1s ease-in-out;
+            border: 5px solid;
+            box-shadow: inset 0 0 0 5px #2980b9, inset 0 0 0 10px #3498db, inset 0 0 0 15px #5fa8d6, inset 0 0 0 20px #85c1e9;
+        }
+
+        .mid_photo img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            width: 100%;
+            height: auto;
+        }
+        @keyframes bounce-in {
+            0% {
+                transform: translateX(-50%) scale(0);
+            }
+            60% {
+                transform: translateX(-50%) scale(1.1);
+            }
+            100% {
+                transform: translateX(-50%) scale(1);
+            }
+        }   
+        @keyframes bounce {
+            0% {
+            box-shadow: inset 0px 0px 0px 5px #0066cc;
+            transform: translate(25px, 25px);
+            }
+            100% {
+            box-shadow: inset 0px 0px 0px 5px #99ccff;
+            transform: translate(25px, 25px);
+            }
+        }             
+    </style>
+    <!-- mid_text -->
+    <style>
+        .mid_text {
+            position: absolute;
+            bottom: 130px;
+            transform: translateX(-50%);
+            left: 50%;
+            /* left: 600px; */
+            color: #ffffff;
+            font-size: 50px;
+        }
+    </style>
+    <section class="container">
+        <div class="page1">              
+            <div class="title">
+                <h1>ANYONE CAN BECOME A MASTER OF DRAWING !</h1>               
+            </div>
+            <div class="mid_photo">
+                <img src="../images/logo.png" alt="" width="100px">
+            </div>
+            <div class="mid_text">
+                I'm Midjourney.
+            </div>
+        </div>
+    </section>
+    <!-- page2 title style -->
+    <section class="container">
+        <div class="page2">              
+
+        </div>
+    </section>
+</body>
+</html>
