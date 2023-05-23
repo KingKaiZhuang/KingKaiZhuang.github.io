@@ -164,7 +164,7 @@ header p {
 #about {
   padding-block: calc(150px + 10vw);
   clip-path: polygon(0 0,100% 0, 100% 100%,0 calc(100% - 10vw));
-  background-color: #fffac2;
+  background-color: #938ed8;
   position: relative;
   z-index: 99;
   margin-bottom: -10vw;
@@ -195,7 +195,7 @@ header p {
 /* news */
 #news {
   padding-block: calc(150px + 10vw);
-  background-color: #fff47d;
+  background-color: #7d97ff;
   clip-path: polygon(0 0,100% 0, 100% calc(100% - 10vw),0 100%);
   z-index: 98;
   position: relative;
