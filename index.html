@@ -64,8 +64,10 @@
             // btn 箭頭按鈕按下去我的自界會跑出來
             $('.btn-introduce').click(function(){
                 console.log(this);
-                $('.introduce-left').fadeToggle('active');
+                $('.introduce-left').toggleClass('active');
+                $(this).toggleClass('active');
             });
+
         })
     </script>
 </body>
