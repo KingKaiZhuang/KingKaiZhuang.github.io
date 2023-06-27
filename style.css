@@ -83,7 +83,7 @@ a.logo{
     margin-top: 44.67px;
     width: 100%;
     height: 25px;
-    background-image: linear-gradient(45deg, #000000, #4d4d4db4 60%); /* 設定漸層角度及顏色 */
+    background-image: linear-gradient(45deg, #cbcbcb, #949494b4 60%); /* 設定漸層角度及顏色 */
 }
 .my-company.active {
     background-color: aliceblue;
@@ -95,6 +95,7 @@ a.logo{
     text-decoration: none;
     color: #ffffff;
     letter-spacing: 4px;
+    font-weight: bold;
 }
 .my-company .content a:hover {
     text-decoration: none;
@@ -105,8 +106,33 @@ a.logo{
     background-color: #ffffff;
 }
 .my-introduce {
+    display: flex;
     height: 600px;
     background-image: linear-gradient(45deg, #e4ffe5 , #d1dfff 80%);
+}
+.introduce-left {
+    display: none;
+    padding: 20px 15px;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 20%;
+    height: 100%;
+    background-color: #ffffff68;
+    backdrop-filter: blur(6px);
+    align-items: center;
+}
+.introduce-right {
+    display: flex;
+    width: 100%;
+}
+.experience {
+    width: 100%;
+    padding-block: 5px;
+    background-color: #fff0d1a7;
+    animation: expand 1s ease-in-out;
+}
+.my-content-img {
+    margin-top: 25px;
 }
 @media(min-width:720px){
     nav {
@@ -157,5 +183,39 @@ a.logo{
     }
     .my-company .content a {
         font-size: 1.5rem;
+    }
+    .introduce-left {
+        padding: 20px 15px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        width: 20%;
+        height: 100%;
+        background-color: #ffffff68;
+        backdrop-filter: blur(6px);
+        align-items: center;
+    }
+    .introduce-right {
+        display: flex;
+        width: 80%;
+    }
+    .experience {
+        width: 100%;
+        padding-block: 15px;
+        background-color: #fff;
+        animation: expand 1s ease-in-out;
+    }
+    .my-content-img {
+        margin-top: 50px;
+    }
+}
+
+@keyframes expand {
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
+        
     }
 }
