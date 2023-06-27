@@ -14,3 +14,23 @@ for(collapseBtn of collapseBtns){
         e.preventDefault();
     }
 }   
+
+// 取得視窗寬度
+
+let bodyWidth = document.body.clientWidth;
+let htmlWidth = document.documentElement.clientWidth;
+console.log(bodyWidth);
+console.log(htmlWidth);
+
+window.onresize = e => {
+    let widowWidth = window.innerWidth;
+    let menu = document.querySelector('.menu-group');
+    console.log(widowWidth);
+    if(widowWidth > 1200){
+        menu.style.height = 'initial';
+        menu.style.overflow = 'initial';
+    }else{
+        menu.style.height = 0;
+        menu.style.overflow = 'hidden';
+    }
+}
