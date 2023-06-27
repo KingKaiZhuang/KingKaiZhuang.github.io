@@ -1,0 +1,117 @@
+nav {
+    width: 100%;
+    padding-block: 6px;
+    background-image: linear-gradient(45deg, #a096ff, #ff8968b4 90%); /* 設定漸層角度及顏色 */
+    backdrop-filter: blur(8px);
+    padding-inline: 15px;
+    position: fixed;
+    z-index: 100;
+    /* opacity: 0;
+    animation: fadeIn 1s forwards; */
+}
+.nav-toggle {
+    display: block;
+    position: absolute;
+    top: 8px;
+    right: 15px;
+    color: rgba(33, 31, 31, 0.77);
+    transition: .3s;
+}
+.nav-toggle.active  {
+    color: #ffffff;
+    background-color: initial;
+}
+nav a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+nav a.logo {
+    display: inline-block;
+    padding: 5px;
+    width: 250px;
+    transition: .3s;
+}
+nav a.logo:hover {
+    letter-spacing: 5px;
+    color: #282828;
+}
+a.logo{
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+.menu .nav-btn {
+    font-weight:bold;
+    display: inline-block;
+    font-size: 18px;
+    margin-inline: 25px;
+    padding: 10px 15px;
+    transition: .3s;
+    border-radius: 10px;
+}
+.menu-group {
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    transition: .3s;
+}
+.menu-group a {
+    display: inline-block;
+    /* margin-inline: 15px; */
+    color: #000000;
+    padding: 12px 15px;
+    transition: .3s;
+}
+.menu-left {
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.menu-right {
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+@media(min-width:720px){
+    nav {
+        display: flex;
+    }
+    .nav-toggle {
+        display: none;
+    }
+    .menu .nav-btn:hover {
+        background-color: rgb(71, 71, 71);
+        border-radius: 10px;
+        color: var(--white);
+    }
+    .nav-btn.active {
+        background-color: rgb(71, 71, 71);
+        border-radius: 10px;
+        color: var(--white);
+    }
+    .logo {
+        width: 500px;
+    }
+    nav a.logo  {
+        width: 350px;
+        padding-top: 10px;
+        font-size: 20px;
+    }    
+    .menu a {
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .menu-group {
+        display: flex;
+        height: initial;
+        overflow: initial;
+    }
+    .menu-left {
+        flex-direction: row;
+    }
+    .menu-right {
+        flex-direction: row;
+    }    
+}
