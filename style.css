@@ -111,25 +111,40 @@ a.logo{
     background-image: linear-gradient(45deg, #e4ffe5 , #d1dfff 80%);
 }
 .introduce-left {
+    float: left;
     display: none;
+    position: relative;
+    /* opacity: 0; */
     padding: 20px 15px;
     flex-wrap: wrap;
     flex-direction: column;
-    width: 20%;
+    width: 150px;
     height: 100%;
     background-color: #ffffff68;
     backdrop-filter: blur(6px);
     align-items: center;
 }
+.introduce-left.active {
+    display: flex;
+}
 .introduce-right {
+    position: relative;
     display: flex;
     width: 100%;
 }
 .experience {
+    position: relative;
     width: 100%;
     padding-block: 5px;
     background-color: #fff0d1a7;
     animation: expand 1s ease-in-out;
+}
+.btn-introduce {
+    position: absolute;
+    top: 2px;
+    padding-inline: 8px;
+    font-size: 20px;
+    cursor: pointer;
 }
 .my-content-img {
     margin-top: 25px;

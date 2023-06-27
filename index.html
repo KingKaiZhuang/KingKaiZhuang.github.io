@@ -42,20 +42,30 @@
         <div class="introduce-right">
             <div class="my-content">
                 <div class="experience">
+                    <div class="btn-introduce">
+                        <i class="fa-solid fa-circle-left"></i>
+                    </div>
                     <p class="text-center">目前正在集訓網頁開發</p>
                 </div>
                 <img src="./images/html_css_js.png" alt="" class="my-content-img">
             </div>
         </div>
     </div>
+
     <script src="./script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         $(function(){
+            // nav 顏色按下去會維持其他會消失
             $('.nav-btn').click(function(){
                 $('.nav-btn').removeClass('active');
                 $(this).addClass('active');
             })
+            // btn 箭頭按鈕按下去我的自界會跑出來
+            $('.btn-introduce').click(function(){
+                console.log(this);
+                $('.introduce-left').fadeToggle('active');
+            });
         })
     </script>
 </body>
