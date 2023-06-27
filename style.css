@@ -83,7 +83,10 @@ a.logo{
     margin-top: 44.67px;
     width: 100%;
     height: 25px;
-    background-image: linear-gradient(45deg, #000000, #4d4d4db4 100%); /* 設定漸層角度及顏色 */
+    background-image: linear-gradient(45deg, #000000, #4d4d4db4 60%); /* 設定漸層角度及顏色 */
+}
+.my-company.active {
+    background-color: aliceblue;
 }
 .my-company .content{
     position: absolute;
@@ -95,6 +98,13 @@ a.logo{
     text-decoration: none;
     color: #ffffff;
     letter-spacing: 4px;
+}
+.my-company .content a:hover {
+    text-decoration: none;
+    color: transparent;
+    background-image: linear-gradient(45deg, #5947ff, #ff5e31c3 120%);
+    -webkit-background-clip: text;
+    background-clip: text;
 }
 @media(min-width:720px){
     nav {
