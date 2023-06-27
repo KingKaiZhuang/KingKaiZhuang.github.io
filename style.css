@@ -123,6 +123,7 @@ a.logo{
     background-color: #ffffff68;
     backdrop-filter: blur(6px);
     align-items: center;
+    transition: 1s;
 }
 .introduce-left.active {
     display: flex;
@@ -145,6 +146,12 @@ a.logo{
     padding-inline: 8px;
     font-size: 20px;
     cursor: pointer;
+}
+.btn-introduce.active {
+    transform: rotate(180deg);
+}
+.btn-introduce i {
+    color: rgb(149, 160, 255);
 }
 .my-content-img {
     margin-top: 25px;
@@ -201,7 +208,6 @@ a.logo{
     }
     .introduce-left {
         padding: 20px 15px;
-        display: flex;
         flex-wrap: wrap;
         flex-direction: column;
         width: 20%;
@@ -210,9 +216,13 @@ a.logo{
         backdrop-filter: blur(6px);
         align-items: center;
     }
+    .btn-introduce {
+        top: 6px;
+        font-size: 30px;
+    }
     .introduce-right {
         display: flex;
-        width: 80%;
+        /* width: 80%; */
     }
     .experience {
         width: 100%;
