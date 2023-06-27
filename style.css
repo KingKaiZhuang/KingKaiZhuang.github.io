@@ -89,10 +89,7 @@ a.logo{
     background-color: aliceblue;
 }
 .my-company .content{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
+    margin-top: -10px;
 }
 .my-company .content a {
     text-decoration: none;
@@ -105,6 +102,7 @@ a.logo{
     background-image: linear-gradient(45deg, #5947ff, #ff5e31c3 120%);
     -webkit-background-clip: text;
     background-clip: text;
+    background-color: #ffffff;
 }
 @media(min-width:720px){
     nav {
@@ -149,6 +147,9 @@ a.logo{
     .my-company {
         padding-block: 25px;
         margin-top: 57.67px;
+    }
+    .my-company .content {
+        margin-top: -17px;
     }
     .my-company .content a {
         font-size: 1.5rem;
