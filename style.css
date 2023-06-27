@@ -146,9 +146,10 @@ a.logo{
     padding-inline: 8px;
     font-size: 20px;
     cursor: pointer;
+    transform: rotate(180deg);
 }
 .btn-introduce.active {
-    transform: rotate(180deg);
+    transform: rotate(360deg);
 }
 .btn-introduce i {
     color: rgb(149, 160, 255);
