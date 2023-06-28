@@ -103,13 +103,12 @@ nav a.logo:hover {
     background-clip: text;
     background-color: #ffffff;
 }
-.my-introduce {
+#my-introduce {
     display: flex;
-    height: 600px;
+    padding-bottom: 30%;
     background-image: linear-gradient(45deg, #e4ffe5 , #d1dfff 80%);
 }
 .introduce-left {
-    float: left;
     display: none;
     position: relative;
     /* opacity: 0; */
@@ -136,6 +135,7 @@ nav a.logo:hover {
 }
 .introduce-left.active {
     display: flex;
+    width: 35%;
 }
 .introduce-right {
     position: relative;
@@ -144,7 +144,7 @@ nav a.logo:hover {
     transition: .5s ease-in-out;
 }
 .introduce-right.active {
-    width: 100%;
+    width: 65%;
 }
 .experience {
     position: relative;
@@ -169,6 +169,11 @@ nav a.logo:hover {
 }
 .my-content-img {
     margin-top: 25px;
+}
+#news {
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(45deg, #fbffe4 , #d1dfff 80%);
 }
 @media(min-width:720px){
     nav {
