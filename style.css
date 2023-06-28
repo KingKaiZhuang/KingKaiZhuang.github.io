@@ -32,17 +32,15 @@ nav a.logo {
     padding: 5px;
     width: 250px;
     transition: .3s;
-}
-nav a.logo:hover {
-    letter-spacing: 5px;
-    color: #282828;
-}
-a.logo{
     font-size: 15px;
     font-weight: bold;
     letter-spacing: 3px;
 }
-.menu .nav-btn {
+nav a.logo:hover {
+    letter-spacing: 5px;
+    color: #000;
+}
+.nav-btn {
     font-weight:bold;
     display: inline-block;
     font-size: 18px;
@@ -118,12 +116,23 @@ a.logo{
     padding: 20px 15px;
     flex-wrap: wrap;
     flex-direction: column;
-    width: 150px;
+    width: 60%;
     height: 100%;
     background-color: #ffffff68;
     backdrop-filter: blur(6px);
     align-items: center;
+    animation: fadeIn 1s ease-in-out;
     transition: 1s;
+}
+.introduce-text {
+    padding-block: 12px;
+    line-height: 30px;
+    letter-spacing: 2px;
+}
+.intorduce-img {
+    border-radius: 50%;
+    border: 3px solid #fff;   
+    overflow: hidden;
 }
 .introduce-left.active {
     display: flex;
@@ -131,6 +140,10 @@ a.logo{
 .introduce-right {
     position: relative;
     display: flex;
+    width: 100%;
+    transition: .5s ease-in-out;
+}
+.introduce-right.active {
     width: 100%;
 }
 .experience {
@@ -208,14 +221,23 @@ a.logo{
         font-size: 1.5rem;
     }
     .introduce-left {
-        padding: 20px 15px;
-        flex-wrap: wrap;
-        flex-direction: column;
-        width: 20%;
         height: 100%;
-        background-color: #ffffff68;
-        backdrop-filter: blur(6px);
-        align-items: center;
+    }
+    .introduce-left.active {
+        display: flex;
+        width: 20%;
+    }
+    .introduce-right {
+        position: relative;
+        display: flex;
+        width: 100%;
+        transition: .3s ease-in;
+    }
+    .introduce-right.active {
+        width: 80%;
+    }
+    .intorduce-img {
+        width: 200px;
     }
     .btn-introduce {
         top: 6px;
@@ -223,19 +245,26 @@ a.logo{
     }
     .introduce-right {
         display: flex;
-        /* width: 80%; */
     }
     .experience {
         width: 100%;
         padding-block: 15px;
-        background-color: #fff;
+        background-color: #ffe4e4;
         animation: expand 1s ease-in-out;
     }
     .my-content-img {
         margin-top: 50px;
+        width: 1200px;
     }
 }
-
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
 @keyframes expand {
     from {
         transform: scaleX(0);

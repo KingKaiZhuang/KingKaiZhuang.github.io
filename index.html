@@ -32,25 +32,41 @@
         </div>
     </div>
 
-    <div id="my-introduce" class="my-introduce">
-        <div class="introduce-left">
-            <div class="intorduce-img">
-                <img src="./images/my-picture.jpg" alt="">
-            </div>
-            <p>姓名:莊鈞凱</p>
-        </div>
-        <div class="introduce-right">
-            <div class="my-content">
-                <div class="experience">
-                    <div class="btn-introduce">
-                        <i class="fa-solid fa-circle-left"></i>
-                    </div>
-                    <p class="text-center">目前正在集訓網頁開發</p>
+    <div class="container row">
+        <div id="my-introduce" class="my-introduce">
+            <div class="introduce-left text-center">
+                <div class="intorduce-img">
+                    <img src="./images/my-picture.jpg" alt="" class="interior">
                 </div>
-                <img src="./images/html_css_js.png" alt="" class="my-content-img">
+                <div class="introduce-text">
+                    <h3>STUST</h3>
+                    <h4>五專資工三甲</h4>
+                    <p>莊鈞凱</p>
+                    <p>Zhuang</p>
+                    <p>Jun</p>
+                    <p>Kai</p>                
+                </div>
+            </div>
+            <div class="introduce-right">
+                <div class="my-content">
+                    <div class="experience">
+                        <div class="btn-introduce">
+                            <i class="fa-solid fa-circle-left"></i>
+                        </div>
+                        <p class="text-center">目前正在集訓網頁開發</p>
+                    </div>
+                    <img src="./images/html_css_js.png" alt="" class="my-content-img">
+                </div>
             </div>
         </div>
     </div>
+
+    <div class="container row">
+        <div id="news">
+            
+        </div>
+    </div>
+
 
     <script src="./script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -65,9 +81,9 @@
             $('.btn-introduce').click(function(){
                 console.log(this);
                 $('.introduce-left').toggleClass('active');
+                $('.introduce-right').toggleClass('active');
                 $(this).toggleClass('active');
             });
-
         })
     </script>
 </body>
