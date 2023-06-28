@@ -18,10 +18,10 @@ section {
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    width: 600px;
+    width:100vw;
     height: 100vh;
     background-color: rgba(141, 141, 141, 0.429);
-    backdrop-filter: blur(6px);
+    backdrop-filter: blur(10px);
 }
 .big-picture {
     width: 150px;
