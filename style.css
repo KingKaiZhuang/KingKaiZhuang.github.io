@@ -1,281 +1,63 @@
-nav {
-    width: 100%;
-    padding-block: 6px;
-    background-image: linear-gradient(45deg, #96caffd3, #c8ffceb4 80%); /* 設定漸層角度及顏色 */
-    backdrop-filter: blur(8px);
-    padding-inline: 15px;
-    position: fixed;
-    z-index: 100;
-    top: 0;
-    left: 0;
-    /* opacity: 0; */
-    animation: fadeIn 1s forwards;
+html,body {
+    height: 100%
 }
-.nav-toggle {
-    display: block;
-    position: absolute;
-    top: 8px;
-    right: 15px;
-    color: rgba(33, 31, 31, 0.77);
-    transition: .3s;
+body {
+    background-color: rgb(186, 186, 186);
 }
-.nav-toggle.active  {
-    color: #ffffff;
-    background-color: initial;
-}
-nav a {
-    text-decoration: none;
-    color: rgb(0, 0, 0);
-}
-nav a.logo {
-    display: inline-block;
-    padding: 5px;
-    width: 250px;
-    transition: .3s;
-    font-size: 15px;
-    font-weight: bold;
-    letter-spacing: 3px;
-}
-nav a.logo:hover {
-    letter-spacing: 5px;
-    color: #000;
-}
-.nav-btn {
-    font-weight:bold;
-    display: inline-block;
-    font-size: 18px;
-    margin-inline: 25px;
-    padding: 10px 15px;
-    transition: .3s;
-    border-radius: 10px;
-}
-.menu-group {
-    width: 100%;
-    height: 0;
-    overflow: hidden;
-    transition: .3s;
-}
-.menu-group a {
-    display: inline-block;
-    /* margin-inline: 15px; */
-    color: #000000;
-    padding: 12px 15px;
-    transition: .3s;
-}
-.menu-left {
-    margin-left: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.menu-right {
-    margin-left: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-/* successful people -> href */
-.my-company {
-    position: relative;
-    padding-block: 15px;
-    margin-top: 44.67px;
-    width: 100%;
-    height: 25px;
-    background-image: linear-gradient(45deg, #cbcbcb, #949494b4 60%); /* 設定漸層角度及顏色 */
-}
-.my-company.active {
-    background-color: aliceblue;
-}
-.my-company .content{
-    margin-top: -10px;
-}
-.my-company .content a {
-    text-decoration: none;
-    color: #ffffff;
-    letter-spacing: 4px;
-    font-weight: bold;
-}
-.my-company .content a:hover {
-    text-decoration: none;
-    color: transparent;
-    background-image: linear-gradient(45deg, #5947ff, #ff5e31c3 120%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    background-color: #ffffff;
-}
-#my-introduce {
-    display: flex;
-    padding-bottom: 30%;
-    background-image: linear-gradient(45deg, #e4ffe5 , #d1dfff 80%);
-}
-.introduce-left {
-    display: none;
-    position: relative;
-    /* opacity: 0; */
-    padding: 20px 15px;
-    flex-wrap: wrap;
-    flex-direction: column;
-    width: 60%;
+.side-menu {
+    width: 300px;
     height: 100%;
-    background-color: #ffffff68;
-    backdrop-filter: blur(6px);
-    align-items: center;
-    animation: fadeIn 1s ease-in-out;
-    transition: 1s;
+    background-image:linear-gradient(0deg,#4236f1,#9c39ff8b);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 10px 0px 5px  #64646484;
+    position: relative;
+    transform: translateX(-100%);
+    transition: .3s;
 }
-.introduce-text {
-    padding-block: 12px;
-    line-height: 30px;
-    letter-spacing: 2px;
+#side-menu-switch {
+    position: absolute;
+    opacity: 0;
+}
+#side-menu-switch:checked + .side-menu {
+    transform: translateX(0);
+}
+#side-menu-switch:checked + .side-menu label .fa-solid {
+    transform: rotate(-180deg);
+}
+.side-menu nav {
+    padding-block: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .intorduce-img {
+    height: 100px;
+    width: 100px;
     border-radius: 50%;
     border: 3px solid #fff;   
     overflow: hidden;
+    margin-bottom: 10px;
 }
-.introduce-left.active {
-    display: flex;
-    width: 35%;
-}
-.introduce-right {
-    position: relative;
-    display: flex;
-    width: 100%;
-    transition: .5s ease-in-out;
-}
-.introduce-right.active {
-    width: 65%;
-}
-.experience {
-    position: relative;
-    width: 100%;
+.side-menu .menu-font {
+    display: block;
     padding-block: 5px;
-    background-color: #fff0d1a7;
-    animation: expand 1s ease-in-out;
+    color: #fff;
+    font-size: 1.5rem;
 }
-.btn-introduce {
+.side-menu label {
     position: absolute;
-    top: 2px;
-    padding-inline: 8px;
-    font-size: 20px;
-    cursor: pointer;
-    transform: rotate(180deg);
-}
-.btn-introduce.active {
-    transform: rotate(360deg);
-}
-.btn-introduce i {
-    color: rgb(149, 160, 255);
-}
-.my-content-img {
-    margin-top: 25px;
-}
-#news {
-    width: 100%;
-    height: 100vh;
-    background-image: linear-gradient(45deg, #fbffe4 , #d1dfff 80%);
-}
-@media(min-width:720px){
-    nav {
-        display: flex;
-    }
-    .nav-toggle {
-        display: none;
-    }
-    .menu .nav-btn:hover {
-        background-color: rgb(71, 71, 71);
-        border-radius: 10px;
-        color: var(--white);
-    }
-    .nav-btn.active {
-        background-color: rgb(71, 71, 71);
-        border-radius: 10px;
-        color: var(--white);
-    }
-    .logo {
-        width: 500px;
-    }
-    nav a.logo  {
-        width: 350px;
-        padding-top: 10px;
-        font-size: 20px;
-    }    
-    .menu a {
-        font-size: 18px;
-        font-weight: bold;
-    }
-    .menu-group {
-        display: flex;
-        height: initial;
-        overflow: initial;
-    }
-    .menu-left {
-        flex-direction: row;
-    }
-    .menu-right {
-        flex-direction: row;
-    }    
-    .my-company {
-        padding-block: 25px;
-        margin-top: 57.67px;
-    }
-    .my-company .content {
-        margin-top: -17px;
-    }
-    .my-company .content a {
-        font-size: 1.5rem;
-    }
-    .introduce-left {
-        height: 100%;
-    }
-    .introduce-left.active {
-        display: flex;
-        width: 20%;
-    }
-    .introduce-right {
-        position: relative;
-        display: flex;
-        width: 100%;
-        transition: .3s ease-in;
-    }
-    .introduce-right.active {
-        width: 80%;
-    }
-    .intorduce-img {
-        width: 200px;
-    }
-    .btn-introduce {
-        top: 6px;
-        font-size: 30px;
-    }
-    .introduce-right {
-        display: flex;
-    }
-    .experience {
-        width: 100%;
-        padding-block: 15px;
-        background-color: #ffe4e4;
-        animation: expand 1s ease-in-out;
-    }
-    .my-content-img {
-        margin-top: 50px;
-        width: 1200px;
-    }
-}
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-@keyframes expand {
-    from {
-        transform: scaleX(0);
-    }
-    to {
-        transform: scaleX(1);
-        
-    }
+    width: 40px;
+    height: 80px;
+    background-color: #000000;
+    color: #fff;
+    right: -40px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    line-height: 80px;
+    text-align: center;
+    font-size: 25px;
+    border-radius: 0 10px 10px 0;
 }

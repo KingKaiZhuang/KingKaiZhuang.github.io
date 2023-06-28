@@ -7,85 +7,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="icon" href="./images/as2va-8k5n2-001.ico">
     <link rel="stylesheet" href="./global.css">
-    <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./grid.css">
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <nav>
-        <a href="./index.html" class="logo">KingKaiZhuang</a></div>
-        <a href="#" class="nav-toggle collapse-btn fa-solid fa-bars fa-2x"></a>
-        <div class="menu-group">
-            <div class="menu menu-left">
-                <div id="#"><a href="#" class="nav-btn">About me</a></div>
-                <div id="#"><a href="#news" class="nav-btn">News</a></div>
-                <div id="#"><a href="#STUST" class="nav-btn">STUST</a></div>
-            </div>
-            <div class="menu menu-right">
-                <a href="https://kingkaizhuang-contect.netlify.app/" class="nav-btn">Contact</a>
-            </div>
-        </div>
-    </nav>
-    
-    <div class="my-company">
-        <div class="content text-center">
-            <a href="https://heartfelt-empanada-d1772d.netlify.app/">Successful People</a>
-        </div>
+
+    <input type="checkbox" name="" id="side-menu-switch">
+
+    <div class="side-menu">
+        <nav>
+            <img src="./images/my-picture.jpg" alt="" class="intorduce-img">
+            <h3 class="menu-font">STUST</h3>
+            <h4 class="menu-font">五專資工三甲</h4>
+            <p class="menu-font">莊鈞凱</p>
+            <p class="menu-font">Zhuang</p>
+            <p class="menu-font">Jun</p>
+            <p class="menu-font">Kai</p>                 
+        </nav>
+        <label for="side-menu-switch">
+            <i class="fa-solid fa-chevron-right"></i>
+        </label>
     </div>
-    <section id="my-introduce">
-        <div class="container row">
-            <div class="introduce-left text-center">
-                <div class="intorduce-img">
-                    <img src="./images/my-picture.jpg" alt="" class="interior">
-                </div>
-                <div class="introduce-text">
-                    <h3>STUST</h3>
-                    <h4>五專資工三甲</h4>
-                    <p>莊鈞凱</p>
-                    <p>Zhuang</p>
-                    <p>Jun</p>
-                    <p>Kai</p>                
-                    
-                </div>
-            </div>
-            <div class="introduce-right">
-                <div class="my-content">
-                    <div class="experience">
-                        <div class="btn-introduce">
-                            <i class="fa-solid fa-circle-left"></i>
-                        </div>
-                        <p class="text-center">目前正在集訓網頁開發</p>
-                    </div>
-                    <img src="./images/html_css_js.png" alt="" class="my-content-img">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section  id="news">
-        <div class="container row">
-
-        </div>
-    </section>
-
-
-
-    <script src="./script.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>
-        $(function(){
-            // nav 顏色按下去會維持其他會消失
-            $('.nav-btn').click(function(){
-                $('.nav-btn').removeClass('active');
-                $(this).addClass('active');
-            })
-            // btn 箭頭按鈕按下去我的自界會跑出來
-            $('.btn-introduce').click(function(){
-                console.log(this);
-                $('.introduce-left').toggleClass('active');
-                $('.introduce-right').toggleClass('active');
-                $(this).toggleClass('active');
-            });
-        })
-    </script>
 </body>
 </html>
