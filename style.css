@@ -68,12 +68,14 @@ html,body {
     height: 100%;
     background-image: linear-gradient(0deg,#6868688f,#ffffff);
 }
-.my-introduce h1 {
+/* .my-introduce h1 {
     padding-block: 20px;
     text-align: center;
     letter-spacing: 10px;
     font-size: 6rem;
-}
+    background-image: linear-gradient(0deg,#6868688f,#ffffff);
+    
+} */
 .menu-right {
     position: absolute;
     right: 0;
@@ -88,6 +90,7 @@ html,body {
     width: 0;
     overflow: hidden;
     transition: width 0.3s ease;
+    z-index: 3;
 }
 .menu-right a {
     display: flex;
@@ -115,4 +118,20 @@ html,body {
 }
 .nav-toggle.active {
     color: white;
+}
+.welcome {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.welcome h1 {
+    padding-block: 25px;
+    font-size: 3.5rem;
+    letter-spacing: 25px;
+
+    color: transparent; /* 文字顏色設定透明 */
+    background-image: linear-gradient(45deg, #93a3ff, #ffb1b1 80%); /* 設定漸層角度及顏色 */
+    -webkit-background-clip: text; /*背景裁剪成文字的前景色*/
+    background-clip: text;
 }
