@@ -24,7 +24,7 @@
             <p class="menu-font">Jun</p>
             <p class="menu-font">Kai</p>                 
         </nav>
-        <label for="side-menu-switch">
+        <label for="side-menu-switch" id="side-menu-btn">
             <i class="fa-solid fa-chevron-right"></i>
         </label>
     </div>
@@ -45,6 +45,7 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
+        // 右側選單點擊時
         let collapseBtns = document.querySelectorAll('.collapse-btn');
         for(collapseBtn of collapseBtns){
             collapseBtn.onclick = e => {
@@ -57,9 +58,20 @@
                 }else{
                     panel.style.width = 250 + 'px';
                 }
+                document.querySelector('.side-menu').style.transform = 'translateX(-100%)';
+                document.querySelector('#side-menu-switch').checked = false;
                 e.preventDefault();
             }
         }  
+        let menusides = document.querySelectorAll('#side-menu-switch');
+        // 左側選單點擊時
+        $(function(){
+            $('#side-menu-btn').click(function() {
+                $('.side-menu').css('transform', '');
+                $('.menu-right').css('width','');
+                $('.nav-toggle.active').removeClass('active');
+            });
+        })
     </script>
 </body>
 </html>
