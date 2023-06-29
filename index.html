@@ -31,7 +31,7 @@
     <div class="my-introduce">
         <a href="#" class="nav-toggle collapse-btn fa-solid fa-bars"></a>
         <div class="menu-right">
-            <a href="#">KingKaiZhuang</a>
+            <a href="#" style="font-size: 1.5rem;">KingKaiZhuang</a>
             <a href="#">我的公司</a>
             <a href="#">學習心得</a>
             <a href="#">程式語言</a>
@@ -39,22 +39,21 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-$(function(){
-    $('.nav-toggle').click(function(){
-        console.log(this);
-        let toggle = $(this).nextAll();
-
-        if ($(toggle).hasClass('active')) {
-            $(toggle).animate({ width: '0%' }, 500, function() {
-                $(toggle).removeClass('active');
-            });
-        } else {
-            $(toggle).addClass('active');
-            $(toggle).animate({ width: '250px' }, 500);
-        }
-    });
-});
-
+        let collapseBtns = document.querySelectorAll('.collapse-btn');
+        for(collapseBtn of collapseBtns){
+            collapseBtn.onclick = e => {
+                let panel = e.target.nextElementSibling;
+                e.target.classList.toggle('active');
+                panel.classList.toggle('active');
+                console.log(panel.style.width);
+                if(panel.style.width){
+                    panel.style.width = null;
+                }else{
+                    panel.style.width = 250 + 'px';
+                }
+                e.preventDefault();
+            }
+        }  
 
     </script>
 </body>

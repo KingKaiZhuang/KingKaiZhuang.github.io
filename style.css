@@ -2,7 +2,7 @@ html,body {
     height: 100%
 }
 .side-menu {
-    width: 300px;
+    width: 250px;
     height: 100%;
     background-image:linear-gradient(0deg,#4236f1,#9c39ff8b);
     display: flex;
@@ -71,20 +71,17 @@ html,body {
 .menu-right {
     position: absolute;
     right: 0;
-    width: 300px;
-    height: 100%;
-    background-image: linear-gradient(0deg,#8b99d2d7,#ff8bf7);
-    box-shadow: -5px 0 5px #a4a4a4;
-    display: none;
+    background-image: linear-gradient(0deg,#3f3f3fd7,#9e9e9e);
+    box-shadow: -5px 0 5px #676767;
+    /* display: none; */
     flex-direction: column;
     text-align: center;
-    padding-block: 30px;
-    transform: translateX(100%);
-    transition: .3s;
-}
-.menu-right.active {
-    display: inline-block;
-    transform: translateX(0);
+    padding-block: 20px;
+    
+    height: 100%;
+    width: 250px;
+    overflow: hidden;
+    transition: width 0.3s ease;
 }
 .menu-right a {
     display: flex;
@@ -93,6 +90,7 @@ html,body {
     font-size: 20px;
     margin-block: 10px;
     color: #fff;
+    font-weight: bold;
 }
 .nav-toggle {
     position: absolute;
@@ -101,4 +99,9 @@ html,body {
     z-index: 100;
     text-decoration: none;
     font-size: 25px;
+    color: #4e4e4e;
+    transition: .3s;
+}
+.nav-toggle.active {
+    color: white;
 }
