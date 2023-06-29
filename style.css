@@ -68,3 +68,37 @@ html,body {
     height: 100%;
     background-image: linear-gradient(0deg,#6868688f,#ffffff);
 }
+.menu-right {
+    position: absolute;
+    right: 0;
+    width: 300px;
+    height: 100%;
+    background-image: linear-gradient(0deg,#8b99d2d7,#ff8bf7);
+    box-shadow: -5px 0 5px #a4a4a4;
+    display: none;
+    flex-direction: column;
+    text-align: center;
+    padding-block: 30px;
+    transform: translateX(100%);
+    transition: .3s;
+}
+.menu-right.active {
+    display: inline-block;
+    transform: translateX(0);
+}
+.menu-right a {
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 20px;
+    margin-block: 10px;
+    color: #fff;
+}
+.nav-toggle {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 100;
+    text-decoration: none;
+    font-size: 25px;
+}
