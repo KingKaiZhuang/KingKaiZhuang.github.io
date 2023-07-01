@@ -119,11 +119,12 @@ html,body {
     height: 100%;
 }
 .welcome .logo {
-    padding-block: 25px;
-    font-size: 3.5rem;
-    letter-spacing: 25px;
+    padding-block: 15px;
+    font-size: 0.8rem;
+    letter-spacing: 10px;
     display: flex;
     justify-content: center;
+    
     color: transparent;
     background-image: linear-gradient(45deg, #2f4fff, #ff5b5b 80%);
     -webkit-background-clip: text;
@@ -138,4 +139,19 @@ html,body {
     height: 100px;
     background-color: #ffffff72;
     z-index: 1;
+}
+
+@media (min-width:720px) {
+    .welcome .logo {
+        padding-block: 25px;
+        font-size: 3.5rem;
+        letter-spacing: 25px;
+        display: flex;
+        justify-content: center;
+        color: transparent;
+        background-image: linear-gradient(45deg, #2f4fff, #ff5b5b 80%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        z-index: 2;
+    }
 }
