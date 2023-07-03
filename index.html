@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- wow 套件 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.compat.min.css" integrity="sha512-b42SanD3pNHoihKwgABd18JUZ2g9j423/frxIP5/gtYgfBz/0nDHGdY/3hi+3JwhSckM3JLklQ/T6tJmV7mZEw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" integrity="sha512-Eak/29OTpb36LLo2r47IpVzPBLXnAMPAVypbSZiZ4Qkf8p/7S/XRG5xp7OKWPPYfJT6metI+IORkR5G8F900+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
@@ -54,31 +54,33 @@
         </div>
     </div>
 
-    <div class="experience">
-        <div class="container row">
-            <div class="col-12">
-                <div class="text-center">
-                    <h2>擅長語言</h2>
+    <section id="transparent-background">
+        <div class="experience">
+            <div class="container row">
+                <div class="col-12">
+                    <div class="text-center">
+                        <h2>擅長語言</h2>
+                    </div>
+                </div>
+                <div class="wow fadeIn col-12 col-xl-3 text-center" data-wow-delay="0.5s" data-wow-duration="1.5s" data-wow-offset="150">
+                    <img src="./images/html5.png" alt="">
+                    <p>整體網頁的架構</p>
+                </div>
+                <div class="wow fadeIn col-12 col-xl-3 text-center" data-wow-delay="0.5s" data-wow-duration="1.5s" data-wow-offset="150">
+                    <img src="./images/css.png" alt="">
+                    <p>美化網頁</p>
+                </div>
+                <div class="wow fadeIn col-12 col-xl-3 text-center" data-wow-delay="0.5s" data-wow-duration="1.5s" data-wow-offset="150">
+                    <img src="./images/javascript.png" alt="">
+                    <p>加入動作與動畫</p>
+                </div>
+                <div class="wow fadeIn col-12 col-xl-3 text-center" data-wow-delay="0.5s" data-wow-duration="1.5s" data-wow-offset="150">
+                    <img src="./images/python-logo.png" alt="">
+                    <p>Leetcode刷提主要語言</p>
                 </div>
             </div>
-            <div class="wow  col-12 col-xl-3 text-center">
-                <img src="./images/html5.png" alt="">
-                <p>整體網頁的架構</p>
-            </div>
-            <div class="col-12 col-xl-3 text-center">
-                <img src="./images/css.png" alt="">
-                <p>美化網頁</p>
-            </div>
-            <div class="col-12 col-xl-3 text-center">
-                <img src="./images/javascript.png" alt="">
-                <p>加入動作與動畫</p>
-            </div>
-            <div class="col-12 col-xl-3 text-center">
-                <img src="./images/python-logo.png" alt="">
-                <p>Leetcode刷提主要語言</p>
-            </div>
         </div>
-    </div>
+    </section>
     
     <!-- 左右側選單 -->
     <script>
@@ -118,8 +120,8 @@
                 items:1,
                 loop: true,
                 autoplay: true,
-                autoplayTimeout: 3000,
-                autoplaySpeed: 2000,
+                autoplayTimeout: 4000,
+                autoplaySpeed: 500,
                 nav: false,
                 dots:false
             })
