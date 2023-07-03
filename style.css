@@ -142,16 +142,13 @@ html,body {
 }
 
 @media (min-width:720px) {
-    .welcome .logo {
-        padding-block: 25px;
+    #welcome .logo {
+        padding-block: 15px;
         font-size: 2rem;
         letter-spacing: 25px;
-        display: flex;
-        justify-content: center;
-        color: transparent;
-        background-image: linear-gradient(45deg, #2f4fff, #ff5b5b 80%);
-        -webkit-background-clip: text;
-        background-clip: text;
-        z-index: 2;
+    }
+    .nav-toggle {
+        right: 12px;
+        top: 18px;
     }
 }
