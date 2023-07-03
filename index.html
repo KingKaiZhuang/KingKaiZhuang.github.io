@@ -10,11 +10,13 @@
     <link rel="stylesheet" href="./grid.css">
     <link rel="stylesheet" href="./style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+    <!-- 圖片輪播 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    <!-- wow 套件 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" integrity="sha512-Eak/29OTpb36LLo2r47IpVzPBLXnAMPAVypbSZiZ4Qkf8p/7S/XRG5xp7OKWPPYfJT6metI+IORkR5G8F900+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
     <input type="checkbox" name="" id="side-menu-switch">
@@ -33,6 +35,7 @@
             <i class="fa-solid fa-chevron-right"></i>
         </label>
     </div>
+
     <div class="my-introduce">
         <a href="#" class="nav-toggle collapse-btn fa-solid fa-bars"></a>
         <div class="menu-right">
@@ -42,6 +45,7 @@
             <a href="#">程式語言</a>
         </div>
     </div>
+
     <div id="welcome">
         <h1 class="logo fa-regular fa-circle-user">King_Kai_Zhuang</h1>
         <div class="owl-carousel owl-theme picture-header" id="product">
@@ -49,13 +53,34 @@
             <img src="./images/Python.png" alt="">                
         </div>
     </div>
+
     <div class="experience">
-        
+        <div class="container row">
+            <div class="col-12">
+                <div class="text-center">
+                    <h2>擅長語言</h2>
+                </div>
+            </div>
+            <div class="wow  col-12 col-xl-3 text-center">
+                <img src="./images/html5.png" alt="">
+                <p>整體網頁的架構</p>
+            </div>
+            <div class="col-12 col-xl-3 text-center">
+                <img src="./images/css.png" alt="">
+                <p>美化網頁</p>
+            </div>
+            <div class="col-12 col-xl-3 text-center">
+                <img src="./images/javascript.png" alt="">
+                <p>加入動作與動畫</p>
+            </div>
+            <div class="col-12 col-xl-3 text-center">
+                <img src="./images/python-logo.png" alt="">
+                <p>Leetcode刷提主要語言</p>
+            </div>
+        </div>
     </div>
     
-
-
-
+    <!-- 左右側選單 -->
     <script>
         // 右側選單點擊時
         let collapseBtns = document.querySelectorAll('.collapse-btn');
@@ -86,6 +111,7 @@
         })
     </script>
 
+    <!-- 圖片輪播 -->
     <script>
         $(function(){
             $('#product').owlCarousel({
@@ -98,6 +124,11 @@
                 dots:false
             })
         })
+    </script>
+
+    <!-- wow 特效 -->
+    <script>
+        new WOW().init();
     </script>
 </body>
 </html>
