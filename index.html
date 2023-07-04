@@ -205,15 +205,17 @@
     <!-- 上下div權重先後順序調整 -->
     <script>
         $(function(){
-            let w = $(window).innerWidth();
-            console.log(w);
-            if (w < 520){
-                $('.turnimg').css('order', '0');
-                $('.turnsit').css('order', '1');
-            }else {
-                $('.turnimg').css('order', '1');
-                $('.turnsit').css('order', '0');               
-            }
+            $(window).resize(function(){
+                let w = $(window).innerWidth();
+                console.log(w);
+                if (w < 520){
+                    $('.turnimg').css('order', '0');
+                    $('.turnsit').css('order', '1');
+                }else {
+                    $('.turnimg').css('order', '1');
+                    $('.turnsit').css('order', '0');               
+                }
+            })
         });
 
     </script>

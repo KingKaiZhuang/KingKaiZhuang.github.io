@@ -160,13 +160,12 @@ html,body {
     scroll-margin-top: -100px; /* 滾動時把定位下調 */
     width: 100%;
     background-color: #bcbcbcd8;
-    padding-block-start: 120px;
-    padding-block-end: 250px;
+    padding-block: 120px;
     color: #fff;
     font-weight: bold;
 }
 .language {
-    padding-block: 0px;
+    padding-block: 50px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
