@@ -162,6 +162,13 @@ html,body {
     color: white;
     z-index: 100;
 }
+footer {
+    background-image: linear-gradient(0deg,#b685ff,hsl(236, 100%, 81%));
+    color: var(--white);
+    width: 100%;
+    padding-block: 15px;
+    letter-spacing: 2px;
+}
 @media (min-width:720px) {
     #welcome .logo {
         padding-block: 15px;
