@@ -138,7 +138,7 @@ html,body {
     background-size: cover;
 }
 .experience {
-    scroll-margin-top: -200px; /* 滾動時把定位下調 */
+    scroll-margin-top: -100px; /* 滾動時把定位下調 */
     width: 100%;
     background-color: #ffffff57;
     padding-block-start: 120px;
