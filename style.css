@@ -183,6 +183,13 @@ html,body {
     justify-content: center;
     font-size: 0.9rem;
 }
+/* 上下div權重先後順序調整 */
+.turnsit {
+    order: 0;
+}
+.turnimg {
+    order: 1;
+}
 .gotop {
     position: fixed;
     right: 15px;

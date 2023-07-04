@@ -99,15 +99,16 @@
                     <p>3. 多用途語言：C++不僅適用於軟體開發，還廣泛應用於系統程式設計、嵌入式系統、遊戲開發等領域。</p>
                 </div>
             </div>
+            <!-- 第二個要調整div順序不然手機板會變成上下顛倒 文字 class 設為 turnsit 相片設為 turnimg-->
             <div class="wow fadeInRight language col-12">
-                <div class="picture col-sm-6 col-lg-4 text-center">
-                    <img src="./images/C++.png" alt="">
-                </div>
-                <div class="feelings col-sm-6 col-lg-8">
+                <div class="feelings turnsit col-sm-6 col-lg-8">
                     <p>C++是我第一個學的程式語言，對於初學者來說確實可能不容易上手，不過我覺得學C++可以更了解電腦執行程式的流程。</p>
                     <p>1. 程式基礎：學會C++要學其他語言也變得很容易。</p>
                     <p>2. 接近硬體層面：C++提供了直接操作記憶體和硬體資源的能力，使您能夠深入瞭解電腦系統的運作原理。</p>
                     <p>3. 多用途語言：C++不僅適用於軟體開發，還廣泛應用於系統程式設計、嵌入式系統、遊戲開發等領域。</p>
+                </div>
+                <div class="picture turnimg col-sm-6 col-lg-4 text-center">
+                    <img src="./images/C++.png" alt="">
                 </div>
             </div>
             <div class="wow fadeInLeft language col-12">
@@ -190,7 +191,7 @@
                 let animateFadeIn = 'fadeInUp';
                 let animateFadeOut = 'fadeOutRight';
                 let h = $(window).scrollTop();
-                console.log(h);
+                // console.log(h);
                 if(h > 600){
                     $('.gotop').removeClass(animateFadeOut);
                     $('.gotop').addClass(animateFadeIn);
@@ -200,6 +201,21 @@
                 }
             })
         })
+    </script>
+    <!-- 上下div權重先後順序調整 -->
+    <script>
+        $(function(){
+            let w = $(window).innerWidth();
+            console.log(w);
+            if (w < 520){
+                $('.turnimg').css('order', '0');
+                $('.turnsit').css('order', '1');
+            }else {
+                $('.turnimg').css('order', '1');
+                $('.turnsit').css('order', '0');               
+            }
+        });
+
     </script>
 </body>
 </html>
