@@ -62,22 +62,22 @@
                         <h2>擅長語言</h2>
                     </div>
                 </div>
-                <div class="wow fadeIn col-12 col-xl-3 text-center" data-wow-delay="0.5s" data-wow-duration="1.5s" data-wow-offset="150">
+                <div class="wow fadeIn col-12 col-sm-6 col-xl-3 text-center" data-wow-delay="0.5s" data-wow-duration="1.5s" data-wow-offset="150">
                     <img src="./images/html5.png" alt="">
                     <p>整體網頁的架構</p>
                     <p>我習慣架構寫好在美化</p>
                 </div>
-                <div class="wow fadeIn col-12 col-xl-3 text-center" data-wow-delay="0.5s" data-wow-duration="1.5s" data-wow-offset="150">
+                <div class="wow fadeIn col-12 col-sm-6 col-xl-3 text-center" data-wow-delay="0.5s" data-wow-duration="1.5s" data-wow-offset="150">
                     <img src="./images/css.png" alt="">
                     <p>美化網頁</p>
                     <p>漸層色也太好看!</p>
                 </div>
-                <div class="wow fadeIn col-12 col-xl-3 text-center" data-wow-delay="0.5s" data-wow-duration="1.5s" data-wow-offset="150">
+                <div class="wow fadeIn col-12 col-sm-6 col-xl-3 text-center" data-wow-delay="0.5s" data-wow-duration="1.5s" data-wow-offset="150">
                     <img src="./images/javascript.png" alt="">
                     <p>加入動作與動畫</p>
                     <p>老實說jquerry用的比較多</p>
                 </div>
-                <div class="wow fadeIn col-12 col-xl-3 text-center" data-wow-delay="0.5s" data-wow-duration="1.5s" data-wow-offset="150">
+                <div class="wow fadeIn col-12 col-sm-6 col-xl-3 text-center" data-wow-delay="0.5s" data-wow-duration="1.5s" data-wow-offset="150">
                     <img src="./images/python-logo.png" alt="">
                     <p>Leetcode刷提主要語言</p>
                     <p>最近偷懶有時候都沒再做題目~</p>
@@ -85,6 +85,10 @@
             </div>
         </div>
     </section>
+
+    <a href="#" class="gotop animated">
+        <i class="fa-solid fa-chevron-up fa-2x"></i>
+    </a>
     
     <!-- 左右側選單 -->
     <script>
@@ -135,6 +139,24 @@
     <!-- wow 特效 -->
     <script>
         new WOW().init();
+    </script>
+    <!-- top 按鈕 -->
+    <script>
+        $(function(){
+            $(window).scroll(function(){
+                let animateFadeIn = 'fadeInUp';
+                let animateFadeOut = 'fadeOutRight';
+                let h = $(window).scrollTop();
+                console.log(h);
+                if(h > 600){
+                    $('.gotop').removeClass(animateFadeOut);
+                    $('.gotop').addClass(animateFadeIn);
+                }else{
+                    $('.gotop').removeClass(animateFadeIn);
+                    $('.gotop').addClass(animateFadeOut);        
+                }
+            })
+        })
     </script>
 </body>
 </html>

@@ -155,7 +155,13 @@ html,body {
     border-radius: 50%;
     padding-block: 60px;
 }
-
+.gotop {
+    position: fixed;
+    right: 15px;
+    bottom: 10px;
+    color: white;
+    z-index: 100;
+}
 @media (min-width:720px) {
     #welcome .logo {
         padding-block: 15px;
