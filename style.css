@@ -11,7 +11,7 @@ html,body {
     position: fixed;
     transform: translateX(-100%);
     transition: .3s;
-    z-index: 2;
+    z-index: 14;
 }
 #side-menu-switch {
     position: absolute;
@@ -77,7 +77,7 @@ html,body {
     width: 0;
     overflow: hidden;
     transition: width 0.3s ease;
-    z-index: 3;
+    z-index: 11;
 }
 .menu-right a {
     display: flex;
@@ -107,15 +107,27 @@ html,body {
     color: white;
 }
 #welcome {
+    padding-block-start: 42px;
     width: 100%;
     margin: auto;
 }
-#welcome .logo {
+.title {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 42px;
+    width: 100%;
+    background-color: #fff;
+    z-index: 10;
+}
+.logo {
     padding-block: 15px;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     letter-spacing: 10px;
-    display: flex;
-    justify-content: center;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+
     
     color: transparent;
     background-image: linear-gradient(45deg, #2f4fff, #ff5b5b 80%);
@@ -209,10 +221,19 @@ footer {
     letter-spacing: 2px;
 }
 @media (min-width:720px) {
-    #welcome .logo {
+    .logo {
         padding-block: 15px;
         font-size: 2rem;
         letter-spacing: 25px;
+    }
+    .title {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 60px;
+        width: 100%;
+        background-color: #fff;
+        z-index: 10;
     }
     .nav-toggle {
         right: 12px;
