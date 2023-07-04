@@ -2,6 +2,7 @@ html,body {
     height: 100%
 }
 .side-menu {
+    top: 42px;
     width: 250px;
     height: 100%;
     background-color: #303030fe;
@@ -72,7 +73,7 @@ html,body {
     flex-direction: column;
     text-align: center;
     padding-block: 20px;
-    
+    top: 42px;
     height: 100%;
     width: 0;
     overflow: hidden;
@@ -221,6 +222,12 @@ footer {
     letter-spacing: 2px;
 }
 @media (min-width:720px) {
+    .side-menu {
+        top: 60px;
+    }
+    .menu-right {
+        top: 60px;
+    }
     .logo {
         padding-block: 15px;
         font-size: 2rem;
