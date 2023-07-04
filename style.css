@@ -141,10 +141,10 @@ html,body {
 .experience {
     scroll-margin-top: -100px; /* 滾動時把定位下調 */
     width: 100%;
-    background-color: #ffffff57;
+    background-color: #686868af;
     padding-block-start: 120px;
     padding-block-end: 250px;
-    color: #fff;
+    color: #ffffff;
     font-weight: bold;
     font-size: 1.2rem;
 }
@@ -179,12 +179,13 @@ html,body {
     width: 200px;
 }
 .feelings {
-    padding-block: 30px;
+    padding-block: 60px;
     padding-inline: 60px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     font-size: 0.9rem;
+    text-align: center;
 }
 /* 上下div權重先後順序調整 */
 .turnsit {
