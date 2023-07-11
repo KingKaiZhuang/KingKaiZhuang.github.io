@@ -61,6 +61,12 @@ html,body {
     border-radius: 0 10px 10px 0;
     cursor: pointer;
 }
+.contect {
+    margin-top: 10px;
+    font-size: 1rem;
+    text-decoration: none;
+    color: aliceblue;
+}
 
 /* my-introduce */
 
@@ -105,7 +111,7 @@ html,body {
     transition: .3s;
 }
 .nav-toggle.active {
-    color: white;
+    color: rgb(142, 140, 255);
 }
 #welcome {
     padding-block-start: 42px;
