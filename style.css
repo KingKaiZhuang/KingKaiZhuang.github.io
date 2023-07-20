@@ -206,6 +206,10 @@ html,body {
     font-size: 0.9rem;
     text-align: center;
 }
+/* hobby */
+.hobby img {
+    width: 100%;
+}
 /* 上下div權重先後順序調整 */
 .turnsit {
     order: 0;
