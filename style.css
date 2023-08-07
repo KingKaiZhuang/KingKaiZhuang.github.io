@@ -142,6 +142,7 @@ html,body {
     z-index: 2;
 }
 .banner {
+    margin-top: initial;
     width: 100%;
     background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);    padding-block: 10px;
 }
@@ -288,12 +289,9 @@ footer {
     letter-spacing: 2px;
 }
 @media (min-width:520px){
-    /* .turnsit {
-        order: 1;
+    .banner {
+        margin-top: 60px;
     }
-    .turnimg {
-        order: 0;
-    } */
 }
 @media (min-width:720px) {
     .side-menu {

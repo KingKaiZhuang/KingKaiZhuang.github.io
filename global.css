@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+HK:wght@100;300;700&display=swap');
 :root {
     --blue: #67a5f7;
     --blue-light: #92c5ff;
@@ -20,7 +20,7 @@ html {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family:'poppins', 'Ping Fang TC','微軟正黑體','sans-serif';
+    font-family: 'Noto Sans HK', sans-serif;
 }
 img {
     width: 100%;
