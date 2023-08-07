@@ -11,8 +11,6 @@ for (collapseBtn of collapseBtns) {
         } else {
             panel.style.width = 250 + 'px';
         }
-        document.querySelector('.side-menu').style.transform = 'translateX(-100%)';
-        document.querySelector('#side-menu-switch').checked = false;
         e.preventDefault();
     }
 }
