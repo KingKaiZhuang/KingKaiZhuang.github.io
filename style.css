@@ -144,12 +144,13 @@ html,body {
 .banner {
     margin-top: initial;
     width: 100%;
-    background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);    padding-block: 10px;
+    background-image: linear-gradient(to top, #4b4b4b 0%, #d5d5d5 100%);    padding-block: 10px;
 }
 .banner h2 {
     position: relative;
     font-size: 2.5rem;
     margin-block: 30px;
+    font-weight: 400;
 }
 .banner h2:after {
     content: "";
@@ -183,9 +184,11 @@ html,body {
     align-items: center;
 }
 .banner h3 {
+    color: #fff;
     position: relative;
     margin-top: 30px;
-    font-size: 2rem;
+    font-size: 2.5rem;
+    font-weight: 400;
 }
 .banner h3::after {
     content: "";
@@ -199,6 +202,30 @@ html,body {
     border-radius: 20px;
     box-shadow: 2px 2px 5px #858585;
     animation: 3s expandLine2 ease-in-out forwards;
+}
+.banner .start {
+    margin-top: 30px;
+
+}
+.banner .start p {
+    font-size: 2rem;
+    line-height: 80px;
+    color: #fff;
+}
+.fa-html5 {
+    color: #86a6ff;
+}
+.fa-css3-alt {
+    color: #ff8800;
+}
+.fa-js {
+    color: #e5ff00;
+}
+.fa-node-js {
+    color: #b9ff9f;
+}
+.fa-code-branch {
+    color: #a2eeff;
 }
 .hobby {
     position: absolute;
