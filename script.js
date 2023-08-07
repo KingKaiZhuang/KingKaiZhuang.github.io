@@ -1,36 +1,74 @@
-/* Callapse nav的收合*/
+// 右側選單點擊時
 let collapseBtns = document.querySelectorAll('.collapse-btn');
-for(collapseBtn of collapseBtns){
+for (collapseBtn of collapseBtns) {
     collapseBtn.onclick = e => {
         let panel = e.target.nextElementSibling;
         e.target.classList.toggle('active');
         panel.classList.toggle('active');
-        console.log(panel.style.height);
-        if(panel.style.height){
-            panel.style.height = null;
-        }else{
-            panel.style.height = panel.scrollHeight + 'px';
+        console.log(panel.style.width);
+        if (panel.style.width) {
+            panel.style.width = null;
+        } else {
+            panel.style.width = 250 + 'px';
         }
+        document.querySelector('.side-menu').style.transform = 'translateX(-100%)';
+        document.querySelector('#side-menu-switch').checked = false;
         e.preventDefault();
     }
-}   
-
-// 取得視窗寬度
-
-let bodyWidth = document.body.clientWidth;
-let htmlWidth = document.documentElement.clientWidth;
-console.log(bodyWidth);
-console.log(htmlWidth);
-
-window.onresize = e => {
-    let widowWidth = window.innerWidth;
-    let menu = document.querySelector('.menu-group');
-    console.log(widowWidth);
-    if(widowWidth > 1200){
-        menu.style.height = 'initial';
-        menu.style.overflow = 'initial';
-    }else{
-        menu.style.height = 0;
-        menu.style.overflow = 'hidden';
-    }
 }
+let menusides = document.querySelectorAll('#side-menu-switch');
+
+//  圖片輪播 
+$(function () {
+    $('#product').owlCarousel({
+        items: 1,
+        loop: true,
+        autoplay: true,
+        autoplayTimeout: 4000,
+        autoplaySpeed: 500,
+        nav: true,
+        navText: [],
+        dots: true,
+        dotsText: []
+    })
+})
+
+// top 按鈕
+$(function () {
+    $(window).scroll(function () {
+        let animateFadeIn = 'fadeInUp';
+        let animateFadeOut = 'fadeOutRight';
+        let h = $(window).scrollTop();
+        // console.log(h);
+        if (h > 600) {
+            $('.gotop').removeClass(animateFadeOut);
+            $('.gotop').addClass(animateFadeIn);
+        } else {
+            $('.gotop').removeClass(animateFadeIn);
+            $('.gotop').addClass(animateFadeOut);
+        }
+    })
+})
+
+//  Messenger 洽談外掛程式 Code 
+var chatbox = document.getElementById('fb-customer-chat');
+chatbox.setAttribute("page_id", "108229789013230");
+chatbox.setAttribute("attribution", "biz_inbox");
+
+window.fbAsyncInit = function () {
+    FB.init({
+        xfbml: true,
+        version: 'v17.0'
+    });
+};
+
+(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = 'https://connect.facebook.net/zh_TW/sdk/xfbml.customerchat.js';
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+// wow 特效
+new WOW().init();

@@ -212,10 +212,10 @@ html,body {
 }
 /* 上下div權重先後順序調整 */
 .turnsit {
-    order: 0;
+    order: 1;
 }
 .turnimg {
-    order: 1;
+    order: 0;
 }
 .gotop {
     position: fixed;
@@ -230,6 +230,14 @@ footer {
     width: 100%;
     padding-block: 15px;
     letter-spacing: 2px;
+}
+@media (min-width:520px){
+    /* .turnsit {
+        order: 1;
+    }
+    .turnimg {
+        order: 0;
+    } */
 }
 @media (min-width:720px) {
     .side-menu {
