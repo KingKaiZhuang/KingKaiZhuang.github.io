@@ -134,123 +134,12 @@
         <i class="fa-solid fa-chevron-up fa-2x"></i>
     </a>
     
-    <!-- 左右側選單 -->
-    <script>
-        // 右側選單點擊時
-        let collapseBtns = document.querySelectorAll('.collapse-btn');
-        for(collapseBtn of collapseBtns){
-            collapseBtn.onclick = e => {
-                let panel = e.target.nextElementSibling;
-                e.target.classList.toggle('active');
-                panel.classList.toggle('active');
-                console.log(panel.style.width);
-                if(panel.style.width){
-                    panel.style.width = null;
-                }else{
-                    panel.style.width = 250 + 'px';
-                }
-                document.querySelector('.side-menu').style.transform = 'translateX(-100%)';
-                document.querySelector('#side-menu-switch').checked = false;
-                e.preventDefault();
-            }
-        }  
-        let menusides = document.querySelectorAll('#side-menu-switch');
-        // 左側選單點擊時
-        $(function(){
-            $('#side-menu-btn').click(function() {
-                $('.side-menu').css('transform', '');
-                $('.menu-right').css('width','');
-                $('.nav-toggle.active').removeClass('active');
-            });
-        })
-    </script>
-
-    <!-- 圖片輪播 -->
-    <script>
-        $(function(){
-            $('#product').owlCarousel({
-                items:1,
-                loop: true,
-                autoplay: true,
-                autoplayTimeout: 4000,
-                autoplaySpeed: 500,
-                nav: true,
-                navText:[],
-                dots:true,
-                dotsText:[]
-            })
-        })
-    </script>
-
-    <!-- wow 特效 -->
-    <script>
-        new WOW().init();
-    </script>
-    <!-- top 按鈕 -->
-    <script>
-        $(function(){
-            $(window).scroll(function(){
-                let animateFadeIn = 'fadeInUp';
-                let animateFadeOut = 'fadeOutRight';
-                let h = $(window).scrollTop();
-                // console.log(h);
-                if(h > 600){
-                    $('.gotop').removeClass(animateFadeOut);
-                    $('.gotop').addClass(animateFadeIn);
-                }else{
-                    $('.gotop').removeClass(animateFadeIn);
-                    $('.gotop').addClass(animateFadeOut);        
-                }
-            })
-        })
-    </script>
-    <!-- 上下div權重先後順序調整 -->
-    <script>
-        $(function(){
-            $(window).resize(function(){
-                let w = $(window).innerWidth();
-                console.log(w);
-                if (w < 520){
-                    $('.turnimg').css('order', '0');
-                    $('.turnsit').css('order', '1');
-                }else {
-                    $('.turnimg').css('order', '1');
-                    $('.turnsit').css('order', '0');     
-                }          
-            })
-        });
-
-    </script>
+    <script src="script.js"></script>
 
     <!-- Messenger 洽談外掛程式 Code -->
     <div id="fb-root"></div>
 
     <!-- Your 洽談外掛程式 code -->
-    <div id="fb-customer-chat" class="fb-customerchat">
-    </div>
-
-    <script>
-      var chatbox = document.getElementById('fb-customer-chat');
-      chatbox.setAttribute("page_id", "108229789013230");
-      chatbox.setAttribute("attribution", "biz_inbox");
-    </script>
-
-    <!-- Your SDK code -->
-    <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          xfbml            : true,
-          version          : 'v17.0'
-        });
-      };
-
-      (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = 'https://connect.facebook.net/zh_TW/sdk/xfbml.customerchat.js';
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
-    </script>
+    <div id="fb-customer-chat" class="fb-customerchat"></div>
 </body>
 </html>
