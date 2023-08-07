@@ -157,7 +157,7 @@ html,body {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    bottom: -10px;
+    bottom: -20px;
     height: 3px;
     background-color: #86a6ff;
     box-shadow: 2px 2px 5px #858585;
@@ -165,6 +165,7 @@ html,body {
 }
 .banner .img {
     position: relative;
+    top: 20px;
     width: 85%;
     margin: auto;
     border: 5px solid #fff;
