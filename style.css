@@ -114,7 +114,6 @@ html,body {
     color: rgb(142, 140, 255);
 }
 #welcome {
-    padding-block-start: 42px;
     width: 100%;
     margin: auto;
 }
@@ -144,7 +143,6 @@ html,body {
 }
 .banner {
     width: 100%;
-    margin-top: 60px;
     background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);    padding-block: 10px;
 }
 .banner h2 {
@@ -161,6 +159,7 @@ html,body {
     bottom: -10px;
     height: 3px;
     background-color: #86a6ff;
+    box-shadow: 2px 2px 5px #858585;
     animation: 3s expandLine ease-in-out forwards;
 }
 .banner .img {
@@ -182,8 +181,22 @@ html,body {
     align-items: center;
 }
 .banner h3 {
+    position: relative;
     margin-top: 30px;
     font-size: 2rem;
+}
+.banner h3::after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -10px;
+    height: 3px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 2px 2px 5px #858585;
+    animation: 3s expandLine2 ease-in-out forwards;
 }
 .hobby {
     position: absolute;
@@ -321,9 +334,17 @@ footer {
 
 @keyframes expandLine {
     0% {
-        width: 0;   
+        width: 0%;   
     }
     100% {
         width: 80%;
+    }
+}
+@keyframes expandLine2 {
+    0% {
+        width: 0%;   
+    }
+    100% {
+        width: 25%;
     }
 }
