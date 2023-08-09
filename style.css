@@ -1,4 +1,7 @@
-html,body {
+html {
+    cursor:url('images/arrow-pointer-solid.svg'), auto;
+}
+body {
     height: 100%
 }
 .side-menu {
@@ -8,7 +11,7 @@ html,body {
     background-color: #303030fe;
     display: flex;
     flex-direction: column;
-    /* box-shadow: 10px 0px 5px  #64646484; */
+    box-shadow: 10px 0px 5px  #64646484;
     position: fixed;
     transform: translateX(-100%);
     transition: .3s;
