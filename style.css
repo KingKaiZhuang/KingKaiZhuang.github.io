@@ -118,7 +118,7 @@ html,body {
     margin: auto;
 }
 .title {
-    position: static;
+    position: fixed;
     top: 0;
     left: 0;
     height: 42px;

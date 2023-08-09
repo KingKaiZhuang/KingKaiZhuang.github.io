@@ -11,10 +11,20 @@ for (collapseBtn of collapseBtns) {
         } else {
             panel.style.width = 250 + 'px';
         }
+        document.querySelector('.side-menu').style.transform = 'translateX(-100%)';
+        document.querySelector('#side-menu-switch').checked = false;
         e.preventDefault();
     }
 }
 let menusides = document.querySelectorAll('#side-menu-switch');
+// 左側選單點擊時
+$(function () {
+    $('#side-menu-btn').click(function () {
+        $('.side-menu').css('transform', '');
+        $('.menu-right').css('width', '');
+        $('.nav-toggle.active').removeClass('active');
+    });
+})
 
 //  圖片輪播 
 $(function () {
