@@ -347,6 +347,12 @@ span {
 }
 
 @media (max-width: 400px) {
+    .home-content h3 {
+        font-size: 2.5rem;
+    }
+    .home-content h1 {
+        font-size: 3.5rem;
+    }
     .home-img img {
         width: 90vw;
     }
