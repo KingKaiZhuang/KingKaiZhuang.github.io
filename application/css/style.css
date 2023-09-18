@@ -132,8 +132,9 @@ header {
 @media(max-width:500px) {
     .main a {
         font-size: 0.8rem;
+
     }
     .logo span {
-        font-size: 25px;
+        font-size: 20px;
     }
 }
