@@ -18,7 +18,7 @@ $(function() {
 
     $(window).resize(() => {
         const screenWidth = window.innerWidth;
-        if(screenWidth > 900) nav.css("height","60px");
+        if(screenWidth > 910) nav.css("height","60px");
         console.log(screenWidth);
     });
 });
