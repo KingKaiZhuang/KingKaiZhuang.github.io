@@ -34,11 +34,13 @@ nav ul {
 
 nav ul li {
     display: none;
-    color: #fff;
     font-weight: bold;
     padding: 18px 30px;
     transition: .3s;
     font-size: 16px;
+}
+nav ul li a {
+    color: #fff;
 }
 nav ul li:hover {
     background-color: #000000;
