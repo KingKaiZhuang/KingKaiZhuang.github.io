@@ -4,13 +4,14 @@ body {
 
 nav {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+    /* justify-content: space-between; */
     background-color: rgba(0, 0, 0, 0.847);
     padding: 16px 10%;
     position: fixed;
     width: 100%;
     box-shadow: 0 5px 10px #0000008a;
+    height: 100vh;
 }
 
 nav .logo {
@@ -18,6 +19,7 @@ nav .logo {
     color: #9ef2ff;
     display: flex;
     align-items: center;
+    margin-bottom: 20px;
 }
 
 nav .logo > span {
@@ -25,15 +27,18 @@ nav .logo > span {
 }
 
 nav ul {
-    display: flex;
+    display: block;
     align-items: center;
+    font-size: 0;
 }
 
 nav ul li {
-    display: none;
+    /* display: none; */
     color: #fff;
     font-weight: bold;
     padding: 20px 30px;
+    transition: .3s;
+    font-size: 16px;
 }
 nav ul li:hover {
     background-color: #000000;
@@ -48,11 +53,20 @@ nav .nav-toggle {
     color: #fff;
 }
 
-@media (min-width: 880px) {
+@media (min-width: 910px) {
     nav {
         padding: 0px 10%;
+        flex-direction: row;
+        height: initial;
+        justify-content: space-between;
+    }
+    nav .logo {
+        margin-bottom: 0px;
     }
     nav ul li {
         display: inline-block;
+    }
+    nav .nav-toggle {
+        display: none;
     }
 }
