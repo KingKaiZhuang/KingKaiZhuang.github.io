@@ -24,10 +24,6 @@ html {
     text-decoration: none;
     list-style: none;
 }
-img {
-    width: 100%;
-    vertical-align:top;
-}
 .btn {
     display: inline-block;
     text-decoration: none;

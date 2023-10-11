@@ -14,6 +14,7 @@ nav {
     width: 100%;
     box-shadow: 0 5px 10px #0000008a;
     height: 62px;
+    z-index: 100;
 }
 
 nav .logo {
@@ -60,7 +61,36 @@ nav .nav-toggle {
 /* header */
 .header {
     width: 100%;
-    height: 500px;
+    height: 700px;
+    position: relative;
+
+    background-image: url('/application/images/header.jpg');
+    clip-path: polygon(0 0,100% 0,100% calc(100% - 10vw) ,0 100%);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff5a;
+}
+
+.header .title {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    writing-mode: vertical-lr; /* 將文字垂直排列，從上到下（由左向右） */
+    text-orientation: upright; /* 確保文字保持正確的方向 */
+    white-space: nowrap; /* 防止文字折行 */
+}
+
+.header .title h1 {
+    font-size: 50px;
+    color: rgb(189, 127, 255);
 }
 
 @media (min-width: 910px) {
