@@ -3,10 +3,6 @@ $(function() {
     let nav = $("nav");
     let navList = $("nav ul li");
     let isFullHeight = false;
-
-    mediaQuery.addListener((event) => {
-        console.log(event);
-    })
     
     $(navToggle).click(()=>{
         if(isFullHeight){
