@@ -1,9 +1,23 @@
 $(function() {
-    let menu = $("#menu-icon");
-    let navbar = $(".navbar");
+    let navToggle = ".nav-toggle";
+    let nav = $("nav");
+    let navList = $("nav ul li");
+    let isFullHeight = false;
 
-    menu.click(() => {
-        menu.toggleClass('bx-x'); // 使用 jQuery 的 toggleClass 方法
-        navbar.toggleClass('open'); // 使用 jQuery 的 toggleClass 方法
-    });
+    mediaQuery.addListener((event) => {
+        console.log(event);
+    })
+    
+    $(navToggle).click(()=>{
+        if(isFullHeight){
+            nav.css("height","60px");
+            navList.css("display","none");
+            isFullHeight = false;
+        }else{
+            nav.css("height","100vh");
+            navList.css("display","block");
+            isFullHeight = true;
+        }
+    })
+
 });
