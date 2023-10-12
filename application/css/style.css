@@ -139,48 +139,32 @@ nav .nav-toggle {
     color: #fff;
 }
 
-/* important-page */
-.important-page {
-    margin-top: -10vw;
-    padding-block: calc(100px + 10vw);
-    width: 100%;
-    clip-path: polygon(0 10vw,100% 0,100% calc(100% - 10vw) ,0 100%);
-    background-image: url('/application/images/importent-page.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+/* life-page */
+
+.life-page {
+    padding-block: 120px;
 }
 
-.important-page .title {
-    padding-bottom: 30px;
-    color: #ffffff;
+.life-page .title {
+    position: relative;
+    background-color: #cccccca8;
+    padding-block: 6px;
 }
 
-.important-page .icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-
-    background-color: rgb(135, 173, 255);
-    color: #f0f0f0;
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    font-size: 50px;
-    animation: shadowBubble 1s ease-in-out infinite;
+.life-page .title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 8px;
+    background-color: #8945ff;
 }
 
-.important-page .text {
-    text-align: center;
-    padding-top: 25px;
-    font-weight: 700;
-    color: #fff;
-}
 
 @keyframes shadowBubble {
     0% {
-        box-shadow: 0 0 2px rgb(46, 46, 46);
+        box-shadow: 0 0 2px rgb(34, 30, 30);
     }
     25% {
         box-shadow: 0 0 10px rgb(46, 46, 46);
