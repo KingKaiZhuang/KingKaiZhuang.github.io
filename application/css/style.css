@@ -172,6 +172,11 @@ nav .nav-toggle {
     background-color: #ff457a;
 }
 
+.life-page .out-item {
+    padding-block: 10%;
+    background-color: #dadada;
+}
+
 .life-page .life-img {
     position: relative;
     width: 300px;
@@ -182,11 +187,22 @@ nav .nav-toggle {
     justify-content: center;
     align-items: start;
     background-color: #fff;
+    overflow: hidden;
 }
 
 .life-page .life-img img {
     width: 100%;
     vertical-align: top;
+}
+
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 @media (min-width: 910px) {
