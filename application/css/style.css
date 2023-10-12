@@ -63,12 +63,13 @@ nav .nav-toggle {
     width: 100%;
     height: 700px;
     position: relative;
-
+    /* 圖片來源: https://i1.kknews.cc/jmqCj71Gl0-rJumw_cVKv9dtVI_jHIAASe2xis8/0.jpg */
     background-image: url('/application/images/header.jpg');
     clip-path: polygon(0 0,100% 0,100% calc(100% - 10vw) ,0 100%);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    z-index: 2;
 }
 
 .header::before {
@@ -99,7 +100,7 @@ nav .nav-toggle {
     top: 2%;
     letter-spacing: 3px;
     font-size: 30px;
-    color: rgb(71, 71, 71);
+    color: rgb(255, 255, 255);
 }
 
 .header .title h1 span:nth-child(1) {
@@ -127,7 +128,7 @@ nav .nav-toggle {
 
 .header .name {
     transform: rotate(-6deg);
-    padding: 20px 10px;
+    padding: 10px;
     background-color: #b1b1b188;
     position: absolute;
     bottom: 10vw;
@@ -142,13 +143,22 @@ nav .nav-toggle {
 /* life-page */
 
 .life-page {
-    padding-block: 120px;
+    position: relative;
+    z-index: 1;
+    margin-top: -10vw;
+    padding-block: calc(100px + 10vw);
+    clip-path: polygon(0 0,100% 0,100% calc(100% - 10vw) ,0 100%);
+    background-image: url('/application/images/importent-page.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .life-page .title {
     position: relative;
     background-color: #cccccca8;
     padding-block: 6px;
+    margin-bottom: 20px;
 }
 
 .life-page .title::after {
@@ -161,18 +171,29 @@ nav .nav-toggle {
     background-color: #8945ff;
 }
 
+.life-page .life-img {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-@keyframes shadowBubble {
-    0% {
-        box-shadow: 0 0 2px rgb(34, 30, 30);
-    }
-    25% {
-        box-shadow: 0 0 10px rgb(46, 46, 46);
-        transform: scale(1.05);
-    }
-    50% {
-        box-shadow: 0 0 2px rgb(46, 46, 46);
-    }
+.life-page .life-img img {
+    width: 100%;
+    vertical-align: top;
+}
+
+.life-page .life-img::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    display: block;
+    height: 20px;
+    width: 100%;
+    background-color: #fff;
 }
 
 @media (min-width: 910px) {
