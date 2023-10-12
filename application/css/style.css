@@ -156,9 +156,10 @@ nav .nav-toggle {
 
 .life-page .title {
     position: relative;
-    background-color: #cccccca8;
+    background-color: #ffffff8f;
     padding-block: 6px;
-    margin-bottom: 20px;
+    /* margin-bottom: 100px; */
+    font-weight: 800;
 }
 
 .life-page .title::after {
@@ -168,17 +169,19 @@ nav .nav-toggle {
     top: 0;
     height: 100%;
     width: 8px;
-    background-color: #8945ff;
+    background-color: #ff457a;
 }
 
 .life-page .life-img {
     position: relative;
-    width: 250px;
-    height: 250px;
+    width: 300px;
+    padding: 20px;
     
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
+    align-items: start;
+    background-color: #fff;
 }
 
 .life-page .life-img img {
@@ -186,14 +189,7 @@ nav .nav-toggle {
     vertical-align: top;
 }
 
-.life-page .life-img::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    display: block;
-    height: 20px;
-    width: 100%;
-    background-color: #fff;
+.life-page .life-img .life-text {
 }
 
 @media (min-width: 910px) {
