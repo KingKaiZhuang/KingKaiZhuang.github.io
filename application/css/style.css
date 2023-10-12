@@ -142,14 +142,18 @@ nav .nav-toggle {
 /* important-page */
 .important-page {
     margin-top: -10vw;
-    padding-block: calc(50px + 10vw);
+    padding-block: calc(100px + 10vw);
     width: 100%;
     clip-path: polygon(0 10vw,100% 0,100% calc(100% - 10vw) ,0 100%);
-    background-color: rgba(255, 212, 212, 0.708);
+    background-image: url('/application/images/importent-page.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .important-page .title {
     padding-bottom: 30px;
+    color: #ffffff;
 }
 
 .important-page .icon {
@@ -171,6 +175,7 @@ nav .nav-toggle {
     text-align: center;
     padding-top: 25px;
     font-weight: 700;
+    color: #fff;
 }
 
 @keyframes shadowBubble {
