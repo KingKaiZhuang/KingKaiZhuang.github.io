@@ -76,21 +76,67 @@ nav .nav-toggle {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: #ffffff5a;
+    background-color: #00000040;
 }
 
 .header .title {
-    position: absolute;
-    right: 10px;
-    top: 10px;
     writing-mode: vertical-lr; /* 將文字垂直排列，從上到下（由左向右） */
-    text-orientation: upright; /* 確保文字保持正確的方向 */
+    text-orientation: upright; /* 確保文字保持正確的方向*/
     white-space: nowrap; /* 防止文字折行 */
 }
 
 .header .title h1 {
-    font-size: 50px;
-    color: rgb(189, 127, 255);
+    position: absolute;
+    left: 2%;
+    top: 2%;
+    letter-spacing: 3px;
+    font-size: 30px;
+    color: rgb(255, 255, 255);
+}
+.header .title h2 {
+    position: absolute;
+    right: 2%;
+    top: 2%;
+    letter-spacing: 3px;
+    font-size: 30px;
+    color: rgb(71, 71, 71);
+}
+
+.header .title h1 span:nth-child(1) {
+    color: #ff4000;
+}
+.header .title h1 span:nth-child(2) {
+    color: #ffffff;
+}
+
+.header .me-item {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    height: 60vw;
+    width: 60vw;
+    vertical-align: top;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.header .me-item img {
+    width: 100%;
+}
+
+.header .name {
+    transform: rotate(-6deg);
+    padding: 20px 10px;
+    background-color: #b1b1b188;
+    position: absolute;
+    bottom: 10vw;
+    right: 10px;
+    border-radius: 6px;
+}
+
+.header .name h1 {
+    color: #fff;
 }
 
 @media (min-width: 910px) {
