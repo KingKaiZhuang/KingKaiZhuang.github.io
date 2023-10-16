@@ -69,7 +69,7 @@ nav .nav-toggle {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    z-index: 2;
+    z-index: 20;
 }
 
 .header::before {
@@ -144,14 +144,14 @@ nav .nav-toggle {
 
 .life-page {
     position: relative;
-    z-index: 1;
+    z-index: 10;
     margin-top: -10vw;
     padding-block: calc(100px + 10vw);
     clip-path: polygon(0 0,100% 0,100% calc(100% - 10vw) ,0 100%);
-    background-image: url('/application/images/importent-page.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    background-image: url('/application/images/importent-page.jpg');
 }
 
 .life-page .title {
@@ -190,6 +190,61 @@ nav .nav-toggle {
     vertical-align: top;
 }
 
+/* pointer-page */
+.pointer-page {
+    position: relative;
+    z-index: 9;
+    margin-top: -10vw;
+    padding-block: calc(100px + 10vw);
+    clip-path: polygon(0 0,100% 0,100% calc(100% - 10vw) ,0 100%);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('/application/images/pointer-page.jpg');
+}
+
+.pointer-page .title {
+    position: relative;
+    background-color: #ffffff8f;
+    padding-block: 6px;
+    /* margin-bottom: 100px; */
+    font-weight: 800;
+}
+
+.pointer-page .title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 8px;
+    background-color: #46acff;
+}
+
+.pointer-page .life-img {
+    position: relative;
+    width: 300px;
+    padding: 20px;
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: start;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.pointer-page .life-img img {
+    width: 100%;
+    vertical-align: top;
+}
+
+.jumbo {
+    margin:0;
+    color:#EC4365;
+    font-size:200%;
+    white-space:nowrap;
+}
 
 @keyframes rotate {
     0% {

@@ -15,11 +15,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.compat.min.css"
         integrity="sha512-b42SanD3pNHoihKwgABd18JUZ2g9j423/frxIP5/gtYgfBz/0nDHGdY/3hi+3JwhSckM3JLklQ/T6tJmV7mZEw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-<body>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="https://cdn.jsdelivr.net/npm/countup.js@2.0.0/dist/countUp.min.js"></script>
+
+<body>
     <nav class="wow fadeIn" data-wow-duration=".5s">
         <h2 class="logo">Zhuang<span>Kai</span></h2>
         <ul>
@@ -42,16 +43,11 @@
 
     <div class="header" style="margin-top: 62px;">
         <div class="title">
-            <h1 class="wow fadeInDown"
-            data-wow-duration="1s"
-            >恐れを克服し、<span>前を向き</span>、<span>前進しましょう。</span></h1>
-            <h2 class="wow fadeInDown"
-            data-wow-duration="2s"
-            >私の修行の道</h2>
+            <h1 class="wow fadeInDown" data-wow-duration="1s">恐れを克服し、<span>前を向き</span>、<span>前進しましょう。</span></h1>
+            <h2 class="wow fadeInDown" data-wow-duration="2s">私の修行の道</h2>
         </div>
         <div class="me-item">
-            <img class="wow bounceInDown" data-wow-duration="2s"
-             src="./application/images/zhuang-me3.jpg" alt="">
+            <img class="wow bounceInDown" data-wow-duration="2s" src="./application/images/zhuang-me3.jpg" alt="">
         </div>
         <div class="name">
             <h1 class="">五專資工三甲 <span>莊鈞凱</span></h1>
@@ -62,7 +58,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 mx-auto">
-                    <h2 class="title text-center mb-5 wow zoomInLeft" data-wow-offset="150">生活基本元件</h2></h2>
+                    <h2 class="title text-center mb-5 wow zoomInLeft" data-wow-offset="150">生活基本元件</h2>
+                    </h2>
                 </div>
                 <div class="col-12 col-xl-4 mb-5 mb-xl-0">
                     <div class="life-img m-auto wow fadeInDown" data-wow-offset="150">
@@ -76,7 +73,8 @@
                     <div class="life-img m-auto wow fadeInDown" data-wow-offset="150">
                         <img src="/application/images/life-img2.jpg" alt="">
                         <div class="life-text mt-3">
-                            <h3>Good eat</h3></h3>
+                            <h3>Good eat</h3>
+                            </h3>
                         </div>
                     </div>
                 </div>
@@ -92,14 +90,62 @@
         </div>
     </div>
 
+    <div class="pointer-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mx-auto">
+                    <h2 class="title text-center mb-5 wow zoomInLeft" data-wow-offset="150">我的技能數值表</h2>
+                    </h2>
+                </div>
+                <div class="col-12 col-xl-4 mb-5 mb-xl-0">
+                    <div class="life-img m-auto wow fadeInDown" data-wow-offset="150">
+                        <img src="/application/images/life-img1.jpg" alt="">
+                        <div class="life-text mt-3">
+                            <h3>Good sleep</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-xl-4 mb-5 mb-xl-0">
+                    <div class="life-img m-auto wow fadeInDown" data-wow-offset="150">
+                        <img src="/application/images/life-img2.jpg" alt="">
+                        <div class="life-text mt-3">
+                            <h3>Good eat</h3>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-xl-4 mb-5 mb-xl-0">
+                    <div class="life-img m-auto wow fadeInDown" data-wow-offset="150">
+                        <img src="/application/images/life-img3.jpg" alt="">
+                        <div class="life-text mt-3">
+                            <h3>Happy coding</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <span id="countUpElement">0</span>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
-        integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
-    <script src="./application/js/main.js"></script>
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
     <script src="./application/js/nav.js"></script>
+    <script>
+        const options = {
+            startVal: 0,  // 起始值
+            endVal: 1000, // 目標值
+            duration: 2, // 動畫時間（秒）
+        };
+        
+        const demo = new CountUp('countUpElement', options);
+
+        demo.start();
+    </script>
 </body>
 
 </html>
