@@ -221,30 +221,17 @@ nav .nav-toggle {
     background-color: #46acff;
 }
 
-.pointer-page .life-img {
-    position: relative;
-    width: 300px;
-    padding: 20px;
+.pointer-page .feature {
+    width: 200px;
+    height: 300px;
+    background-color: #9ef2ff;
     
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    align-items: start;
-    background-color: #fff;
-    overflow: hidden;
 }
 
-.pointer-page .life-img img {
-    width: 100%;
-    vertical-align: top;
-}
-
-.jumbo {
-    margin:0;
-    color:#EC4365;
-    font-size:200%;
-    white-space:nowrap;
-}
 
 @keyframes rotate {
     0% {
