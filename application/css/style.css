@@ -205,9 +205,10 @@ nav .nav-toggle {
 
 .pointer-page .title {
     position: relative;
-    background-color: #ffffff8f;
+    background-color: #141414bb;
+    color: #fff;
     padding-block: 6px;
-    /* margin-bottom: 100px; */
+    margin-bottom: 100px;
     font-weight: 800;
 }
 
@@ -218,18 +219,29 @@ nav .nav-toggle {
     top: 0;
     height: 100%;
     width: 8px;
-    background-color: #46acff;
+    background-color: #ffffff;
 }
 
 .pointer-page .feature {
     width: 200px;
     height: 300px;
-    background-color: #9ef2ff;
+    background-color: #141414bb;
+    border-radius: 12px;
     
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    color: #fff;
+}
+
+.pointer-page .feature .icon > i {
+    font-size: 50px;
+    color: #fff;
+}
+
+.pointer-page .feature .gate {
+    padding-bottom: 25px;
 }
 
 

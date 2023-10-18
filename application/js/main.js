@@ -10,7 +10,7 @@ $(document).ready(function() {
     var elementInView = isElementInViewport('#target');
 
     if (elementInView && !countUp) {
-      countUp = new CountUp('target', 2000);
+      countUp = new CountUp('target', 100);
       countUp.start();
     }
   });
