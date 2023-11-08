@@ -200,7 +200,7 @@ nav .nav-toggle {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url('/application/images/pointer-page.jpg');
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/importent-page.jpg?alt=media&token=e9ff6d7c-89c2-4619-87b5-1e7a2a7a8fe0');
 }
 
 .pointer-page .title {
