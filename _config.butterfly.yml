@@ -1,0 +1,264 @@
+# Hexo 配置文件
+## 文件: https://hexo.io/docs/configuration.html
+## 原始碼: https://github.com/hexojs/hexo/
+
+# 站點設置
+title: FullStackPenguin
+subtitle: ""
+description: ""
+keywords:
+author: 全端企鵝
+language: zh-TW
+timezone: ""
+
+nav:
+  # logo: /images/Logo.png # 這裡填入你的 logo 圖片鏈接
+  display_title: true # 是否顯示網站標題
+  fixed: false # 導航欄是否固定在頁面頂部，設為 true 則固定
+
+menu:
+  首頁: / || fas fa-home
+  時間軸: /archives/ || fas fa-archive
+  標籤: /tags/ || fas fa-tags
+  分類: /categories/ || fas fa-folder-open
+  清單||fa fa-heartbeat:
+    音樂: /music/ || fas fa-music
+    照片: /Gallery/ || fas fa-images
+    電影: /movies/ || fas fa-video
+  友鏈: /link/ || fas fa-link
+  關於: /about/ || fas fa-heart
+
+# 網址設置
+## 在這裡設置你的網站 URL。例如，如果你使用 GitHub Pages，則設置 url 為 'https://username.github.io/project'
+url: http://example.com
+permalink: :year/:month/:day/:title/
+permalink_defaults:
+pretty_urls:
+  trailing_index: true # 設置為 false 將從永久連結中移除 'index.html'
+  trailing_html: true # 設置為 false 將從永久連結中移除 '.html'
+
+# 目錄設置
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render:
+
+# 撰寫設置
+new_post_name: :title.md # 新文章的文件名
+default_layout: post
+titlecase: false # 將標題轉換為標題大小寫
+external_link:
+  enable: true # 將外部鏈接在新標籤中打開
+  field: site # 應用於整個網站
+  exclude: ""
+filename_case: 0
+render_drafts: false
+post_asset_folder: false
+relative_link: false
+future: true
+syntax_highlighter: highlight.js
+highlight:
+  line_number: true
+  auto_detect: false
+  tab_replace: ""
+  wrap: true
+  hljs: false
+  highlight_copy: true # 顯示代碼框複製按鈕
+  highlight_shrink: true # 代碼框不展開，需點擊 '>' 打開
+prismjs:
+  preprocess: true
+  line_number: true
+  tab_replace: ""
+
+# 首頁設置
+# path: 部落格首頁的根路徑 (默認為 '')
+# per_page: 每頁顯示的文章數 (0 = 關閉分頁)
+# order_by: 文章排序 (默認按日期降序排列)
+index_generator:
+  path: ""
+  per_page: 10
+  order_by: -date
+
+# 分類與標籤
+default_category: uncategorized
+category_map:
+tag_map:
+
+# 網站元數據
+## https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
+meta_generator: true
+
+# 日期與時間格式
+## Hexo 使用 Moment.js 來解析和顯示日期
+## 可以自定義日期格式，請參考 http://momentjs.com/docs/#/displaying/format/
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+## updated_option 支持 'mtime', 'date', 'empty'
+updated_option: "mtime"
+
+# 分頁設置
+## 設置 per_page 為 0 以禁用分頁
+per_page: 10
+pagination_dir: page
+
+# 包含 / 排除文件
+## include:/exclude: 選項僅適用於 'source/' 資料夾
+include:
+exclude:
+ignore:
+
+# 擴展功能
+## 插件: https://hexo.io/plugins/
+## 主題: https://hexo.io/themes/
+theme: butterfly
+
+# 客製化內容
+post_pagination:
+  enable: true
+  newer_text: "« 上一篇"
+  older_text: "下一篇 »"
+
+related_post:
+  enable: true
+  limit: 6 # 顯示推薦文章數目
+  date_type: created # or created or updated 文章日期顯示創建日或者更新日
+
+toc:
+  post: true
+  page: true
+  number: true
+  expand: false
+  style_simple: false # for post
+  scroll_percent: true
+
+copy:
+  enable: true
+
+post_copyright:
+  enable: true
+  decode: false
+  author_href:
+  license: CC BY-NC-SA 4.0
+  license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+post_meta:
+  page:
+    date_type: both # created or updated or both 主頁文章日期是創建日或者更新日或都顯示
+    date_format: relative # date/relative 顯示日期還是相對日期
+    categories: true # true or false 主頁是否顯示分類
+    tags: true # true or false 主頁是否顯示標籤
+    label: true # true or false 顯示描述性文字
+  post:
+    date_type: both # created or updated or both 文章頁日期是創建日或者更新日或都顯示
+    date_format: relative # date/relative 顯示日期還是相對日期
+    categories: true # true or false 文章頁是否顯示分類
+    tags: true # true or false 文章頁是否顯示標籤
+    label: true # true or false 顯示描述性文字
+
+index_post_content:
+  method: 3
+  length: 500 # if you set method to 2 or 3, the length need to config
+
+# disable_top_img: false
+
+error_404:
+  enable: true
+  subtitle: "頁面沒有找到"
+
+social:
+  fab fa-github: https://github.com/xxxxx || Github || "#hdhfbb"
+  fas fa-envelope: mailto:xxxxxx@gmail.com || Email || "#000000"
+
+avatar:
+  img: /images/MyPic.jpeg
+  effect: false
+
+cover:
+  index_enable: true
+  aside_enable: true
+  archives_enable: true
+  position: both
+
+aside:
+  enable: true
+  hide: false
+  button: true
+  mobile: true # 手機版顯示
+  position: right # 左邊或右邊
+  display:
+    archive: true
+    tag: true
+    category: true
+  card_author:
+    enable: true
+    description:
+    button:
+      enable: true
+      icon: fab fa-github
+      text: Follow Me
+      link: https://github.com/xxxxxx
+  card_announcement:
+    enable: true
+    content: This is my Blog
+  card_recent_post:
+    enable: true
+    limit: 5 # 設置為 0 將顯示所有
+    sort: date # 按日期或更新日期排序
+    sort_order: # 不要修改此設置，除非你知道它的作用
+  card_categories:
+    enable: true
+    limit: 8 # 設置為 0 將顯示所有
+    expand: none # none/true/false
+    sort_order: # 不要修改此設置，除非你知道它的作用
+  card_tags:
+    enable: true
+    limit: 40 # 設置為 0 將顯示所有
+    color: false
+    orderby: random # 標籤順序，random/name/length
+    order: 1 # 排序。1 為升序，-1 為降序
+    sort_order: # 不要修改此設置，除非你知道它的作用
+  card_archives:
+    enable: true
+    type: monthly # yearly 或 monthly
+    format: MMMM YYYY # 例如: YYYY年MM月
+    order: -1 # 排序。1 為升序，-1 為降序
+    limit: 8 # 設置為 0 將顯示所有
+    sort_order: # 不要修改此設置，除非你知道它的作用
+  card_webinfo:
+    enable: true
+    post_count: true
+    last_push_date: true
+    sort_order: # 不要修改此設置，除非你知道它的作用
+  card_post_series:
+    enable: true
+    orderBy: "date" # 按標題或日期排序
+    order: -1 # 排序。1 為升序，-1 為降序
+
+# 訪問人數統計
+busuanzi:
+  site_uv: true
+  site_pv: true
+  page_pv: true
+
+runtimeshow:
+  enable: true
+  publish_date: 11/9/2024 00:00:00
+  ## 網站開通時間
+  # 格式: 月/日/年 時間
+  # 也可以寫成 年/月/日 時間
+# 深色模式
+darkmode:
+  enable: true
+  # 深色模式與亮色模式切換按鈕
+  button: true
+  autoChangeMode: false
+  # 設定亮色模式時間。值應介於 0 到 24 之間。若未設置，默認值為 6 和 18
+  start: # 8
+  end: # 22
+
+# 顯示捲動百分比在返回頂部按鈕中
+rightside_scroll_percent: true
