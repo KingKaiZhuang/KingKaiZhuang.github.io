@@ -117,6 +117,12 @@ ignore:
 theme: butterfly
 
 # 客製化內容
+footer:
+  owner:
+    enable: true
+    since: 2024
+  custom_text: FullStackPenguin | STUST
+
 post_pagination:
   enable: true
   newer_text: "« 上一篇"
