@@ -301,7 +301,13 @@ window.addEventListener('load', () => {
   }
 
   const openSearch = () => {
+<<<<<<< HEAD
     btf.overflowPaddingR.add()
+=======
+    const bodyStyle = document.body.style
+    bodyStyle.width = '100%'
+    bodyStyle.overflow = 'hidden'
+>>>>>>> 1ebeeb5 (start)
     btf.animateIn($searchMask, 'to_show 0.5s')
     btf.animateIn($searchDialog, 'titleScale 0.5s')
     setTimeout(() => { input.focus() }, 300)
@@ -323,7 +329,13 @@ window.addEventListener('load', () => {
   }
 
   const closeSearch = () => {
+<<<<<<< HEAD
     btf.overflowPaddingR.remove()
+=======
+    const bodyStyle = document.body.style
+    bodyStyle.width = ''
+    bodyStyle.overflow = ''
+>>>>>>> 1ebeeb5 (start)
     btf.animateOut($searchDialog, 'search_close .5s')
     btf.animateOut($searchMask, 'to_hide 0.5s')
     window.removeEventListener('resize', fixSafariHeight)

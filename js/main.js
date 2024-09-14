@@ -1,9 +1,19 @@
+<<<<<<< HEAD
 document.addEventListener('DOMContentLoaded', () => {
+=======
+document.addEventListener('DOMContentLoaded', function () {
+>>>>>>> 1ebeeb5 (start)
   let headerContentWidth, $nav
   let mobileSidebarOpen = false
 
   const adjustMenu = init => {
+<<<<<<< HEAD
     const getAllWidth = ele => Array.from(ele).reduce((width, i) => width + i.offsetWidth, 0)
+=======
+    const getAllWidth = ele => {
+      return Array.from(ele).reduce((width, i) => width + i.offsetWidth, 0)
+    }
+>>>>>>> 1ebeeb5 (start)
 
     if (init) {
       const blogInfoWidth = getAllWidth(document.querySelector('#blog-info > a').children)
@@ -25,13 +35,24 @@ document.addEventListener('DOMContentLoaded', () => {
   // sidebar menus
   const sidebarFn = {
     open: () => {
+<<<<<<< HEAD
       btf.overflowPaddingR.add()
+=======
+      btf.sidebarPaddingR()
+      document.body.style.overflow = 'hidden'
+>>>>>>> 1ebeeb5 (start)
       btf.animateIn(document.getElementById('menu-mask'), 'to_show 0.5s')
       document.getElementById('sidebar-menus').classList.add('open')
       mobileSidebarOpen = true
     },
     close: () => {
+<<<<<<< HEAD
       btf.overflowPaddingR.remove()
+=======
+      const $body = document.body
+      $body.style.overflow = ''
+      $body.style.paddingRight = ''
+>>>>>>> 1ebeeb5 (start)
       btf.animateOut(document.getElementById('menu-mask'), 'to_hide 0.5s')
       document.getElementById('sidebar-menus').classList.remove('open')
       mobileSidebarOpen = false
@@ -58,9 +79,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const highLight = GLOBAL_CONFIG.highlight
     if (!highLight) return
 
+<<<<<<< HEAD
     const { highlightCopy, highlightLang, highlightHeightLimit, highlightFullpage, highlightMacStyle, plugin } = highLight
     const isHighlightShrink = GLOBAL_CONFIG_SITE.isHighlightShrink
     const isShowTool = highlightCopy || highlightLang || isHighlightShrink !== undefined || highlightFullpage || highlightMacStyle
+=======
+    const { highlightCopy, highlightLang, highlightHeightLimit, plugin } = highLight
+    const isHighlightShrink = GLOBAL_CONFIG_SITE.isHighlightShrink
+    const isShowTool = highlightCopy || highlightLang || isHighlightShrink !== undefined
+>>>>>>> 1ebeeb5 (start)
     const $figureHighlight = plugin === 'highlight.js' ? document.querySelectorAll('figure.highlight') : document.querySelectorAll('pre[class*="language-"]')
 
     if (!((isShowTool || highlightHeightLimit) && $figureHighlight.length)) return
@@ -69,16 +96,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const highlightShrinkClass = isHighlightShrink === true ? 'closed' : ''
     const highlightShrinkEle = isHighlightShrink !== undefined ? '<i class="fas fa-angle-down expand"></i>' : ''
     const highlightCopyEle = highlightCopy ? '<div class="copy-notice"></div><i class="fas fa-paste copy-button"></i>' : ''
+<<<<<<< HEAD
     const highlightMacStyleEle = '<div class="macStyle"><div class="mac-close"></div><div class="mac-minimize"></div><div class="mac-maximize"></div></div>'
     const highlightFullpageEle = highlightFullpage ? '<i class="fa-solid fa-up-right-and-down-left-from-center fullpage-button"></i>' : ''
+=======
+>>>>>>> 1ebeeb5 (start)
 
     const alertInfo = (ele, text) => {
       if (GLOBAL_CONFIG.Snackbar !== undefined) {
         btf.snackbarShow(text)
       } else {
+<<<<<<< HEAD
         ele.textContent = text
         ele.style.opacity = 1
         setTimeout(() => { ele.style.opacity = 0 }, 800)
+=======
+        const prevEle = ele.previousElementSibling
+        prevEle.textContent = text
+        prevEle.style.opacity = 1
+        setTimeout(() => { prevEle.style.opacity = 0 }, 800)
+>>>>>>> 1ebeeb5 (start)
       }
     }
 
@@ -92,20 +129,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // click events
+<<<<<<< HEAD
     const highlightCopyFn = (ele, clickEle) => {
+=======
+    const highlightCopyFn = ele => {
+>>>>>>> 1ebeeb5 (start)
       const $buttonParent = ele.parentNode
       $buttonParent.classList.add('copy-true')
       const selection = window.getSelection()
       const range = document.createRange()
       const preCodeSelector = isPrismjs ? 'pre code' : 'table .code pre'
+<<<<<<< HEAD
       range.selectNodeContents($buttonParent.querySelector(`${preCodeSelector}`))
       selection.removeAllRanges()
       selection.addRange(range)
       copy(clickEle.previousElementSibling)
+=======
+      range.selectNodeContents($buttonParent.querySelectorAll(`${preCodeSelector}`)[0])
+      selection.removeAllRanges()
+      selection.addRange(range)
+      copy(ele.lastChild)
+>>>>>>> 1ebeeb5 (start)
       selection.removeAllRanges()
       $buttonParent.classList.remove('copy-true')
     }
 
+<<<<<<< HEAD
     const highlightShrinkFn = ele => ele.classList.toggle('closed')
 
     const codeFullpage = (item, clickEle) => {
@@ -160,17 +209,42 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const createEle = (lang, item) => {
+=======
+    const highlightShrinkFn = ele => {
+      ele.classList.toggle('closed')
+    }
+
+    const highlightToolsFn = function (e) {
+      const $target = e.target.classList
+      if ($target.contains('expand')) highlightShrinkFn(this)
+      else if ($target.contains('copy-button')) highlightCopyFn(this)
+    }
+
+    const expandCode = function () {
+      this.classList.toggle('expand-done')
+    }
+
+    const createEle = (lang, item, service) => {
+>>>>>>> 1ebeeb5 (start)
       const fragment = document.createDocumentFragment()
 
       if (isShowTool) {
         const hlTools = document.createElement('div')
         hlTools.className = `highlight-tools ${highlightShrinkClass}`
+<<<<<<< HEAD
         hlTools.innerHTML = highlightMacStyleEle + highlightShrinkEle + lang + highlightCopyEle + highlightFullpageEle
+=======
+        hlTools.innerHTML = highlightShrinkEle + lang + highlightCopyEle
+>>>>>>> 1ebeeb5 (start)
         btf.addEventListenerPjax(hlTools, 'click', highlightToolsFn)
         fragment.appendChild(hlTools)
       }
 
+<<<<<<< HEAD
       if (highlightHeightLimit && getActualHeight(item) > highlightHeightLimit + 30) {
+=======
+      if (highlightHeightLimit && item.offsetHeight > highlightHeightLimit + 30) {
+>>>>>>> 1ebeeb5 (start)
         const ele = document.createElement('div')
         ele.className = 'code-expand-btn'
         ele.innerHTML = '<i class="fas fa-angle-double-down"></i>'
@@ -178,6 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fragment.appendChild(ele)
       }
 
+<<<<<<< HEAD
       isPrismjs ? item.parentNode.insertBefore(fragment, item) : item.insertBefore(fragment, item.firstChild)
     }
 
@@ -198,13 +273,49 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       createEle(`<div class="code-lang">${langName}</div>`, item)
     })
+=======
+      if (service === 'hl') {
+        item.insertBefore(fragment, item.firstChild)
+      } else {
+        item.parentNode.insertBefore(fragment, item)
+      }
+    }
+
+    if (isPrismjs) {
+      $figureHighlight.forEach(item => {
+        if (highlightLang) {
+          const langName = item.getAttribute('data-language') || 'Code'
+          const highlightLangEle = `<div class="code-lang">${langName}</div>`
+          btf.wrap(item, 'figure', { class: 'highlight' })
+          createEle(highlightLangEle, item)
+        } else {
+          btf.wrap(item, 'figure', { class: 'highlight' })
+          createEle('', item)
+        }
+      })
+    } else {
+      $figureHighlight.forEach(item => {
+        if (highlightLang) {
+          let langName = item.getAttribute('class').split(' ')[1]
+          if (langName === 'plain' || langName === undefined) langName = 'Code'
+          const highlightLangEle = `<div class="code-lang">${langName}</div>`
+          createEle(highlightLangEle, item, 'hl')
+        } else {
+          createEle('', item, 'hl')
+        }
+      })
+    }
+>>>>>>> 1ebeeb5 (start)
   }
 
   /**
    * PhotoFigcaption
    */
   const addPhotoFigcaption = () => {
+<<<<<<< HEAD
     if (!GLOBAL_CONFIG.isPhotoFigcaption) return
+=======
+>>>>>>> 1ebeeb5 (start)
     document.querySelectorAll('#article-container img').forEach(item => {
       const altValue = item.title || item.alt
       if (!altValue) return
@@ -226,7 +337,11 @@ document.addEventListener('DOMContentLoaded', () => {
    * justified-gallery 圖庫排版
    */
 
+<<<<<<< HEAD
   const fetchUrl = async url => {
+=======
+  const fetchUrl = async (url) => {
+>>>>>>> 1ebeeb5 (start)
     const response = await fetch(url)
     return await response.json()
   }
@@ -244,6 +359,13 @@ document.addEventListener('DOMContentLoaded', () => {
       // useRecycle: false
     })
 
+<<<<<<< HEAD
+=======
+    if (tabs) {
+      btf.addGlobalFn('igOfTabs', () => { ig.destroy() }, false, tabs)
+    }
+
+>>>>>>> 1ebeeb5 (start)
     const replaceDq = str => str.replace(/"/g, '&quot;') // replace double quotes to &quot;
 
     const getItems = (nextGroupKey, count) => {
@@ -260,7 +382,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const alt = item.alt ? `alt="${replaceDq(item.alt)}"` : ''
         const title = item.title ? `title="${replaceDq(item.title)}"` : ''
 
+<<<<<<< HEAD
         nextItems.push(`<div class="item">
+=======
+        nextItems.push(`<div class="item ">
+>>>>>>> 1ebeeb5 (start)
             <img src="${item.url}" data-grid-maintained-target="true" ${alt + title} />
           </div>`)
       }
@@ -270,6 +396,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const buttonText = GLOBAL_CONFIG.infinitegrid.buttonText
     const addButton = item => {
       const button = document.createElement('button')
+<<<<<<< HEAD
       button.innerHTML = buttonText + '<i class="fa-solid fa-arrow-down"></i>'
 
       button.addEventListener('click', e => {
@@ -278,6 +405,18 @@ document.addEventListener('DOMContentLoaded', () => {
         appendItem(ig.getGroups().length + 1, 10)
       }, { once: true })
 
+=======
+      button.textContent = buttonText
+
+      const buttonFn = e => {
+        e.target.removeEventListener('click', buttonFn)
+        e.target.remove()
+        btf.setLoading.add(item)
+        appendItem(ig.getGroups().length + 1, 10)
+      }
+
+      button.addEventListener('click', buttonFn)
+>>>>>>> 1ebeeb5 (start)
       item.insertAdjacentElement('afterend', button)
     }
 
@@ -286,6 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const maxGroupKey = Math.ceil(dataLength / 10)
+<<<<<<< HEAD
     let isLayoutHidden = false
 
     const completeFn = e => {
@@ -302,6 +442,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
+=======
+
+    const completeFn = e => {
+>>>>>>> 1ebeeb5 (start)
       const { updated, isResize, mounted } = e
       if (!updated.length || !mounted.length || isResize) {
         return
@@ -311,7 +455,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (ig.getGroups().length === maxGroupKey) {
         btf.setLoading.remove(item)
+<<<<<<< HEAD
         !tabs && ig.off('renderComplete', completeFn)
+=======
+        ig.off('renderComplete', completeFn)
+>>>>>>> 1ebeeb5 (start)
         return
       }
 
@@ -340,12 +488,17 @@ document.addEventListener('DOMContentLoaded', () => {
       ig.renderItems()
     }
 
+<<<<<<< HEAD
     btf.addGlobalFn('pjaxSendOnce', () => { ig.destroy() })
+=======
+    btf.addGlobalFn('justifiedGallery', () => { ig.destroy() })
+>>>>>>> 1ebeeb5 (start)
   }
 
   const addJustifiedGallery = async (ele, tabs = false) => {
     const init = async () => {
       for (const item of ele) {
+<<<<<<< HEAD
         if (btf.isHidden(item) || item.classList.contains('loaded')) continue
 
         const isButton = item.getAttribute('data-button') === 'true'
@@ -368,6 +521,29 @@ document.addEventListener('DOMContentLoaded', () => {
       init()
     } else {
       await btf.getScript(`${GLOBAL_CONFIG.infinitegrid.js}`)
+=======
+        if (btf.isHidden(item)) continue
+        if (tabs && item.classList.contains('loaded')) {
+          item.querySelector('.gallery-items').innerHTML = ''
+          const button = item.querySelector(':scope > button')
+          const loadingContainer = item.querySelector(':scope > .loading-container')
+          button && button.remove()
+          loadingContainer && loadingContainer.remove()
+        }
+
+        const isButton = item.getAttribute('data-button') === 'true'
+        const text = item.firstElementChild.textContent
+        item.classList.add('loaded')
+        const content = item.getAttribute('data-type') === 'url' ? await fetchUrl(text) : JSON.parse(text)
+        runJustifiedGallery(item.lastElementChild, content, isButton, tabs)
+      }
+    }
+
+    if (typeof InfiniteGrid === 'function') {
+      init()
+    } else {
+      await getScript(`${GLOBAL_CONFIG.infinitegrid.js}`)
+>>>>>>> 1ebeeb5 (start)
       init()
     }
   }
@@ -398,6 +574,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const isChatBtn = typeof chatBtn !== 'undefined'
     const isShowPercent = GLOBAL_CONFIG.percent.rightside
 
+<<<<<<< HEAD
     // 檢查文檔高度是否小於視窗高度
     const checkDocumentHeight = () => {
       if (document.body.scrollHeight <= innerHeight) {
@@ -410,6 +587,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // 如果文檔高度小於視窗高度,直接返回
     if (checkDocumentHeight()) return
 
+=======
+    // 當滾動條小于 56 的時候
+    if (document.body.scrollHeight <= innerHeight) {
+      $rightside.classList.add('rightside-show')
+      return
+    }
+
+>>>>>>> 1ebeeb5 (start)
     // find the scroll direction
     const scrollDirection = currentTop => {
       const result = currentTop > initTop // true is down & false is up
@@ -449,7 +634,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       isShowPercent && rightsideScrollPercent(currentTop)
+<<<<<<< HEAD
       checkDocumentHeight()
+=======
+
+      if (document.body.scrollHeight <= innerHeight) {
+        $rightside.classList.add('rightside-show')
+      }
+>>>>>>> 1ebeeb5 (start)
     }, 300)
 
     btf.addEventListenerPjax(window, 'scroll', scrollTask, { passive: true })
@@ -489,6 +681,7 @@ document.addEventListener('DOMContentLoaded', () => {
       btf.addEventListenerPjax($cardToc, 'click', tocItemClickFn)
 
       autoScrollToc = item => {
+<<<<<<< HEAD
         const sidebarHeight = $cardToc.clientHeight
         const itemOffsetTop = item.offsetTop
         const itemHeight = item.clientHeight
@@ -503,18 +696,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // 處理 hexo-blog-encrypt 事件
       $cardToc.style.display = 'block'
+=======
+        const activePosition = item.getBoundingClientRect().top
+        const sidebarScrollTop = $cardToc.scrollTop
+        if (activePosition > (document.documentElement.clientHeight - 100)) {
+          $cardToc.scrollTop = sidebarScrollTop + 150
+        }
+        if (activePosition < 100) {
+          $cardToc.scrollTop = sidebarScrollTop - 150
+        }
+      }
+>>>>>>> 1ebeeb5 (start)
     }
 
     // find head position & add active class
     const $articleList = $article.querySelectorAll('h1,h2,h3,h4,h5,h6')
     let detectItem = ''
+<<<<<<< HEAD
 
     const findHeadPosition = top => {
       if (top === 0) return false
+=======
+    const findHeadPosition = top => {
+      if (top === 0) {
+        return false
+      }
+>>>>>>> 1ebeeb5 (start)
 
       let currentId = ''
       let currentIndex = ''
 
+<<<<<<< HEAD
       for (let i = 0; i < $articleList.length; i++) {
         const ele = $articleList[i]
         if (top > btf.getEleTop(ele) - 80) {
@@ -525,6 +737,15 @@ document.addEventListener('DOMContentLoaded', () => {
           break
         }
       }
+=======
+      $articleList.forEach((ele, index) => {
+        if (top > btf.getEleTop(ele) - 80) {
+          const id = ele.id
+          currentId = id ? '#' + encodeURI(id) : ''
+          currentIndex = index
+        }
+      })
+>>>>>>> 1ebeeb5 (start)
 
       if (detectItem === currentIndex) return
 
@@ -533,6 +754,7 @@ document.addEventListener('DOMContentLoaded', () => {
       detectItem = currentIndex
 
       if (isToc) {
+<<<<<<< HEAD
         $cardToc.querySelectorAll('.active').forEach(i => i.classList.remove('active'))
 
         if (currentId) {
@@ -548,6 +770,26 @@ document.addEventListener('DOMContentLoaded', () => {
               parent = parent.parentNode
             }
           }
+=======
+        $cardToc.querySelectorAll('.active').forEach(i => { i.classList.remove('active') })
+
+        if (currentId === '') {
+          return
+        }
+
+        const currentActive = $tocLink[currentIndex]
+        currentActive.classList.add('active')
+
+        setTimeout(() => {
+          autoScrollToc(currentActive)
+        }, 0)
+
+        if (isExpand) return
+        let parent = currentActive.parentNode
+
+        for (; !parent.matches('.toc'); parent = parent.parentNode) {
+          if (parent.matches('li')) parent.classList.add('active')
+>>>>>>> 1ebeeb5 (start)
         }
       }
     }
@@ -604,6 +846,7 @@ document.addEventListener('DOMContentLoaded', () => {
     darkmode: () => { // switch between light and dark mode
       const willChangeMode = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'
       if (willChangeMode === 'dark') {
+<<<<<<< HEAD
         btf.activateDarkMode()
         GLOBAL_CONFIG.Snackbar !== undefined && btf.snackbarShow(GLOBAL_CONFIG.Snackbar.day_to_night)
       } else {
@@ -611,6 +854,15 @@ document.addEventListener('DOMContentLoaded', () => {
         GLOBAL_CONFIG.Snackbar !== undefined && btf.snackbarShow(GLOBAL_CONFIG.Snackbar.night_to_day)
       }
       btf.saveToLocal.set('theme', willChangeMode, 2)
+=======
+        activateDarkMode()
+        GLOBAL_CONFIG.Snackbar !== undefined && btf.snackbarShow(GLOBAL_CONFIG.Snackbar.day_to_night)
+      } else {
+        activateLightMode()
+        GLOBAL_CONFIG.Snackbar !== undefined && btf.snackbarShow(GLOBAL_CONFIG.Snackbar.night_to_day)
+      }
+      saveToLocal.set('theme', willChangeMode, 2)
+>>>>>>> 1ebeeb5 (start)
       handleThemeChange(willChangeMode)
     },
     'rightside-config': item => { // Show or hide rightside-hide-btn
@@ -630,6 +882,7 @@ document.addEventListener('DOMContentLoaded', () => {
     'hide-aside-btn': () => { // Hide aside
       const $htmlDom = document.documentElement.classList
       const saveStatus = $htmlDom.contains('hide-aside') ? 'show' : 'hide'
+<<<<<<< HEAD
       btf.saveToLocal.set('aside-status', saveStatus, 2)
       $htmlDom.toggle('hide-aside')
     },
@@ -648,6 +901,17 @@ document.addEventListener('DOMContentLoaded', () => {
       tocEle.classList.toggle('open')
       tocEle.addEventListener('transitionend', () => {
         tocEle.style.cssText = ''
+=======
+      saveToLocal.set('aside-status', saveStatus, 2)
+      $htmlDom.toggle('hide-aside')
+    },
+    'mobile-toc-button': item => { // Show mobile toc
+      const tocEle = document.getElementById('card-toc')
+      tocEle.style.transition = 'transform 0.3s ease-in-out'
+      tocEle.classList.toggle('open')
+      tocEle.addEventListener('transitionend', () => {
+        tocEle.style.transition = ''
+>>>>>>> 1ebeeb5 (start)
       }, { once: true })
     },
     'chat-btn': () => { // Show chat
@@ -658,10 +922,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+<<<<<<< HEAD
   document.getElementById('rightside').addEventListener('click', e => {
     const $target = e.target.closest('[id]')
     if ($target && rightSideFn[$target.id]) {
       rightSideFn[$target.id](e.currentTarget, $target)
+=======
+  document.getElementById('rightside').addEventListener('click', function (e) {
+    const $target = e.target.closest('[id]')
+    if ($target && rightSideFn[$target.id]) {
+      rightSideFn[$target.id](this)
+>>>>>>> 1ebeeb5 (start)
     }
   })
 
@@ -676,17 +947,26 @@ document.addEventListener('DOMContentLoaded', () => {
       target.classList.toggle('hide')
     }
 
+<<<<<<< HEAD
     const menusItems = document.querySelector('#sidebar-menus .menus_items')
     menusItems && menusItems.addEventListener('click', handleClickOfSubMenu)
+=======
+    document.querySelector('#sidebar-menus .menus_items').addEventListener('click', handleClickOfSubMenu)
+>>>>>>> 1ebeeb5 (start)
   }
 
   /**
    * 手机端目录点击
    */
   const openMobileMenu = () => {
+<<<<<<< HEAD
     const toggleMenu = document.getElementById('toggle-menu')
     if (!toggleMenu) return
     btf.addEventListenerPjax(toggleMenu, 'click', () => { sidebarFn.open() })
+=======
+    const handleClick = () => { sidebarFn.open() }
+    btf.addEventListenerPjax(document.getElementById('toggle-menu'), 'click', handleClick)
+>>>>>>> 1ebeeb5 (start)
   }
 
   /**
@@ -754,6 +1034,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const clickFnOfTagHide = () => {
     const hideButtons = document.querySelectorAll('#article-container .hide-button')
     if (!hideButtons.length) return
+<<<<<<< HEAD
     hideButtons.forEach(item => item.addEventListener('click', e => {
       const currentTarget = e.currentTarget
       currentTarget.classList.add('open')
@@ -793,6 +1074,64 @@ document.addEventListener('DOMContentLoaded', () => {
     navTabsElements.forEach(tabElement => {
       btf.addEventListenerPjax(tabElement.firstElementChild, 'click', handleNavClick)
       btf.addEventListenerPjax(tabElement.lastElementChild, 'click', handleToTopClick(tabElement))
+=======
+    const handleClick = function (e) {
+      const $this = this
+      $this.classList.add('open')
+      const $fjGallery = $this.nextElementSibling.querySelectorAll('.gallery-container')
+      $fjGallery.length && addJustifiedGallery($fjGallery)
+    }
+
+    hideButtons.forEach(item => {
+      item.addEventListener('click', handleClick, { once: true })
+    })
+  }
+
+  const tabsFn = () => {
+    const navTabsElement = document.querySelectorAll('#article-container .tabs')
+    if (!navTabsElement.length) return
+
+    const removeAndAddActiveClass = (elements, detect) => {
+      Array.from(elements).forEach(element => {
+        element.classList.remove('active')
+        if (element === detect || element.id === detect) {
+          element.classList.add('active')
+        }
+      })
+    }
+
+    const addTabNavEventListener = (item, isJustifiedGallery) => {
+      const navClickHandler = function (e) {
+        const target = e.target.closest('button')
+        if (target.classList.contains('active')) return
+        removeAndAddActiveClass(this.children, target)
+        this.classList.remove('no-default')
+        const tabId = target.getAttribute('data-href')
+        const tabContent = this.nextElementSibling
+        removeAndAddActiveClass(tabContent.children, tabId)
+        if (isJustifiedGallery) {
+          btf.removeGlobalFnEvent('igOfTabs', this)
+          const justifiedGalleryItems = tabContent.querySelectorAll(`:scope > #${tabId} .gallery-container`)
+          justifiedGalleryItems.length && addJustifiedGallery(justifiedGalleryItems, this)
+        }
+      }
+      btf.addEventListenerPjax(item.firstElementChild, 'click', navClickHandler)
+    }
+
+    const addTabToTopEventListener = item => {
+      const btnClickHandler = (e) => {
+        const target = e.target.closest('button')
+        if (!target) return
+        btf.scrollToDest(btf.getEleTop(item), 300)
+      }
+      btf.addEventListenerPjax(item.lastElementChild, 'click', btnClickHandler)
+    }
+
+    navTabsElement.forEach(item => {
+      const isJustifiedGallery = !!item.querySelectorAll('.gallery-container')
+      addTabNavEventListener(item, isJustifiedGallery)
+      addTabToTopEventListener(item)
+>>>>>>> 1ebeeb5 (start)
     })
   }
 
@@ -800,7 +1139,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const cardCategory = document.querySelector('#aside-cat-list.expandBtn')
     if (!cardCategory) return
 
+<<<<<<< HEAD
     const handleToggleBtn = e => {
+=======
+    const handleToggleBtn = (e) => {
+>>>>>>> 1ebeeb5 (start)
       const target = e.target
       if (target.nodeName === 'I') {
         e.preventDefault()
@@ -813,10 +1156,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const switchComments = () => {
     const switchBtn = document.getElementById('switch-btn')
     if (!switchBtn) return
+<<<<<<< HEAD
 
     let switchDone = false
     const handleSwitchBtn = () => {
       document.getElementById('post-comment').classList.toggle('move')
+=======
+    let switchDone = false
+    const commentContainer = document.getElementById('post-comment')
+    const handleSwitchBtn = () => {
+      commentContainer.classList.toggle('move')
+>>>>>>> 1ebeeb5 (start)
       if (!switchDone && typeof loadOtherComment === 'function') {
         switchDone = true
         loadOtherComment()
@@ -847,6 +1197,7 @@ document.addEventListener('DOMContentLoaded', () => {
       threshold: 0,
       data_src: 'lazy-src'
     })
+<<<<<<< HEAD
 
     btf.addGlobalFn('pjaxComplete', () => {
       window.lazyLoadInstance.update()
@@ -856,10 +1207,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const relativeDate = selector => {
     selector.forEach(item => {
       item.textContent = btf.diffDate(item.getAttribute('datetime'), true)
+=======
+  }
+
+  const relativeDate = function (selector) {
+    selector.forEach(item => {
+      const timeVal = item.getAttribute('datetime')
+      item.textContent = btf.diffDate(timeVal, true)
+>>>>>>> 1ebeeb5 (start)
       item.style.display = 'inline'
     })
   }
 
+<<<<<<< HEAD
   const justifiedIndexPostUI = () => {
     const recentPostsElement = document.getElementById('recent-posts')
     if (!(recentPostsElement && recentPostsElement.classList.contains('masonry'))) return
@@ -878,13 +1238,20 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const unRefreshFn = () => {
+=======
+  const unRefreshFn = function () {
+>>>>>>> 1ebeeb5 (start)
     window.addEventListener('resize', () => {
       adjustMenu(false)
       mobileSidebarOpen && btf.isHidden(document.getElementById('toggle-menu')) && sidebarFn.close()
     })
 
+<<<<<<< HEAD
     const menuMask = document.getElementById('menu-mask')
     menuMask && menuMask.addEventListener('click', () => { sidebarFn.close() })
+=======
+    document.getElementById('menu-mask').addEventListener('click', e => { sidebarFn.close() })
+>>>>>>> 1ebeeb5 (start)
 
     clickFnOfSubMenu()
     GLOBAL_CONFIG.islazyload && lazyloadImg()
@@ -892,12 +1259,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (GLOBAL_CONFIG.autoDarkmode) {
       window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+<<<<<<< HEAD
         if (btf.saveToLocal.get('theme') !== undefined) return
+=======
+        if (saveToLocal.get('theme') !== undefined) return
+>>>>>>> 1ebeeb5 (start)
         e.matches ? handleThemeChange('dark') : handleThemeChange('light')
       })
     }
   }
 
+<<<<<<< HEAD
   const forPostFn = () => {
     addHighlightTool()
     addPhotoFigcaption()
@@ -912,6 +1284,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const refreshFn = () => {
     initAdjust()
     justifiedIndexPostUI()
+=======
+  window.refreshFn = function () {
+    initAdjust()
+>>>>>>> 1ebeeb5 (start)
 
     if (GLOBAL_CONFIG_SITE.isPost) {
       GLOBAL_CONFIG.noticeOutdate !== undefined && addPostOutdateNotice()
@@ -923,14 +1299,32 @@ document.addEventListener('DOMContentLoaded', () => {
       toggleCardCategory()
     }
 
+<<<<<<< HEAD
     GLOBAL_CONFIG_SITE.isHome && scrollDownInIndex()
     scrollFn()
 
     forPostFn()
+=======
+    scrollFnToDo()
+    GLOBAL_CONFIG_SITE.isHome && scrollDownInIndex()
+    addHighlightTool()
+    GLOBAL_CONFIG.isPhotoFigcaption && addPhotoFigcaption()
+    scrollFn()
+
+    btf.removeGlobalFnEvent('justifiedGallery')
+    const galleryContainer = document.querySelectorAll('#article-container .gallery-container')
+    galleryContainer.length && addJustifiedGallery(galleryContainer)
+
+    runLightbox()
+    addTableWrap()
+    clickFnOfTagHide()
+    tabsFn()
+>>>>>>> 1ebeeb5 (start)
     switchComments()
     openMobileMenu()
   }
 
+<<<<<<< HEAD
   btf.addGlobalFn('pjaxComplete', refreshFn, 'refreshFn')
   refreshFn()
   unRefreshFn()
@@ -943,4 +1337,8 @@ document.addEventListener('DOMContentLoaded', () => {
       fn()
     })
   })
+=======
+  refreshFn()
+  unRefreshFn()
+>>>>>>> 1ebeeb5 (start)
 })
