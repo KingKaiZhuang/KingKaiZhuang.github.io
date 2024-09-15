@@ -22,19 +22,24 @@ cover: /images/cover.jpg
 - **HTML / CSS / JavaScript**：這是所有前端開發的基礎。HTML 用來定義結構，CSS 用來美化網頁，而 JavaScript 負責動態行為。
 - **框架和工具**：常見的前端框架包括 [React](https://reactjs.org/)、[Vue.js](https://vuejs.org/)、以及 [Angular](https://angular.io/)。
 
-#### 代碼範例：
+這樣可以保留格式並顯示代碼塊。
 
-```html
-<!DOCTYPE html>
-<html lang="zh-TW">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>全端開發</title>
-  </head>
-  <body>
-    <h1>歡迎來到全端開發的世界！</h1>
-    <p>這是一段簡單的 HTML 代碼。</p>
-  </body>
-</html>
+#### 2. **使用插件顯示音樂符號**
+
+如果你希望更精確地顯示音樂符號，可能需要尋找專門的 Hexo 插件來支持音樂符號渲染。你可以查找與 ABC 符號相關的插件，或者使用第三方音樂渲染工具。
+
+#### 3. **代碼片段顯示問題**
+
+如果你只是希望插入代碼，並且代碼格式被正確顯示，可以直接使用 Markdown 代碼塊語法：
+
+````markdown
+```abc
+X:1
+T:alternate heads
+M:C
+L:1/8
+U:n=!style=normal!
+K:C treble style=rhythm
+"Am" BBBB B2 B>B | "Dm" B2 B/B/B "C" B4 |"Am" B2 nGnB B2 nGnA | "Dm" nDB/B/ nDB/B/ "C" nCB/B/ nCB/B/ |B8| B0 B0 B0 B0 |]
 ```
+````
