@@ -103,4 +103,4 @@ theme: butterfly
 deploy:
   type: git
   repo: https://github.com/KingKaiZhuang/KingKaiZhuang.github.io/
-  branch: gh-pages
+  branch: master
