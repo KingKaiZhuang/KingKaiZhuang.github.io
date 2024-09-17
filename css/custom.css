@@ -1,0 +1,27 @@
+#page-header #post-info {
+  bottom: 100px;
+}
+
+#post-info {
+  display: flex;
+  flex-direction: column; /* 讓內容垂直排列 */
+  justify-content: center; /* 置中對齊內容 */
+  align-items: center; /* 置中對齊內容 */
+  text-align: center; /* 文字置中 */
+}
+
+.post-title {
+  font-size: 2.5em;
+  margin-bottom: 30px; /* 調整標題和元數據間的距離 */
+}
+
+#post-meta {
+  display: flex;
+  flex-direction: column; /* 元數據垂直排列 */
+  align-items: center; /* 元數據置中 */
+}
+
+.meta-firstline,
+.meta-secondline {
+  margin-bottom: 10px; /* 增加每行之間的距離 */
+}
