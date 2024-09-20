@@ -1,6 +1,5 @@
 ---
-layout: page
-title: link
-date: 2024-09-14 20:51:59
-tags:
+title: 友情鏈接
+date: 2024-09-16 22:17:49
+type: "link"
 ---

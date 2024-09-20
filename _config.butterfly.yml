@@ -20,12 +20,12 @@ menu:
   時間軸: /archives/ || fas fa-archive
   標籤: /tags/ || fas fa-tags
   分類: /categories/ || fas fa-folder-open
-  清單||fa fa-heartbeat:
-    音樂: /music/ || fas fa-music
-    照片: /Gallery/ || fas fa-images
-    電影: /movies/ || fas fa-video
-  友鏈: /link/ || fas fa-link
-  關於: /about/ || fas fa-heart
+  # 清單||fa fa-heartbeat:
+  #   音樂: /music/ || fas fa-music
+  #   照片: /Gallery/ || fas fa-images
+  #   電影: /movies/ || fas fa-video
+  # 友鏈: /link/ || fas fa-link
+  # 關於: /about/ || fas fa-heart
 
 # 網址設置
 ## 在這裡設置你的網站 URL。例如，如果你使用 GitHub Pages，則設置 url 為 'https://username.github.io/project'
@@ -175,11 +175,12 @@ error_404:
   subtitle: "頁面沒有找到"
 
 social:
-  fab fa-github: https://github.com/KingKaiZhuang || Github || "#hdhfbb"
-  fas fa-envelope: mailto:pudy6511@gmail.com || Email || "#000000"
+  fab fa-instagram: https://www.instagram.com/zhuang_2024/ || Instagram || "#E4405F"
+  fab fa-line: https://line.me/ti/p/EeWpQ7ef-e || LINE || "#00C300"
+  fab fa-facebook: https://www.facebook.com/profile.php?id=100002212333597 || Facebook || "#4267B2"
 
 avatar:
-  img: /images/MyPic.jpeg
+  img: /images/Avatar.jpeg
   effect: false
 
 cover:
@@ -206,9 +207,14 @@ aside:
       icon: fab fa-github
       text: Follow Me
       link: https://github.com/KingKaiZhuang
+
   card_announcement:
     enable: true
-    content: This is my Blog
+    content: |
+      <p>🏫 STUST | 開學人生 ~</p>
+      <p>📖 目前正在準備 <strong>CPE</strong> 和 <strong>英文多益</strong>。</p>
+      <p>內容會持續更新！</p>
+
   card_recent_post:
     enable: true
     limit: 5 # 設置為 0 將顯示所有
@@ -365,6 +371,7 @@ subtitle:
   source: false
   # 如果關閉打字效果，subtitle 只會顯示 sub 的第一行文字
   sub:
+    - 不相信自己的人，連努力的價值都沒有。（邁特凱)
     - 不要對外表過分在意，心靈才是最重要的。
     - 命運是任何人也無法改變的，但他可以決定是等死還是面對。
     - 堅強不是面對悲傷不流一滴淚，而是擦乾眼淚後微笑面對以後的生活。
@@ -379,6 +386,7 @@ preloader:
 aplayer:
   meting: true
   asset_inject: false
+  data-autoplay: false
 
 # Inject the css and script (aplayer/meting)
 aplayerInject:
@@ -387,5 +395,16 @@ aplayerInject:
 
 inject:
   head:
+    - <link rel="stylesheet" href="/css/wave.css">
+    - <link rel="stylesheet" href="/css/custom.css">
   bottom:
-    - <div class="aplayer no-destroy" data-id="60198" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="true"> </div>
+    - <div class="aplayer no-destroy"  data-id="60198" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="false"> </div>
+
+default_cover:
+  - https://jsd.012700.xyz/gh/jerryc127/CDN@latest/cover/default_bg.png
+
+# tidio
+# https://www.tidio.com/
+tidio:
+  enable: true
+  public_key: p2vvxddelwnygtsjyyuqs055bjigrdgq
