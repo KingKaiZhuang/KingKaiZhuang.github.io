@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Line Bot 與 Chatgpt應用 01 - 建立機器人帳號
+title: Line Bot 與 Chatgpt應用 01 - 建立帳號
 date: 2024-09-19 10:49:52
 tags: [Line Bot]
-categories: [Line Bot]
+categories: [Line Bot, 建立帳號Line Bot帳號]
 top_img: /images/Line-Bot/create-account/create-account2.png
 cover: /images/Line-Bot/create-account/create-account2.png
 ---
@@ -16,25 +16,25 @@ cover: /images/Line-Bot/create-account/create-account2.png
 
 首先，前往 [Line Business](https://developers.line.biz/en/?status=success) 官方網站，這是 Line Bot 開發者專用的後台管理平台。
 
-![create-account01](../images/Line-Bot/create-account/create-account1.png)
+![create-account01](https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2FLine-Bot%E5%92%8Cgpt%E5%AF%A6%E6%88%B0%E6%95%99%E5%AD%B8%2Fcreate-account1.png?alt=media&token=1a48bf32-ef29-4e39-b16a-55598225e676)
 
 ## 2. 登入並進入 Console
 
 在頁面的右上角，找到並點擊 **Console** 按鈕，進入 Line Bot 後台控制台。
 
-![create-account02](/images/Line-Bot/create-account/create-account2.png)
+![create-account02](https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2FLine-Bot%E5%92%8Cgpt%E5%AF%A6%E6%88%B0%E6%95%99%E5%AD%B8%2Fcreate-account2.png?alt=media&token=efd7f776-8637-4fe2-8b39-39dc8709367f)
 
 ## 3. 進入後台控制台
 
 系統會將你引導至後台管理畫面，在這裡可以管理和創建你的 Line Bot 專案。
 
-![create-account03](/images/Line-Bot/create-account/create-account3.png)
+![create-account03](https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2FLine-Bot%E5%92%8Cgpt%E5%AF%A6%E6%88%B0%E6%95%99%E5%AD%B8%2Fcreate-account3.png?alt=media&token=bf809ba3-4017-4dfd-9ae0-26057f312fd5)
 
 ## 4. 選擇 Providers
 
 在控制台頁面中，找到並點擊 **Providers**，我都想成這是用來管理多個專案的文件資料夾。
 
-![create-account04](/images/Line-Bot/create-account/create-account4.png)
+![create-account04](https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2FLine-Bot%E5%92%8Cgpt%E5%AF%A6%E6%88%B0%E6%95%99%E5%AD%B8%2Fcreate-account4.png?alt=media&token=9d91588e-425e-45f1-ac3c-7cba2fd19e2e)
 
 ## 5. 創建新的 Provider
 

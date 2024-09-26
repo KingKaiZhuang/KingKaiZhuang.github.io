@@ -211,9 +211,10 @@ aside:
   card_announcement:
     enable: true
     content: |
+      <a href="https://orca-biz.com/" alt="OrcaBiz 虎鯨數位行銷" >OrcaBiz 實習生</a>
       <p>🏫 STUST | 開學人生 ~</p>
       <p>📖 目前正在準備 <strong>CPE</strong> 和 <strong>英文多益</strong>。</p>
-      <p>內容會持續更新！</p>
+      <p>📚 我不是天才 但我可以努力努力 !</p>
 
   card_recent_post:
     enable: true
@@ -300,10 +301,6 @@ algolia_search:
   hits:
     per_page: 6
 
-sharejs:
-  enable: true
-  sites: facebook,ig #想要顯示的內容
-
 # Facebook Comments Plugin
 # https://developers.facebook.com/docs/plugins/comments/
 facebook_comments:
@@ -371,7 +368,7 @@ subtitle:
   source: false
   # 如果關閉打字效果，subtitle 只會顯示 sub 的第一行文字
   sub:
-    - 不相信自己的人，連努力的價值都沒有。（邁特凱)
+    - 不相信自己的人，連努力的價值都沒有。
     - 不要對外表過分在意，心靈才是最重要的。
     - 命運是任何人也無法改變的，但他可以決定是等死還是面對。
     - 堅強不是面對悲傷不流一滴淚，而是擦乾眼淚後微笑面對以後的生活。
@@ -383,15 +380,15 @@ preloader:
   source: 2 # 使用 pace 進度條效果
   pace_css_url: https://cdn.jsdelivr.net/npm/pace-js@latest/themes/blue/pace-theme-flash.css # pace 的 CSS 文件 URL
 
-aplayer:
-  meting: true
-  asset_inject: false
-  data-autoplay: false
+# aplayer:
+#   meting:
+#   asset_inject: false
+#   data-autoplay: false
 
 # Inject the css and script (aplayer/meting)
-aplayerInject:
-  enable: true
-  per_page: true
+# aplayerInject:
+#   enable: true
+#   per_page: true
 
 inject:
   head:
@@ -408,3 +405,11 @@ default_cover:
 tidio:
   enable: true
   public_key: p2vvxddelwnygtsjyyuqs055bjigrdgq
+
+infinite_scroll:
+  enable: true
+  distance: 50
+
+# https://instant.page/
+# prefetch (預加載)
+instantpage: true
