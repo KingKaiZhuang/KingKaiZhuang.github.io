@@ -2,8 +2,11 @@
 layout: post
 title: UVA 10420 - List of Conquests
 date: 2024-09-17 14:39:31
-tags: [CPE]
-categories: [程式解題, CPE49題]
+tags:
+  - "CPE"
+categories:
+  - "程式解題"
+  - "CPE49題"
 top_img: /images/CPE_sub.webp
 cover: /images/CPE.webp
 ---

@@ -2,10 +2,13 @@
 layout: post
 title: Wordpress 動態選單
 date: 2024-09-26 00:33:48
-tags: [Wordpress]
-categories: [Wordpress, 動態選單]
-top_img: https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2Fwordpress%20%E5%8B%95%E6%85%8B%E9%81%B8%E5%96%AE%E6%95%99%E5%AD%B8%2Fdynamic-wp-nav.webp?alt=media&token=b20209da-6039-49f2-8df4-35b3e48be9e4
-cover: https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2Fwordpress%20%E5%8B%95%E6%85%8B%E9%81%B8%E5%96%AE%E6%95%99%E5%AD%B8%2Fdynamic-wp-nav.webp?alt=media&token=b20209da-6039-49f2-8df4-35b3e48be9e4
+tags:
+  - "Wordpress"
+categories:
+  - "Wordpress"
+  - "動態選單"
+top_img: "https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2Fwordpress%20%E5%8B%95%E6%85%8B%E9%81%B8%E5%96%AE%E6%95%99%E5%AD%B8%2Fdynamic-wp-nav.webp?alt=media&token=b20209da-6039-49f2-8df4-35b3e48be9e4"
+cover: "https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2Fwordpress%20%E5%8B%95%E6%85%8B%E9%81%B8%E5%96%AE%E6%95%99%E5%AD%B8%2Fdynamic-wp-nav.webp?alt=media&token=b20209da-6039-49f2-8df4-35b3e48be9e4"
 ---
 
 ## 步驟 1：連結對應選單

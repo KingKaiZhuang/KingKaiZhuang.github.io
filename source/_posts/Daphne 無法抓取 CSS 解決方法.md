@@ -2,10 +2,14 @@
 layout: post
 title: Daphne 無法抓取 CSS 解決方法
 date: 2024-11-24 21:19:31
-tags: [Python Django]
-categories: [Python, Django, Daphne]
-top_img: https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2FDjango%2Fcss.webp?alt=media&token=d4e8572d-3c73-4b4e-9c53-8241ed36820d
-cover: https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2FDjango%2Fcss.webp?alt=media&token=d4e8572d-3c73-4b4e-9c53-8241ed36820d
+tags:
+  - "Python Django"
+categories:
+  - "Python"
+  - "Django"
+  - "Daphne"
+top_img: "https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2FDjango%2Fcss.webp?alt=media&token=d4e8572d-3c73-4b4e-9c53-8241ed36820d"
+cover: "https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2FDjango%2Fcss.webp?alt=media&token=d4e8572d-3c73-4b4e-9c53-8241ed36820d"
 ---
 
 ### **背景**

@@ -2,10 +2,13 @@
 layout: post
 title: 本地專案推送至Bitbucket遠端存放庫
 date: 2024-09-22 12:47:29
-tags: [Bitbucket]
-categories: [遠端存放庫, Bitbucket]
-top_img: https://www.interviewbit.com/blog/wp-content/uploads/2021/10/What-is-Bitbucket-550x413.jpeg
-cover: https://www.interviewbit.com/blog/wp-content/uploads/2021/10/What-is-Bitbucket-550x413.jpeg
+tags:
+  - "Bitbucket"
+categories:
+  - "遠端存放庫"
+  - "Bitbucket"
+top_img: "https://www.interviewbit.com/blog/wp-content/uploads/2021/10/What-is-Bitbucket-550x413.jpeg"
+cover: "https://www.interviewbit.com/blog/wp-content/uploads/2021/10/What-is-Bitbucket-550x413.jpeg"
 ---
 
 我的工作常常會使用到 bitbucket 遠端存放庫，前幾次使用不是很熟悉，因此我將步驟記錄下來讓我對 git 語法更熟悉：

@@ -2,10 +2,12 @@
 layout: post
 title: Django WebSocket 前後端即時通訊
 date: 2024-10-24 10:00:30
-tags: [Python Django]
-categories: [WebSocket]
-top_img: https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2FDjango%2Fwebsocket.webp?alt=media&token=7e9597ac-6eb5-480c-b7ae-862eede0f1ab
-cover: https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2FDjango%2Fwebsocket.webp?alt=media&token=7e9597ac-6eb5-480c-b7ae-862eede0f1ab
+tags:
+  - "Python Django"
+categories:
+  - "WebSocket"
+top_img: "https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2FDjango%2Fwebsocket.webp?alt=media&token=7e9597ac-6eb5-480c-b7ae-862eede0f1ab"
+cover: "https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2FDjango%2Fwebsocket.webp?alt=media&token=7e9597ac-6eb5-480c-b7ae-862eede0f1ab"
 ---
 
 ## 全部步驟總結

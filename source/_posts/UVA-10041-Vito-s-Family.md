@@ -2,8 +2,11 @@
 layout: post
 title: UVA 10041 - Vito's Family
 date: 2024-09-16 23:49:32
-tags: [CPE]
-categories: [程式解題, CPE49題]
+tags:
+  - "CPE"
+categories:
+  - "程式解題"
+  - "CPE49題"
 top_img: /images/CPE_sub.webp
 cover: /images/CPE.webp
 ---

@@ -2,10 +2,13 @@
 layout: post
 title: Line Bot 與 Chatgpt應用 02 - 執行程式
 date: 2024-09-26 20:42:52
-tags: [Line Bot]
-categories: [Line Bot, replit設定]
-top_img: https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2FLine-Bot%E5%92%8Cgpt%E5%AF%A6%E6%88%B0%E6%95%99%E5%AD%B8%2Freplit-python%2Fbanner.webp?alt=media&token=04b3ef21-5ea8-4c0d-9a96-318f3eeb974a
-cover: https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2FLine-Bot%E5%92%8Cgpt%E5%AF%A6%E6%88%B0%E6%95%99%E5%AD%B8%2Freplit-python%2Fbanner.webp?alt=media&token=04b3ef21-5ea8-4c0d-9a96-318f3eeb974a
+tags:
+  - "Line Bot"
+categories:
+  - "Line Bot"
+  - "replit設定"
+top_img: "https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2FLine-Bot%E5%92%8Cgpt%E5%AF%A6%E6%88%B0%E6%95%99%E5%AD%B8%2Freplit-python%2Fbanner.webp?alt=media&token=04b3ef21-5ea8-4c0d-9a96-318f3eeb974a"
+cover: "https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2FLine-Bot%E5%92%8Cgpt%E5%AF%A6%E6%88%B0%E6%95%99%E5%AD%B8%2Freplit-python%2Fbanner.webp?alt=media&token=04b3ef21-5ea8-4c0d-9a96-318f3eeb974a"
 ---
 
 # Line Bot 和 GPT 實戰教學

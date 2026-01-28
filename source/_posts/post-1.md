@@ -2,10 +2,13 @@
 layout: post
 title: C++ 筆記 - Vector 使用方式
 date: 2024-11-20 23:22:52
-tags: [C++]
-categories: [C++, Vector]
-top_img: https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2FC%2B%2B%20%E7%AD%86%E8%A8%98%2Fvector.webp?alt=media&token=13648a6d-cbd4-4420-974c-bc2c56ae85c4
-cover: https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2FC%2B%2B%20%E7%AD%86%E8%A8%98%2Fvector.webp?alt=media&token=13648a6d-cbd4-4420-974c-bc2c56ae85c4
+tags:
+  - "C++"
+categories:
+  - "C++"
+  - "Vector"
+top_img: "https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2FC%2B%2B%20%E7%AD%86%E8%A8%98%2Fvector.webp?alt=media&token=13648a6d-cbd4-4420-974c-bc2c56ae85c4"
+cover: "https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2FC%2B%2B%20%E7%AD%86%E8%A8%98%2Fvector.webp?alt=media&token=13648a6d-cbd4-4420-974c-bc2c56ae85c4"
 ---
 
 # Vector 實戰教學

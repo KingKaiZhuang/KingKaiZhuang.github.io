@@ -2,10 +2,13 @@
 layout: post
 title: 撰寫 Python 發送成績給學生確認
 date: 2024-11-02 13:43:31
-tags: [Python Email]
-categories: [Python, Email]
-top_img: https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2F%E6%92%B0%E5%AF%AB%20Python%20%E7%99%BC%E9%80%81%E6%88%90%E7%B8%BE%E7%B5%A6%E5%AD%B8%E7%94%9F%E7%A2%BA%E8%AA%8D%2Fpython-mailscore.webp?alt=media&token=0ed4da31-e1b5-4ea3-8f89-0ecf46d0f30c
-cover: https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2F%E6%92%B0%E5%AF%AB%20Python%20%E7%99%BC%E9%80%81%E6%88%90%E7%B8%BE%E7%B5%A6%E5%AD%B8%E7%94%9F%E7%A2%BA%E8%AA%8D%2Fpython-mailscore.webp?alt=media&token=0ed4da31-e1b5-4ea3-8f89-0ecf46d0f30c
+tags:
+  - "Python Email"
+categories:
+  - "Python"
+  - "Email"
+top_img: "https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2F%E6%92%B0%E5%AF%AB%20Python%20%E7%99%BC%E9%80%81%E6%88%90%E7%B8%BE%E7%B5%A6%E5%AD%B8%E7%94%9F%E7%A2%BA%E8%AA%8D%2Fpython-mailscore.webp?alt=media&token=0ed4da31-e1b5-4ea3-8f89-0ecf46d0f30c"
+cover: "https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2F%E6%92%B0%E5%AF%AB%20Python%20%E7%99%BC%E9%80%81%E6%88%90%E7%B8%BE%E7%B5%A6%E5%AD%B8%E7%94%9F%E7%A2%BA%E8%AA%8D%2Fpython-mailscore.webp?alt=media&token=0ed4da31-e1b5-4ea3-8f89-0ecf46d0f30c"
 ---
 
 ### 程式功能概述

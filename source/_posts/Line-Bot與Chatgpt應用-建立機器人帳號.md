@@ -2,8 +2,11 @@
 layout: post
 title: Line Bot 與 Chatgpt應用 01 - 建立帳號
 date: 2024-09-19 10:49:52
-tags: [Line Bot]
-categories: [Line Bot, 建立帳號Line Bot帳號]
+tags:
+  - "Line Bot"
+categories:
+  - "Line Bot"
+  - "建立帳號Line Bot帳號"
 top_img: /images/Line-Bot/create-account/create-account2.png
 cover: /images/Line-Bot/create-account/create-account2.png
 ---

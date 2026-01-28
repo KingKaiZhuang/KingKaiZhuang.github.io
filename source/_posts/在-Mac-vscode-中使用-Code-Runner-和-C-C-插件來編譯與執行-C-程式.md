@@ -2,10 +2,13 @@
 layout: post
 title: 在 Mac vscode 中使用 Code Runner 和 C/C++ 插件來編譯與執行 C++ 程式
 date: 2024-09-30 23:22:52
-tags: [開發環境]
-categories: [開發環境, 使用Mac在vscode執行C++]
-top_img: https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2Fmac%20%E5%9C%A8%20vscode%20%E5%9F%B7%E8%A1%8C%20c%2B%2B%2Flogo.webp?alt=media&token=81620eff-892d-4194-9b04-d8ddf12fae6c
-cover: https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2Fmac%20%E5%9C%A8%20vscode%20%E5%9F%B7%E8%A1%8C%20c%2B%2B%2Flogo.webp?alt=media&token=81620eff-892d-4194-9b04-d8ddf12fae6c
+tags:
+  - "開發環境"
+categories:
+  - "開發環境"
+  - "使用Mac在vscode執行C++"
+top_img: "https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2Fmac%20%E5%9C%A8%20vscode%20%E5%9F%B7%E8%A1%8C%20c%2B%2B%2Flogo.webp?alt=media&token=81620eff-892d-4194-9b04-d8ddf12fae6c"
+cover: "https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2Fmac%20%E5%9C%A8%20vscode%20%E5%9F%B7%E8%A1%8C%20c%2B%2B%2Flogo.webp?alt=media&token=81620eff-892d-4194-9b04-d8ddf12fae6c"
 ---
 
 今天在學校老師突然派一個 c++作業，結果我電腦還沒裝 C++環境，讀檔案一直出問題，我決定今天好好寫一個 Mac 在 vscode 中執行 C++ 的教學。

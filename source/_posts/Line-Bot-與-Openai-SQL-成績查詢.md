@@ -2,10 +2,13 @@
 layout: post
 title: Line Bot 與 Openai & SQL 03 - 成績查詢
 date: 2024-10-02 16:30:06
-tags: [Line Bot]
-categories: [Line Bot, 成績查詢練習]
-top_img: https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2FLine-Bot%E5%92%8Cgpt%E5%AF%A6%E6%88%B0%E6%95%99%E5%AD%B8%2Fstudent-score%2Flinebot-student.webp?alt=media&token=b991afe3-27a4-4d32-a1d7-5b34b8849a11
-cover: https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2FLine-Bot%E5%92%8Cgpt%E5%AF%A6%E6%88%B0%E6%95%99%E5%AD%B8%2Fstudent-score%2Flinebot-student.webp?alt=media&token=b991afe3-27a4-4d32-a1d7-5b34b8849a11
+tags:
+  - "Line Bot"
+categories:
+  - "Line Bot"
+  - "成績查詢練習"
+top_img: "https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2FLine-Bot%E5%92%8Cgpt%E5%AF%A6%E6%88%B0%E6%95%99%E5%AD%B8%2Fstudent-score%2Flinebot-student.webp?alt=media&token=b991afe3-27a4-4d32-a1d7-5b34b8849a11"
+cover: "https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2FLine-Bot%E5%92%8Cgpt%E5%AF%A6%E6%88%B0%E6%95%99%E5%AD%B8%2Fstudent-score%2Flinebot-student.webp?alt=media&token=b991afe3-27a4-4d32-a1d7-5b34b8849a11"
 ---
 
 參考來源 : https://www.youtube.com/watch?v=IfzY0axpjD8&t=333s

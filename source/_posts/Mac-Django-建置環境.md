@@ -2,10 +2,13 @@
 layout: post
 title: Mac Django 建置環境
 date: 2024-10-01 13:43:31
-tags: [Python Django]
-categories: [Python, Django]
-top_img: https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2FDjango%2Fdjango%20logo.jpeg?alt=media&token=8bc6ff88-240d-4df6-af8f-3e33bf72140f
-cover: https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2FDjango%2Fdjango%20logo.jpeg?alt=media&token=8bc6ff88-240d-4df6-af8f-3e33bf72140f
+tags:
+  - "Python Django"
+categories:
+  - "Python"
+  - "Django"
+top_img: "https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2FDjango%2Fdjango%20logo.jpeg?alt=media&token=8bc6ff88-240d-4df6-af8f-3e33bf72140f"
+cover: "https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2FDjango%2Fdjango%20logo.jpeg?alt=media&token=8bc6ff88-240d-4df6-af8f-3e33bf72140f"
 ---
 
 ### **macOS 上下載並安裝 Django 教學指南（不使用虛擬環境，並加入 PATH 教學）**
