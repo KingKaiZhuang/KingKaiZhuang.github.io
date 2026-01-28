@@ -1,0 +1,278 @@
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>如何用雲端備份在本地 Local 重建 WordPress | FullStackPenguin</title><meta name="author" content="全端企鵝"><meta name="copyright" content="全端企鵝"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="閱讀這篇文章之前，必須先操作上一篇文章的內容。 https:&#x2F;&#x2F;stackpenguin.com&#x2F;blog&#x2F;wp-cron-backup 我在我的macbook筆電建立一個Local的測試機名字取為BackupReview。 本文章的目的是將我的Linode主機備份後的WordPress檔案，匯入到本地端做測試。 廢話不多說馬上開始吧！ 下載備份檔案 db資料庫的.sql檔案。 main的話是wp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何用雲端備份在本地 Local 重建 WordPress">
+<meta property="og:url" content="https://kingkaizhuang.github.io/2025/11/15/wp-restore-local/index.html">
+<meta property="og:site_name" content="FullStackPenguin">
+<meta property="og:description" content="閱讀這篇文章之前，必須先操作上一篇文章的內容。 https:&#x2F;&#x2F;stackpenguin.com&#x2F;blog&#x2F;wp-cron-backup 我在我的macbook筆電建立一個Local的測試機名字取為BackupReview。 本文章的目的是將我的Linode主機備份後的WordPress檔案，匯入到本地端做測試。 廢話不多說馬上開始吧！ 下載備份檔案 db資料庫的.sql檔案。 main的話是wp">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://kingkaizhuang.github.io/images/Gemini_Generated_Image_vfctf8vfctf8vfct.png">
+<meta property="article:published_time" content="2025-11-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-01-28T03:08:27.791Z">
+<meta property="article:author" content="全端企鵝">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kingkaizhuang.github.io/images/Gemini_Generated_Image_vfctf8vfctf8vfct.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "如何用雲端備份在本地 Local 重建 WordPress",
+  "url": "https://kingkaizhuang.github.io/2025/11/15/wp-restore-local/",
+  "image": "https://kingkaizhuang.github.io/images/Gemini_Generated_Image_vfctf8vfctf8vfct.png",
+  "datePublished": "2025-11-14T16:00:00.000Z",
+  "dateModified": "2026-01-28T03:08:27.791Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "全端企鵝",
+      "url": "https://kingkaizhuang.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://kingkaizhuang.github.io/2025/11/15/wp-restore-local/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '複製成功',
+    error: '複製失敗',
+    noSupport: '瀏覽器不支援'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '剛剛',
+    min: '分鐘前',
+    hour: '小時前',
+    day: '天前',
+    month: '個月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '載入更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '如何用雲端備份在本地 Local 重建 WordPress',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/wave.css"><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 7.3.0"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+btf.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@latest/themes/blue/pace-theme-flash.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/Avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">35</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 時間軸</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分類</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/images/Gemini_Generated_Image_vfctf8vfctf8vfct.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">FullStackPenguin</span></a><a class="nav-page-title" href="/"><span class="site-name">如何用雲端備份在本地 Local 重建 WordPress</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首頁</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 時間軸</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分類</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">如何用雲端備份在本地 Local 重建 WordPress</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2025-11-14T16:00:00.000Z" title="發表於 2025-11-15 00:00:00">2025-11-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2026-01-28T03:08:27.791Z" title="更新於 2026-01-28 11:08:27">2026-01-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/wordpress/">wordpress</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">瀏覽量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>閱讀這篇文章之前，必須先操作上一篇文章的內容。</p>
+<p><a target="_blank" rel="noopener" href="https://stackpenguin.com/blog/wp-cron-backup">https://stackpenguin.com/blog/wp-cron-backup</a></p>
+<p>我在我的macbook筆電建立一個Local的測試機名字取為BackupReview。</p>
+<p>本文章的目的是將我的Linode主機備份後的WordPress檔案，匯入到本地端做測試。</p>
+<p>廢話不多說馬上開始吧！</p>
+<h2 id="下載備份檔案"><a href="#下載備份檔案" class="headerlink" title="下載備份檔案"></a>下載備份檔案</h2><p><img src="/images/CleanShot-2025-11-14-at-18.10.07@2x-1024x482.png"></p>
+<p>db資料庫的.sql檔案。</p>
+<p>main的話是wp-content所有內容。</p>
+<p>uploads包含圖片與檔案，或是其他外掛的檔案內容都在這裡。</p>
+<p>這三個內容只要缺一個，就沒辦法完整復原。</p>
+<h2 id="建立測試機"><a href="#建立測試機" class="headerlink" title="建立測試機"></a>建立測試機</h2><p><img src="/images/CleanShot-2025-11-15-at-11.44.53@2x-1024x632.png"></p>
+<p>先看一下有沒有成功跑起來，看來是有。</p>
+<p>接下來要開始復原我的網頁到本地端。</p>
+<p><img src="/images/CleanShot-2025-11-15-at-12.02.52-1024x611.png"></p>
+<h2 id="匯入資料庫"><a href="#匯入資料庫" class="headerlink" title="匯入資料庫"></a>匯入資料庫</h2><p>來到Database這邊，按下Open AdminNeo就會打開資料庫介面。</p>
+<p><img src="/images/CleanShot-2025-11-15-at-12.09.41@2x-1024x632.png"></p>
+<p>進到資料庫頁面點擊 Local Site: BackupReview 跳轉到資料庫首頁。</p>
+<p><img src="/images/CleanShot-2025-11-15-at-12.17.01-1024x611.png"></p>
+<p>建立資料庫，對應你網站的資料庫名稱，我的是wp_zhuangblog。</p>
+<p>記得要改成自己的。</p>
+<p><img src="/images/CleanShot-2025-11-15-at-12.20.47-1024x228.png"></p>
+<p>創建完成後要匯入備份的sql檔案。</p>
+<p><img src="/images/CleanShot-2025-11-15-at-12.21.44-1024x277.png"></p>
+<p>執行後會顯示成功匯入，並在左側顯示所有資料表。</p>
+<p><img src="/images/CleanShot-2025-11-15-at-12.23.00-1024x611.png"></p>
+<h2 id="Local-sites-檔案設定"><a href="#Local-sites-檔案設定" class="headerlink" title="Local sites 檔案設定"></a>Local sites 檔案設定</h2><p>首先回到Local頁面，按下Site folder會進直接跳進你的網頁資料夾．</p>
+<p><img src="/images/CleanShot-2025-11-15-at-12.24.17@2x-1024x632.png"></p>
+<p>將public裡面的所有檔案都先刪除，因為要把備份的轉進來。</p>
+<p><img src="/images/CleanShot-2025-11-15-at-12.28.08@2x-1024x599.png"></p>
+<p><img src="/images/CleanShot-2025-11-15-at-12.29.00@2x-1024x599.png"></p>
+<p>接著去你備份的main資料夾解壓縮，之後複製所有檔案</p>
+<p><img src="/images/CleanShot-2025-11-15-at-12.29.35@2x-1024x599.png"></p>
+<p>把它複製到剛剛的本地網頁資料夾</p>
+<p><img src="/images/CleanShot-2025-11-15-at-12.32.25@2x-1024x599.png"></p>
+<p>然後我們要修改wp-config.php這一個檔案</p>
+<p><img src="/images/CleanShot-2025-11-15-at-12.36.18@2x-1024x599.png"></p>
+<p>這六個要修正，對應你的資料庫名稱，資料庫帳密，以及本地網址。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">define( &#x27;DB_NAME&#x27;, &#x27;wp_zhuangblog&#x27; );</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">/** Database username */</span><br><span class="line">define( &#x27;DB_USER&#x27;, &#x27;root&#x27; );</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">/** Database password */</span><br><span class="line">define( &#x27;DB_PASSWORD&#x27;, &#x27;root&#x27; );</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">/** Database hostname */</span><br><span class="line">define( &#x27;DB_HOST&#x27;, &#x27;localhost&#x27; );</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">define(&#x27;WP_HOME&#x27;, &#x27;http://backupreview.local&#x27;);</span><br><span class="line">define(&#x27;WP_SITEURL&#x27;, &#x27;http://backupreview.local&#x27;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">define( &#x27;DB_NAME&#x27;, &#x27;wp_zhuangblog&#x27; );</span><br><span class="line"></span><br><span class="line">/** Database username */</span><br><span class="line">define( &#x27;DB_USER&#x27;, &#x27;root&#x27; );</span><br><span class="line"></span><br><span class="line">/** Database password */</span><br><span class="line">define( &#x27;DB_PASSWORD&#x27;, &#x27;root&#x27; );</span><br><span class="line"></span><br><span class="line">/** Database hostname */</span><br><span class="line">define( &#x27;DB_HOST&#x27;, &#x27;localhost&#x27; );</span><br><span class="line"></span><br><span class="line">define(&#x27;WP_HOME&#x27;, &#x27;http://backupreview.local&#x27;);</span><br><span class="line">define(&#x27;WP_SITEURL&#x27;, &#x27;http://backupreview.local&#x27;);</span><br></pre></td></tr></table></figure>
+
+<p>改完之後要重啟一次，資料庫才會被更改。</p>
+<p>否則他不會連到本地測試網站。</p>
+<p><img src="/images/CleanShot-2025-11-15-at-12.48.01@2x-1024x632.png"></p>
+<p>然後就可以點擊Open site連到本地網頁裡了。</p>
+<p>有時候瀏覽器會因為某些插件，會有快取。</p>
+<p>可能會導致之前的網址被記錄下來。</p>
+<p>如果進去還是連到正式機網址，那可以開啟無痕模式輸入網址的方式進去。</p>
+<p>進去後發現ㄟ ！樣式怎麼都沒有套進來？這是正常的，因為還沒將uploads資料夾放到wp-content。</p>
+<p><img src="/images/CleanShot-2025-11-15-at-13.26.07-1024x583.png"></p>
+<p>這是我備份的uploads資料夾，要把它移動到本地的wp-content資料夾中。</p>
+<p><img src="/images/CleanShot-2025-11-15-at-13.40.02@2x-1024x599.png"></p>
+<p>先將原來的uploads刪除，然後把剛剛的uploads貼過來。</p>
+<p><img src="/images/CleanShot-2025-11-15-at-13.41.36@2x-1024x606.png"></p>
+<p>再過看剛剛的頁面是不是就成功了！</p>
+<p><img src="/images/CleanShot-2025-11-15-at-13.44.41-1024x611.png"></p>
+<p><img src="/images/CleanShot-2025-11-15-at-13.44.56-1024x611.png"></p>
+<p>以上就是這次的教學。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://kingkaizhuang.github.io">全端企鵝</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章連結: </span><span class="post-copyright-info"><a href="https://kingkaizhuang.github.io/2025/11/15/wp-restore-local/">https://kingkaizhuang.github.io/2025/11/15/wp-restore-local/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版權聲明: </span><span class="post-copyright-info">本部落格所有文章除特別聲明外，均採用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 授權協議。轉載請註明來源 <a href="https://kingkaizhuang.github.io" target="_blank">FullStackPenguin</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/images/Gemini_Generated_Image_vfctf8vfctf8vfct.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/11/24/interest-and-yield/" title="利率＆殖利率"><img class="cover" src="/images/image-12.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">利率＆殖利率</div></div><div class="info-2"><div class="info-item-1">我是一點基礎概念都沒有的小菜機，希望從今天開始慢慢的增加一些有關投資的相關知識。 基金、股票、保險、定存 利率都是評估獲利的關鍵 利率和殖利率差異？ 利率 （通常以一年為計算單位）又稱年利率假設年利率是1%，代表存滿一年可以獲得1%的利息 如果定存時間只設定三個月（1&#x2F;4年）  假設將10000元放入銀行，年利率1%，放12個月跟放6個月分別如下：   通常時間越短的年利率也相對較低。 如果原本跟銀行講好的定存時間是一年，年利率1%，結果只存了六個月就要用這筆錢。 必須要提前解約，這時候利息變成：  殖利率（浮動）舉個例子像是100塊的本金可以拿到5%的利息。  但是本金有可能隨時變大變小，但是利息在一段時間是固定不變的。 假設有一個股票100塊，年利率5塊。  說不定隔天又漲10塊 參考影片：https://www.youtube.com/watch?v=yd3fZRrjzGM&list=PLrZrfGLGySzcZoVhb4idy5B0XI25ZhnF7&index=1 </div></div></div></a><a class="pagination-related" href="/2025/11/14/wp-cron-backup/" title="WordPress 網站利用 Cron + Rclone 自動同步檔案到 Google Drive 完整教學"><img class="cover" src="/images/Gemini_Generated_Image_hqxfm7hqxfm7hqxf.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">WordPress 網站利用 Cron + Rclone 自動同步檔案到 Google Drive 完整教學</div></div><div class="info-2"><div class="info-item-1">首先將示範你如何在 Ubuntu 上安裝 rclone、建立 Google Drive remote，最後撰寫Shell Script。 安裝 rclone1sudo apt install rclone -y  1sudo apt install rclone -y  代表的意思：  sudo：以管理員權限執行。  apt install rclone：從套件庫安裝 rclone。  -y：自動同意所有安裝提示，不需要手動按 Yes。   安裝完後 Ubuntu 會輸出一堆像是 Database、man-db、kernel upgrade 的提示，這些是系統正常的安裝訊息，與 rclone 本體無關。 開始設定 rclone1rclone config  1rclone config  這會啟動互動式設定介面，讓你建立 remote。 建立新 remote畫面問： 1234n) New remotes) Set configuration passwordq) Quit confign/s/q&gt;  1234n) New remotes) Set configuration...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/images/Avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">全端企鵝</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">35</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/KingKaiZhuang"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://www.instagram.com/zhuang_2024/" target="_blank" title="Instagram"><i class="fab fa-instagram" style="color: #E4405F;"></i></a><a class="social-icon" href="https://line.me/ti/p/EeWpQ7ef-e" target="_blank" title="LINE"><i class="fab fa-line" style="color: #00C300;"></i></a><a class="social-icon" href="https://www.facebook.com/profile.php?id=100002212333597" target="_blank" title="Facebook"><i class="fab fa-facebook" style="color: #4267B2;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><a target="_blank" rel="noopener" href="https://orca-biz.com/" alt="OrcaBiz 虎鯨數位行銷" >OrcaBiz 實習生</a>
+<p>🏫 STUST</p>
+<p>📖 目前正在準備 <strong>CPE</strong> 和 <strong>英文多益</strong>。</p>
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目錄</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BC%89%E5%82%99%E4%BB%BD%E6%AA%94%E6%A1%88"><span class="toc-number">1.</span> <span class="toc-text">下載備份檔案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8B%E6%B8%AC%E8%A9%A6%E6%A9%9F"><span class="toc-number">2.</span> <span class="toc-text">建立測試機</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%AF%E5%85%A5%E8%B3%87%E6%96%99%E5%BA%AB"><span class="toc-number">3.</span> <span class="toc-text">匯入資料庫</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Local-sites-%E6%AA%94%E6%A1%88%E8%A8%AD%E5%AE%9A"><span class="toc-number">4.</span> <span class="toc-text">Local sites 檔案設定</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/12/04/unity-scene-data/" title="Unity 場景切換以及 Data 共享"><img src="/images/unity-data-scene.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Unity 場景切換以及 Data 共享"/></a><div class="content"><a class="title" href="/2025/12/04/unity-scene-data/" title="Unity 場景切換以及 Data 共享">Unity 場景切換以及 Data 共享</a><time datetime="2025-12-03T16:00:00.000Z" title="發表於 2025-12-04 00:00:00">2025-12-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/12/01/streamlit-yolo/" title="Streamlit 結合 yolo 辨識圖片"><img src="/images/streamlit_yolo.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Streamlit 結合 yolo 辨識圖片"/></a><div class="content"><a class="title" href="/2025/12/01/streamlit-yolo/" title="Streamlit 結合 yolo 辨識圖片">Streamlit 結合 yolo 辨識圖片</a><time datetime="2025-11-30T16:00:00.000Z" title="發表於 2025-12-01 00:00:00">2025-12-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/26/next-js-v16-base/" title="Next.js v16 基本常識"><img src="/images/Gemini_Generated_Image_8zuhop8zuhop8zuh-1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Next.js v16 基本常識"/></a><div class="content"><a class="title" href="/2025/11/26/next-js-v16-base/" title="Next.js v16 基本常識">Next.js v16 基本常識</a><time datetime="2025-11-25T16:00:00.000Z" title="發表於 2025-11-26 00:00:00">2025-11-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/24/interest-and-yield/" title="利率＆殖利率"><img src="/images/image-12.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="利率＆殖利率"/></a><div class="content"><a class="title" href="/2025/11/24/interest-and-yield/" title="利率＆殖利率">利率＆殖利率</a><time datetime="2025-11-23T16:00:00.000Z" title="發表於 2025-11-24 00:00:00">2025-11-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/15/wp-restore-local/" title="如何用雲端備份在本地 Local 重建 WordPress"><img src="/images/Gemini_Generated_Image_vfctf8vfctf8vfct.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="如何用雲端備份在本地 Local 重建 WordPress"/></a><div class="content"><a class="title" href="/2025/11/15/wp-restore-local/" title="如何用雲端備份在本地 Local 重建 WordPress">如何用雲端備份在本地 Local 重建 WordPress</a><time datetime="2025-11-14T16:00:00.000Z" title="發表於 2025-11-15 00:00:00">2025-11-15</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2024 - 2026 By 全端企鵝</span></div><div class="footer_custom_text">StackPenguin | STUST</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="閱讀模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日夜模式切換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目錄"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到頂端"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js" type="module"></script><div class="js-pjax"><script>(() => {
+  const abcjsInit = () => {
+    const abcjsFn = () => {
+      setTimeout(() => {
+        const sheets = document.querySelectorAll(".abc-music-sheet")
+        for (let i = 0; i < sheets.length; i++) {
+          const ele = sheets[i]
+          if (ele.children.length > 0) continue
+
+          // Parse parameters from data-params attribute
+          let params = {}
+          const dp = ele.getAttribute("data-params")
+          if (dp) {
+            try {
+              params = JSON.parse(dp)
+            } catch (e) {
+              console.error("Failed to parse data-params:", e)
+            }
+          }
+
+          // Merge parsed parameters with the responsive option
+          // Ensures params content appears before responsive
+          const options = { ...params, responsive: "resize" }
+
+          // Render the music score using ABCJS.renderAbc
+          ABCJS.renderAbc(ele, ele.textContent, options)
+        }
+      }, 100)
+    }
+
+    if (typeof ABCJS === "object") {
+      abcjsFn()
+    } else {
+      btf.getScript("https://cdn.jsdelivr.net/npm/abcjs@6.6.0/dist/abcjs-basic-min.min.js").then(abcjsFn)
+    }
+  }
+
+  if (window.pjax) {
+    abcjsInit()
+  } else {
+    window.addEventListener("load", abcjsInit)
+  }
+
+  btf.addGlobalFn("encrypt", abcjsInit, "abcjs")
+})()</script></div><div class="aplayer no-destroy"  data-id="60198" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="false"> </div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/fireworks.min.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="true" data-click="false"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

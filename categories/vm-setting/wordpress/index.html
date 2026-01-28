@@ -1,0 +1,247 @@
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>分類: wordpress | FullStackPenguin</title><meta name="author" content="全端企鵝"><meta name="copyright" content="全端企鵝"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="FullStackPenguin">
+<meta property="og:url" content="https://kingkaizhuang.github.io/categories/vm-setting/wordpress/index.html">
+<meta property="og:site_name" content="FullStackPenguin">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://kingkaizhuang.github.io/images/Avatar.jpeg">
+<meta property="article:author" content="全端企鵝">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kingkaizhuang.github.io/images/Avatar.jpeg"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://kingkaizhuang.github.io/categories/vm-setting/wordpress/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '複製成功',
+    error: '複製失敗',
+    noSupport: '瀏覽器不支援'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '剛剛',
+    min: '分鐘前',
+    hour: '小時前',
+    day: '天前',
+    month: '個月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '載入更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '分類: wordpress',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'category'
+}</script><link rel="stylesheet" href="/css/wave.css"><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 7.3.0"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+btf.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@latest/themes/blue/pace-theme-flash.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/Avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">35</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 時間軸</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分類</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">FullStackPenguin</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 時間軸</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分類</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="page-site-info"><h1 id="site-title">wordpress</h1></div></header><main class="layout" id="content-inner"><div id="category"><div class="article-sort-title">分類 - wordpress</div><div class="article-sort"><div class="article-sort-item year">2025</div><div class="article-sort-item"><a class="article-sort-item-img" href="/2025/11/14/wp-cron-backup/" title="WordPress 網站利用 Cron + Rclone 自動同步檔案到 Google Drive 完整教學"><img src="/images/Gemini_Generated_Image_hqxfm7hqxfm7hqxf.png" alt="WordPress 網站利用 Cron + Rclone 自動同步檔案到 Google Drive 完整教學" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2025-11-13T16:00:00.000Z" title="發表於 2025-11-14 00:00:00">2025-11-14</time></div><a class="article-sort-item-title" href="/2025/11/14/wp-cron-backup/" title="WordPress 網站利用 Cron + Rclone 自動同步檔案到 Google Drive 完整教學">WordPress 網站利用 Cron + Rclone 自動同步檔案到 Google Drive 完整教學</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/2025/03/31/wordpress-start/" title="WordPress 架站與伺服器設定教學紀錄"><img src="/images/64b6bd08-e4f1-4125-aba5-2886b5bc938a.webp" alt="WordPress 架站與伺服器設定教學紀錄" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2025-03-30T16:00:00.000Z" title="發表於 2025-03-31 00:00:00">2025-03-31</time></div><a class="article-sort-item-title" href="/2025/03/31/wordpress-start/" title="WordPress 架站與伺服器設定教學紀錄">WordPress 架站與伺服器設定教學紀錄</a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/images/Avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">全端企鵝</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">35</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/KingKaiZhuang"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://www.instagram.com/zhuang_2024/" target="_blank" title="Instagram"><i class="fab fa-instagram" style="color: #E4405F;"></i></a><a class="social-icon" href="https://line.me/ti/p/EeWpQ7ef-e" target="_blank" title="LINE"><i class="fab fa-line" style="color: #00C300;"></i></a><a class="social-icon" href="https://www.facebook.com/profile.php?id=100002212333597" target="_blank" title="Facebook"><i class="fab fa-facebook" style="color: #4267B2;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><a target="_blank" rel="noopener" href="https://orca-biz.com/" alt="OrcaBiz 虎鯨數位行銷" >OrcaBiz 實習生</a>
+<p>🏫 STUST</p>
+<p>📖 目前正在準備 <strong>CPE</strong> 和 <strong>英文多益</strong>。</p>
+</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/12/04/unity-scene-data/" title="Unity 場景切換以及 Data 共享"><img src="/images/unity-data-scene.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Unity 場景切換以及 Data 共享"/></a><div class="content"><a class="title" href="/2025/12/04/unity-scene-data/" title="Unity 場景切換以及 Data 共享">Unity 場景切換以及 Data 共享</a><time datetime="2025-12-03T16:00:00.000Z" title="發表於 2025-12-04 00:00:00">2025-12-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/12/01/streamlit-yolo/" title="Streamlit 結合 yolo 辨識圖片"><img src="/images/streamlit_yolo.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Streamlit 結合 yolo 辨識圖片"/></a><div class="content"><a class="title" href="/2025/12/01/streamlit-yolo/" title="Streamlit 結合 yolo 辨識圖片">Streamlit 結合 yolo 辨識圖片</a><time datetime="2025-11-30T16:00:00.000Z" title="發表於 2025-12-01 00:00:00">2025-12-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/26/next-js-v16-base/" title="Next.js v16 基本常識"><img src="/images/Gemini_Generated_Image_8zuhop8zuhop8zuh-1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Next.js v16 基本常識"/></a><div class="content"><a class="title" href="/2025/11/26/next-js-v16-base/" title="Next.js v16 基本常識">Next.js v16 基本常識</a><time datetime="2025-11-25T16:00:00.000Z" title="發表於 2025-11-26 00:00:00">2025-11-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/24/interest-and-yield/" title="利率＆殖利率"><img src="/images/image-12.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="利率＆殖利率"/></a><div class="content"><a class="title" href="/2025/11/24/interest-and-yield/" title="利率＆殖利率">利率＆殖利率</a><time datetime="2025-11-23T16:00:00.000Z" title="發表於 2025-11-24 00:00:00">2025-11-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/15/wp-restore-local/" title="如何用雲端備份在本地 Local 重建 WordPress"><img src="/images/Gemini_Generated_Image_vfctf8vfctf8vfct.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="如何用雲端備份在本地 Local 重建 WordPress"/></a><div class="content"><a class="title" href="/2025/11/15/wp-restore-local/" title="如何用雲端備份在本地 Local 重建 WordPress">如何用雲端備份在本地 Local 重建 WordPress</a><time datetime="2025-11-14T16:00:00.000Z" title="發表於 2025-11-15 00:00:00">2025-11-15</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分類</span>
+            <a class="card-more-btn" href="/categories/" title="檢視更多">
+      <i class="fas fa-angle-right"></i></a>
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/C/"><span class="card-category-list-name">C++</span><span class="card-category-list-count">1</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/C/Vector/"><span class="card-category-list-name">Vector</span><span class="card-category-list-count">1</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Line-Bot/"><span class="card-category-list-name">Line Bot</span><span class="card-category-list-count">3</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Line-Bot/replit%E8%A8%AD%E5%AE%9A/"><span class="card-category-list-name">replit設定</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Line-Bot/%E5%BB%BA%E7%AB%8B%E5%B8%B3%E8%99%9FLine-Bot%E5%B8%B3%E8%99%9F/"><span class="card-category-list-name">建立帳號Line Bot帳號</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Line-Bot/%E6%88%90%E7%B8%BE%E6%9F%A5%E8%A9%A2%E7%B7%B4%E7%BF%92/"><span class="card-category-list-name">成績查詢練習</span><span class="card-category-list-count">1</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python/"><span class="card-category-list-name">Python</span><span class="card-category-list-count">3</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python/Django/"><span class="card-category-list-name">Django</span><span class="card-category-list-count">2</span></a></li></ul></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>標籤</span></div><div class="card-tag-cloud"><a href="/tags/Line-Bot/" style="font-size: 1.5em; color: #99a9bf">Line Bot</a> <a href="/tags/yolo/" style="font-size: 1.1em; color: #999">yolo</a> <a href="/tags/CPE/" style="font-size: 1.3em; color: #99a1ac">CPE</a> <a href="/tags/%E5%88%A9%E7%8E%87/" style="font-size: 1.1em; color: #999">利率</a> <a href="/tags/wordpress-%E5%82%99%E4%BB%BD/" style="font-size: 1.1em; color: #999">wordpress-備份</a> <a href="/tags/Python-Email/" style="font-size: 1.1em; color: #999">Python Email</a> <a href="/tags/Wordpress/" style="font-size: 1.1em; color: #999">Wordpress</a> <a href="/tags/C/" style="font-size: 1.1em; color: #999">C++</a> <a href="/tags/Python-Django/" style="font-size: 1.5em; color: #99a9bf">Python Django</a> <a href="/tags/%E6%AE%96%E5%88%A9%E7%8E%87/" style="font-size: 1.1em; color: #999">殖利率</a> <a href="/tags/streamlit/" style="font-size: 1.1em; color: #999">streamlit</a> <a href="/tags/%E9%96%8B%E7%99%BC%E7%92%B0%E5%A2%83/" style="font-size: 1.1em; color: #999">開發環境</a> <a href="/tags/location-app/" style="font-size: 1.1em; color: #999">location-app</a> <a href="/tags/Bitbucket/" style="font-size: 1.1em; color: #999">Bitbucket</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>歸檔</span>
+      
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/12/">
+            <span class="card-archive-list-date">
+              十二月 2025
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/11/">
+            <span class="card-archive-list-date">
+              十一月 2025
+            </span>
+            <span class="card-archive-list-count">6</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/10/">
+            <span class="card-archive-list-date">
+              十月 2025
+            </span>
+            <span class="card-archive-list-count">5</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/04/">
+            <span class="card-archive-list-date">
+              四月 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/03/">
+            <span class="card-archive-list-date">
+              三月 2025
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/11/">
+            <span class="card-archive-list-date">
+              十一月 2024
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/10/">
+            <span class="card-archive-list-date">
+              十月 2024
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/09/">
+            <span class="card-archive-list-date">
+              九月 2024
+            </span>
+            <span class="card-archive-list-count">7</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>網站資訊</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章數量 :</div><div class="item-count">29</div></div><div class="webinfo-item"><div class="item-name">訪客數 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">總瀏覽量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最後更新時間 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-01-28T03:56:45.343Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2024 - 2026 By 全端企鵝</span></div><div class="footer_custom_text">StackPenguin | STUST</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日夜模式切換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到頂端"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js" type="module"></script><div class="js-pjax"></div><div class="aplayer no-destroy"  data-id="60198" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="false"> </div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/fireworks.min.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="true" data-click="false"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

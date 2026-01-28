@@ -1,0 +1,355 @@
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Wordpress 動態選單 | FullStackPenguin</title><meta name="author" content="全端企鵝"><meta name="copyright" content="全端企鵝"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="步驟 1：連結對應選單1$menu_items &#x3D; wp_get_nav_menu_items(&#x27;首頁選單&#x27;);  這段程式碼使用了 wp_get_nav_menu_items() 函數，傳入選單的名稱 &#39;首頁選單&#39;，該名稱對應的是你在 WordPress 後台中設定的選單名稱。 👇🏻 後台長這樣 👇🏻 範例：假設你在 WordPress 後台創建了一個">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Wordpress 動態選單">
+<meta property="og:url" content="https://kingkaizhuang.github.io/2024/09/26/Wordpress-%E5%8B%95%E6%85%8B%E9%81%B8%E5%96%AE/index.html">
+<meta property="og:site_name" content="FullStackPenguin">
+<meta property="og:description" content="步驟 1：連結對應選單1$menu_items &#x3D; wp_get_nav_menu_items(&#x27;首頁選單&#x27;);  這段程式碼使用了 wp_get_nav_menu_items() 函數，傳入選單的名稱 &#39;首頁選單&#39;，該名稱對應的是你在 WordPress 後台中設定的選單名稱。 👇🏻 後台長這樣 👇🏻 範例：假設你在 WordPress 後台創建了一個">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2Fwordpress%20%E5%8B%95%E6%85%8B%E9%81%B8%E5%96%AE%E6%95%99%E5%AD%B8%2Fdynamic-wp-nav.webp?alt=media&token=b20209da-6039-49f2-8df4-35b3e48be9e4">
+<meta property="article:published_time" content="2024-09-25T16:33:48.000Z">
+<meta property="article:modified_time" content="2026-01-28T03:08:27.795Z">
+<meta property="article:author" content="全端企鵝">
+<meta property="article:tag" content="Wordpress">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2Fwordpress%20%E5%8B%95%E6%85%8B%E9%81%B8%E5%96%AE%E6%95%99%E5%AD%B8%2Fdynamic-wp-nav.webp?alt=media&token=b20209da-6039-49f2-8df4-35b3e48be9e4"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Wordpress 動態選單",
+  "url": "https://kingkaizhuang.github.io/2024/09/26/Wordpress-%E5%8B%95%E6%85%8B%E9%81%B8%E5%96%AE/",
+  "image": "https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2Fwordpress%20%E5%8B%95%E6%85%8B%E9%81%B8%E5%96%AE%E6%95%99%E5%AD%B8%2Fdynamic-wp-nav.webp?alt=media&token=b20209da-6039-49f2-8df4-35b3e48be9e4",
+  "datePublished": "2024-09-25T16:33:48.000Z",
+  "dateModified": "2026-01-28T03:08:27.795Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "全端企鵝",
+      "url": "https://kingkaizhuang.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://kingkaizhuang.github.io/2024/09/26/Wordpress-%E5%8B%95%E6%85%8B%E9%81%B8%E5%96%AE/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '複製成功',
+    error: '複製失敗',
+    noSupport: '瀏覽器不支援'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '剛剛',
+    min: '分鐘前',
+    hour: '小時前',
+    day: '天前',
+    month: '個月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '載入更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Wordpress 動態選單',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/wave.css"><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 7.3.0"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+btf.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@latest/themes/blue/pace-theme-flash.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/Avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">35</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 時間軸</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分類</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2Fwordpress%20%E5%8B%95%E6%85%8B%E9%81%B8%E5%96%AE%E6%95%99%E5%AD%B8%2Fdynamic-wp-nav.webp?alt=media&amp;token=b20209da-6039-49f2-8df4-35b3e48be9e4);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">FullStackPenguin</span></a><a class="nav-page-title" href="/"><span class="site-name">Wordpress 動態選單</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首頁</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 時間軸</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分類</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Wordpress 動態選單</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2024-09-25T16:33:48.000Z" title="發表於 2024-09-26 00:33:48">2024-09-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2026-01-28T03:08:27.795Z" title="更新於 2026-01-28 11:08:27">2026-01-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Wordpress/">Wordpress</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Wordpress/%E5%8B%95%E6%85%8B%E9%81%B8%E5%96%AE/">動態選單</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">瀏覽量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="步驟-1：連結對應選單"><a href="#步驟-1：連結對應選單" class="headerlink" title="步驟 1：連結對應選單"></a>步驟 1：連結對應選單</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$menu_items</span> = <span class="title function_ invoke__">wp_get_nav_menu_items</span>(<span class="string">&#x27;首頁選單&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>這段程式碼使用了 <code>wp_get_nav_menu_items()</code> 函數，傳入選單的名稱 <code>&#39;首頁選單&#39;</code>，該名稱對應的是你在 WordPress 後台中設定的選單名稱。</p>
+<p>👇🏻 後台長這樣 👇🏻<br><img src="https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2Fwordpress%20%E5%8B%95%E6%85%8B%E9%81%B8%E5%96%AE%E6%95%99%E5%AD%B8%2Fwp-back-nav.png?alt=media&token=1bbfaa5c-1e34-4b9c-9683-6f64a99e62c4" alt="wordpress-background"></p>
+<h3 id="範例："><a href="#範例：" class="headerlink" title="範例："></a>範例：</h3><p>假設你在 WordPress 後台創建了一個選單，並命名為「首頁選單」，該選單中包含以下項目：</p>
+<ol>
+<li>Home</li>
+<li>Services<ul>
+<li>Web Development</li>
+<li>App Development</li>
+</ul>
+</li>
+<li>About Us</li>
+<li>Contact</li>
+</ol>
+<p><code>wp_get_nav_menu_items()</code> 會返回這些選單項目作為一個物件陣列，每個項目包含：</p>
+<ul>
+<li><code>ID</code>：選單項目的唯一標識符</li>
+<li><code>title</code>：選單項目的標題（如 “Home”, “Services”）</li>
+<li><code>url</code>：選單項目的連結</li>
+<li><code>menu_item_parent</code>：父選單項目的 ID（若是頂層項目則為 0）</li>
+</ul>
+<h2 id="步驟-2：組織選單層次結構"><a href="#步驟-2：組織選單層次結構" class="headerlink" title="步驟 2：組織選單層次結構"></a>步驟 2：組織選單層次結構</h2><p>接下來，你需要將這些選單項目按父子關係組織起來，以便生成一個層次結構清晰的選單。這段程式碼的目的是將選單項目分類為父選單和子選單。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$tree_menu_items</span> = <span class="keyword">array</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span> (<span class="variable">$menu_items</span> <span class="keyword">as</span> <span class="variable">$menu_item</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$menu_item</span>-&gt;menu_item_parent == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// 父選單項目</span></span><br><span class="line">        <span class="variable">$tree_menu_items</span>[<span class="variable">$menu_item</span>-&gt;ID] = <span class="variable">$menu_item</span>;</span><br><span class="line">        <span class="variable">$tree_menu_items</span>[<span class="variable">$menu_item</span>-&gt;ID]-&gt;children = <span class="keyword">array</span>(); <span class="comment">// 初始化子選單陣列</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 子選單項目，添加到父選單項目的 children 陣列中</span></span><br><span class="line">        <span class="variable">$tree_menu_items</span>[<span class="variable">$menu_item</span>-&gt;menu_item_parent]-&gt;children[] = <span class="variable">$menu_item</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="範例：-1"><a href="#範例：-1" class="headerlink" title="範例："></a>範例：</h3><ul>
+<li>假設 “Services” 是一個父選單項目，它的 <code>menu_item_parent</code> 是 <code>0</code>。</li>
+<li>“Web Development” 和 “App Development” 是它的子選單項目，它們的 <code>menu_item_parent</code> 為 “Services” 的 ID。</li>
+</ul>
+<p>程式會將這些項目組織為：</p>
+<ul>
+<li><code>Home</code>：無子選單</li>
+<li><code>Services</code>：<ul>
+<li>子選單：<code>Web Development</code>, <code>App Development</code></li>
+</ul>
+</li>
+<li><code>About Us</code>：無子選單</li>
+<li><code>Contact</code>：無子選單</li>
+</ul>
+<h2 id="步驟-3：生成-HTML-選單"><a href="#步驟-3：生成-HTML-選單" class="headerlink" title="步驟 3：生成 HTML 選單"></a>步驟 3：生成 HTML 選單</h2><p>這裡的程式碼將已整理好的選單結構動態地生成 HTML。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$tree_menu_items</span>)): <span class="meta">?&gt;</span></span><br><span class="line">    <span class="meta">&lt;?php</span> <span class="keyword">foreach</span> (<span class="variable">$tree_menu_items</span> <span class="keyword">as</span> <span class="variable">$menu_item</span>): <span class="meta">?&gt;</span></span><br><span class="line">        &lt;li <span class="class"><span class="keyword">class</span>=&quot;<span class="title">menu</span>-<span class="title">item</span> &lt;?<span class="title">php</span> <span class="title">if</span>($<span class="title">hasSubmenu</span>): ?&gt;<span class="title">has</span>-<span class="title">children</span>&lt;?<span class="title">php</span> <span class="title">endif</span>; ?&gt;&quot;&gt;</span></span><br><span class="line"><span class="class">            &lt;<span class="title">a</span> <span class="title">id</span>=&quot;<span class="title">menu</span>-<span class="title">item</span>-&lt;?<span class="title">php</span> <span class="title">echo</span> $<span class="title">menu_item</span>-&gt;<span class="title">ID</span>; ?&gt;&quot; <span class="title">href</span>=&quot;&lt;?<span class="title">php</span> <span class="title">echo</span> $<span class="title">menu_item</span>-&gt;<span class="title">url</span>; ?&gt;&quot;&gt;</span></span><br><span class="line"><span class="class">                &lt;?<span class="title">php</span> <span class="title">echo</span> <span class="title">esc_html</span>($<span class="title">menu_item</span>-&gt;<span class="title">title</span>); ?&gt;</span></span><br><span class="line"><span class="class">                &lt;?<span class="title">php</span> <span class="title">if</span> ($<span class="title">hasSubmenu</span>): ?&gt;</span></span><br><span class="line"><span class="class">                    &lt;<span class="title">span</span> <span class="title">class</span>=&quot;<span class="title">angle</span>-<span class="title">down</span>-<span class="title">wrap</span>&quot;&gt;&lt;<span class="title">i</span> <span class="title">class</span>=&quot;<span class="title">fa</span> <span class="title">fa</span>-<span class="title">angle</span>-<span class="title">down</span>&quot; <span class="title">aria</span>-<span class="title">hidden</span>=&quot;<span class="title">true</span>&quot;&gt;&lt;/<span class="title">i</span>&gt;&lt;/<span class="title">span</span>&gt;</span></span><br><span class="line"><span class="class">                &lt;?<span class="title">php</span> <span class="title">endif</span>; ?&gt;</span></span><br><span class="line"><span class="class">            &lt;/<span class="title">a</span>&gt;</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">            &lt;?<span class="title">php</span> <span class="title">if</span> ($<span class="title">hasSubmenu</span>): ?&gt;</span></span><br><span class="line"><span class="class">                &lt;<span class="title">ul</span> <span class="title">class</span>=&quot;<span class="title">menu</span>-<span class="title">dropdown</span>-<span class="title">list</span> <span class="title">list</span>-<span class="title">unstyled</span>&quot;&gt;</span></span><br><span class="line"><span class="class">                    &lt;?<span class="title">php</span> <span class="title">foreach</span> ($<span class="title">menu_item</span>-&gt;<span class="title">children</span> <span class="title">as</span> $<span class="title">child_menu_item</span>): ?&gt;</span></span><br><span class="line"><span class="class">                        &lt;<span class="title">li</span> <span class="title">class</span>=&quot;<span class="title">dropdown</span>-<span class="title">list</span>-<span class="title">item</span>&quot;&gt;</span></span><br><span class="line"><span class="class">                            &lt;<span class="title">a</span> <span class="title">id</span>=&quot;<span class="title">menu</span>-<span class="title">item</span>-&lt;?<span class="title">php</span> <span class="title">echo</span> $<span class="title">child_menu_item</span>-&gt;<span class="title">ID</span>; ?&gt;&quot; <span class="title">href</span>=&quot;&lt;?<span class="title">php</span> <span class="title">echo</span> $<span class="title">child_menu_item</span>-&gt;<span class="title">url</span>; ?&gt;&quot;&gt;</span></span><br><span class="line"><span class="class">                                &lt;?<span class="title">php</span> <span class="title">echo</span> <span class="title">esc_html</span>($<span class="title">child_menu_item</span>-&gt;<span class="title">title</span>); ?&gt;</span></span><br><span class="line"><span class="class">                            &lt;/<span class="title">a</span>&gt;</span></span><br><span class="line"><span class="class">                        &lt;/<span class="title">li</span>&gt;</span></span><br><span class="line"><span class="class">                    &lt;?<span class="title">php</span> <span class="title">endforeach</span>; ?&gt;</span></span><br><span class="line"><span class="class">                &lt;/<span class="title">ul</span>&gt;</span></span><br><span class="line"><span class="class">            &lt;?<span class="title">php</span> <span class="title">endif</span>; ?&gt;</span></span><br><span class="line"><span class="class">        &lt;/<span class="title">li</span>&gt;</span></span><br><span class="line"><span class="class">    &lt;?<span class="title">php</span> <span class="title">endforeach</span>; ?&gt;</span></span><br><span class="line"><span class="class">&lt;?<span class="title">php</span> <span class="title">endif</span>; ?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>這段程式碼會生成以下的 HTML：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;menu-box list-unstyled&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">&quot;menu-item&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">id</span>=<span class="string">&quot;menu-item-1&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/home&quot;</span>&gt;</span>Home<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">&quot;menu-item has-children&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">id</span>=<span class="string">&quot;menu-item-2&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/services&quot;</span></span></span><br><span class="line"><span class="tag">      &gt;</span>Services</span><br><span class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;angle-down-wrap&quot;</span></span></span><br><span class="line"><span class="tag">        &gt;</span><span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">&quot;fa fa-angle-down&quot;</span> <span class="attr">aria-hidden</span>=<span class="string">&quot;true&quot;</span>&gt;</span>&lt;/i</span><br><span class="line">      &gt;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;menu-dropdown-list list-unstyled&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">&quot;dropdown-list-item&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">id</span>=<span class="string">&quot;menu-item-3&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/services/web-development&quot;</span>&gt;</span>Web Development<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">&quot;dropdown-list-item&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">id</span>=<span class="string">&quot;menu-item-4&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/services/app-development&quot;</span>&gt;</span>App Development<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">&quot;menu-item&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">id</span>=<span class="string">&quot;menu-item-5&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/about-us&quot;</span>&gt;</span>About Us<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">&quot;menu-item&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">id</span>=<span class="string">&quot;menu-item-6&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/contact&quot;</span>&gt;</span>Contact<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>menu-item-2</code> 是 <code>Services</code>，因為它有子選單，所以會附加 <code>has-children</code> class，並顯示一個下拉圖標（<code>&lt;span class=&quot;angle-down-wrap&quot;&gt;</code>）。</li>
+<li>其子選單（<code>Web Development</code> 和 <code>App Development</code>）被放在一個內嵌的 <code>&lt;ul class=&quot;menu-dropdown-list&quot;&gt;</code> 中。</li>
+</ul>
+<h2 id="步驟-4：顯示和樣式"><a href="#步驟-4：顯示和樣式" class="headerlink" title="步驟 4：顯示和樣式"></a>步驟 4：顯示和樣式</h2><p>這段程式碼最終將選單顯示在 <code>&lt;header&gt;</code> 中，並包含基於層次結構的樣式（如子選單的下拉圖標和層次結構的縮排）。</p>
+<h2 id="補充-wp-get-nav-menu-items-得到的結構"><a href="#補充-wp-get-nav-menu-items-得到的結構" class="headerlink" title="補充 wp_get_nav_menu_items() 得到的結構"></a>補充 wp_get_nav_menu_items() 得到的結構</h2><p>在 WordPress 中，<code>wp_get_nav_menu_items()</code> 函數返回一個包含選單項目（<code>$menu_items</code>）的陣列。每個選單項目都是一個物件，包含許多屬性，這些屬性描述了選單中的每個項目。以下是 <code>$menu_items</code> 中每個選單項目的內容：</p>
+<h3 id="menu-items-每個項目的結構："><a href="#menu-items-每個項目的結構：" class="headerlink" title="$menu_items 每個項目的結構："></a><code>$menu_items</code> 每個項目的結構：</h3><p>每個選單項目會包含以下常見屬性：</p>
+<ol>
+<li><strong>ID</strong> (<code>$menu_item-&gt;ID</code>)<ul>
+<li>每個選單項目的唯一識別符。這個值可以用來區分不同的選單項目。</li>
+</ul>
+</li>
+<li><strong>title</strong> (<code>$menu_item-&gt;title</code>)<ul>
+<li>選單項目的名稱，這是會顯示在前端的文字。</li>
+</ul>
+</li>
+<li><strong>url</strong> (<code>$menu_item-&gt;url</code>)<ul>
+<li>選單項目的鏈接地址（例如，指向頁面的 URL）。</li>
+</ul>
+</li>
+<li><strong>menu_item_parent</strong> (<code>$menu_item-&gt;menu_item_parent</code>)<ul>
+<li>父選單項目的 ID。如果該選單項目是頂層選單，<code>menu_item_parent</code> 會是 <code>0</code>；如果它是子選單，<code>menu_item_parent</code> 會是其父選單項目的 ID。</li>
+</ul>
+</li>
+<li><strong>post_type</strong> (<code>$menu_item-&gt;post_type</code>)<ul>
+<li>指定該選單項目的類型，一般為 <code>nav_menu_item</code>。</li>
+</ul>
+</li>
+<li><strong>object</strong> (<code>$menu_item-&gt;object</code>)<ul>
+<li>選單項目的目標對象類型，例如 <code>page</code> 或 <code>category</code>。這表示選單鏈接指向的是一個頁面還是分類目錄等。</li>
+</ul>
+</li>
+<li><strong>object_id</strong> (<code>$menu_item-&gt;object_id</code>)<ul>
+<li>目標對象的 ID，例如，如果該選單項目連接到一個頁面，這裡會顯示該頁面的 ID。</li>
+</ul>
+</li>
+<li><strong>type</strong> (<code>$menu_item-&gt;type</code>)<ul>
+<li>選單項目的類型。通常為 <code>post_type</code> 或 <code>taxonomy</code>，指的是該選單項目連結到的對象是否是一個文章類型或分類法。</li>
+</ul>
+</li>
+<li><strong>classes</strong> (<code>$menu_item-&gt;classes</code>)<ul>
+<li>選單項目所包含的 CSS class。這是一個陣列，通常可用於為選單項目添加自定義樣式。</li>
+</ul>
+</li>
+<li><strong>target</strong> (<code>$menu_item-&gt;target</code>)<ul>
+<li>指定鏈接是否在新窗口或當前窗口打開，這與 HTML 的 <code>target=&quot;_blank&quot;</code> 類似。</li>
+</ul>
+</li>
+<li><strong>attr_title</strong> (<code>$menu_item-&gt;attr_title</code>)<ul>
+<li>為選單項目提供的 <code>title</code> 屬性，用來顯示在鼠標懸停在鏈接上時的提示文字。</li>
+</ul>
+</li>
+<li><strong>description</strong> (<code>$menu_item-&gt;description</code>)<ul>
+<li>選單項目的描述，通常不會顯示在前端，但在一些主題中可能會用於輔助說明。</li>
+</ul>
+</li>
+<li><strong>xfn</strong> (<code>$menu_item-&gt;xfn</code>)<ul>
+<li>用於指定鏈接關係（XFN，”XHTML Friends Network”），例如指定鏈接到該頁面的使用者關係（朋友、合作夥伴等）。</li>
+</ul>
+</li>
+<li><strong>db_id</strong> (<code>$menu_item-&gt;db_id</code>)<ul>
+<li>選單項目的資料庫 ID，與 <code>ID</code> 相同，用來唯一識別該選單項目。</li>
+</ul>
+</li>
+<li><strong>menu_order</strong> (<code>$menu_item-&gt;menu_order</code>)<ul>
+<li>選單項目的順序，用來指定該項目在選單中的顯示順序。</li>
+</ul>
+</li>
+</ol>
+<h3 id="範例：-menu-items-的內容範例"><a href="#範例：-menu-items-的內容範例" class="headerlink" title="範例：$menu_items 的內容範例"></a>範例：<code>$menu_items</code> 的內容範例</h3><p>假設有一個選單名為「首頁選單」，其中包含以下項目：</p>
+<ol>
+<li>Home（頂層選單）</li>
+<li>Services（頂層選單）<ul>
+<li>Web Development（子選單）</li>
+<li>App Development（子選單）</li>
+</ul>
+</li>
+<li>About Us（頂層選單）</li>
+</ol>
+<p>那麼，<code>$menu_items</code> 中的內容可能類似以下結構：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">Array</span> (</span><br><span class="line">    [<span class="number">0</span>] =&gt; <span class="built_in">stdClass</span> <span class="title function_ invoke__">Object</span> (</span><br><span class="line">        [ID] =&gt; <span class="number">1</span></span><br><span class="line">        [title] =&gt; Home</span><br><span class="line">        [url] =&gt; <span class="attr">http</span>://example.com/home</span><br><span class="line">        [menu_item_parent] =&gt; <span class="number">0</span></span><br><span class="line">        [post_type] =&gt; nav_menu_item</span><br><span class="line">        [<span class="keyword">object</span>] =&gt; page</span><br><span class="line">        [object_id] =&gt; <span class="number">5</span></span><br><span class="line">        [type] =&gt; post_type</span><br><span class="line">        [classes] =&gt; <span class="title function_ invoke__">Array</span> ( )</span><br><span class="line">        [target] =&gt;</span><br><span class="line">        [attr_title] =&gt;</span><br><span class="line">        [description] =&gt;</span><br><span class="line">        [xfn] =&gt;</span><br><span class="line">        [db_id] =&gt; <span class="number">1</span></span><br><span class="line">        [menu_order] =&gt; <span class="number">1</span></span><br><span class="line">    )</span><br><span class="line">    [<span class="number">1</span>] =&gt; <span class="built_in">stdClass</span> <span class="title function_ invoke__">Object</span> (</span><br><span class="line">        [ID] =&gt; <span class="number">2</span></span><br><span class="line">        [title] =&gt; Services</span><br><span class="line">        [url] =&gt; <span class="attr">http</span>://example.com/services</span><br><span class="line">        [menu_item_parent] =&gt; <span class="number">0</span></span><br><span class="line">        [post_type] =&gt; nav_menu_item</span><br><span class="line">        [<span class="keyword">object</span>] =&gt; page</span><br><span class="line">        [object_id] =&gt; <span class="number">6</span></span><br><span class="line">        [type] =&gt; post_type</span><br><span class="line">        [classes] =&gt; <span class="title function_ invoke__">Array</span> ( )</span><br><span class="line">        [target] =&gt;</span><br><span class="line">        [attr_title] =&gt;</span><br><span class="line">        [description] =&gt;</span><br><span class="line">        [xfn] =&gt;</span><br><span class="line">        [db_id] =&gt; <span class="number">2</span></span><br><span class="line">        [menu_order] =&gt; <span class="number">2</span></span><br><span class="line">    )</span><br><span class="line">    [<span class="number">2</span>] =&gt; <span class="built_in">stdClass</span> <span class="title function_ invoke__">Object</span> (</span><br><span class="line">        [ID] =&gt; <span class="number">3</span></span><br><span class="line">        [title] =&gt; Web Development</span><br><span class="line">        [url] =&gt; <span class="attr">http</span>://example.com/web-development</span><br><span class="line">        [menu_item_parent] =&gt; <span class="number">2</span></span><br><span class="line">        [post_type] =&gt; nav_menu_item</span><br><span class="line">        [<span class="keyword">object</span>] =&gt; page</span><br><span class="line">        [object_id] =&gt; <span class="number">7</span></span><br><span class="line">        [type] =&gt; post_type</span><br><span class="line">        [classes] =&gt; <span class="title function_ invoke__">Array</span> ( )</span><br><span class="line">        [target] =&gt;</span><br><span class="line">        [attr_title] =&gt;</span><br><span class="line">        [description] =&gt;</span><br><span class="line">        [xfn] =&gt;</span><br><span class="line">        [db_id] =&gt; <span class="number">3</span></span><br><span class="line">        [menu_order] =&gt; <span class="number">3</span></span><br><span class="line">    )</span><br><span class="line">    [<span class="number">3</span>] =&gt; <span class="built_in">stdClass</span> <span class="title function_ invoke__">Object</span> (</span><br><span class="line">        [ID] =&gt; <span class="number">4</span></span><br><span class="line">        [title] =&gt; App Development</span><br><span class="line">        [url] =&gt; <span class="attr">http</span>://example.com/app-development</span><br><span class="line">        [menu_item_parent] =&gt; <span class="number">2</span></span><br><span class="line">        [post_type] =&gt; nav_menu_item</span><br><span class="line">        [<span class="keyword">object</span>] =&gt; page</span><br><span class="line">        [object_id] =&gt; <span class="number">8</span></span><br><span class="line">        [type] =&gt; post_type</span><br><span class="line">        [classes] =&gt; <span class="title function_ invoke__">Array</span> ( )</span><br><span class="line">        [target] =&gt;</span><br><span class="line">        [attr_title] =&gt;</span><br><span class="line">        [description] =&gt;</span><br><span class="line">        [xfn] =&gt;</span><br><span class="line">        [db_id] =&gt; <span class="number">4</span></span><br><span class="line">        [menu_order] =&gt; <span class="number">4</span></span><br><span class="line">    )</span><br><span class="line">    [<span class="number">4</span>] =&gt; <span class="built_in">stdClass</span> <span class="title function_ invoke__">Object</span> (</span><br><span class="line">        [ID] =&gt; <span class="number">5</span></span><br><span class="line">        [title] =&gt; About Us</span><br><span class="line">        [url] =&gt; <span class="attr">http</span>://example.com/about-us</span><br><span class="line">        [menu_item_parent] =&gt; <span class="number">0</span></span><br><span class="line">        [post_type] =&gt; nav_menu_item</span><br><span class="line">        [<span class="keyword">object</span>] =&gt; page</span><br><span class="line">        [object_id] =&gt; <span class="number">9</span></span><br><span class="line">        [type] =&gt; post_type</span><br><span class="line">        [classes] =&gt; <span class="title function_ invoke__">Array</span> ( )</span><br><span class="line">        [target] =&gt;</span><br><span class="line">        [attr_title] =&gt;</span><br><span class="line">        [description] =&gt;</span><br><span class="line">        [xfn] =&gt;</span><br><span class="line">        [db_id] =&gt; <span class="number">5</span></span><br><span class="line">        [menu_order] =&gt; <span class="number">5</span></span><br><span class="line">    )</span><br><span class="line">)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="說明："><a href="#說明：" class="headerlink" title="說明："></a>說明：</h3><ol>
+<li><code>Home</code>：是一個頂層選單項目，<code>menu_item_parent</code> 為 <code>0</code>。</li>
+<li><code>Services</code>：也是一個頂層選單項目，<code>menu_item_parent</code> 為 <code>0</code>，並且有子項目。</li>
+<li><code>Web Development</code>：是 <code>Services</code> 的子選單，<code>menu_item_parent</code> 是 <code>Services</code> 的 <code>ID</code>（即 <code>2</code>）。</li>
+<li><code>App Development</code>：也是 <code>Services</code> 的子選單，<code>menu_item_parent</code> 是 <code>Services</code> 的 <code>ID</code>（即 <code>2</code>）。</li>
+<li><code>About Us</code>：是一個頂層選單項目，<code>menu_item_parent</code> 為 <code>0</code>。</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://kingkaizhuang.github.io">全端企鵝</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章連結: </span><span class="post-copyright-info"><a href="https://kingkaizhuang.github.io/2024/09/26/Wordpress-%E5%8B%95%E6%85%8B%E9%81%B8%E5%96%AE/">https://kingkaizhuang.github.io/2024/09/26/Wordpress-%E5%8B%95%E6%85%8B%E9%81%B8%E5%96%AE/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版權聲明: </span><span class="post-copyright-info">本部落格所有文章除特別聲明外，均採用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 授權協議。轉載請註明來源 <a href="https://kingkaizhuang.github.io" target="_blank">FullStackPenguin</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Wordpress/">Wordpress</a></div><div class="post-share"><div class="social-share" data-image="https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2Fwordpress%20%E5%8B%95%E6%85%8B%E9%81%B8%E5%96%AE%E6%95%99%E5%AD%B8%2Fdynamic-wp-nav.webp?alt=media&amp;token=b20209da-6039-49f2-8df4-35b3e48be9e4" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2024/09/26/Line-Bot%E8%88%87Chatgpt%E6%87%89%E7%94%A8-%E4%B8%B2%E6%8E%A5replit%E5%A4%A7%E7%A5%9E%E7%A8%8B%E5%BC%8F/" title="Line Bot 與 Chatgpt應用 02 - 執行程式"><img class="cover" src="https://firebasestorage.googleapis.com/v0/b/zhuang-afef4.appspot.com/o/KingKaiZhuang.github.io%2FLine-Bot%E5%92%8Cgpt%E5%AF%A6%E6%88%B0%E6%95%99%E5%AD%B8%2Freplit-python%2Fbanner.webp?alt=media&amp;token=04b3ef21-5ea8-4c0d-9a96-318f3eeb974a" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Line Bot 與 Chatgpt應用 02 - 執行程式</div></div><div class="info-2"><div class="info-item-1">Line Bot 和 GPT 實戰教學本教學將帶領你使用 Replit 平台運行由 GPT 支援的 Line Bot，並逐步指導你如何設定和執行這個 Python 程式碼。 步驟 1: 進入 Replit 並複製專案首先，進入 Replit 上的大神已經寫好的 Python 程式碼頁面。  點擊以下連結，進入 Replit 上的專案頁面並進行複製 (fork) 到你自己的工作區： GPTDev_LINE_bot - Replit 步驟 2: 複製專案到自己的工作區點擊 “Fork” 按鈕將專案複製到你的 Replit 帳戶中：  步驟 3: 設定環境變數在 Replit 的專案設定中，輸入以下三個環境變數：  LINE_SECRET：你在 Line 開發者後台取得的 Secret LINE_TOKEN：你在 Line 開發者後台取得的 Token OPENAI_API_KEY：你從 OpenAI 取得的 API Key  如圖所示：   提示: 如果你不知道如何取得這三個值，請私訊我以獲得幫助。  步驟 4: 執行專案設定好環境變數後，點擊 “Run” 按鈕來執行程式。  完成恭...</div></div></div></a><a class="pagination-related" href="/2024/09/22/%E6%9C%AC%E5%9C%B0%E5%B0%88%E6%A1%88%E6%8E%A8%E9%80%81%E8%87%B3Bitbucket%E9%81%A0%E7%AB%AF%E5%AD%98%E6%94%BE%E5%BA%AB/" title="本地專案推送至Bitbucket遠端存放庫"><img class="cover" src="https://www.interviewbit.com/blog/wp-content/uploads/2021/10/What-is-Bitbucket-550x413.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">本地專案推送至Bitbucket遠端存放庫</div></div><div class="info-2"><div class="info-item-1">我的工作常常會使用到 bitbucket 遠端存放庫，前幾次使用不是很熟悉，因此我將步驟記錄下來讓我對 git 語法更熟悉： 12345678910111213# 將本地專案推送到 Bitbucket 的教學文案本文介紹了如何將本地的 Git 專案推送到 Bitbucket，包括每個步驟執行指令後的顯示內容。---## 步驟 1: 初始化本地 Git 儲存庫如果尚未初始化 Git 儲存庫，首先進入專案目錄並執行以下命令：```bashgit init```  顯示內容1Initialized empty Git repository in /Users/zhuang/iavogue/.git/   步驟 2: 新增 Bitbucket 遠端倉庫將 Bitbucket 的儲存庫 URL 新增到本地專案的 Git 遠端倉庫列表中： 1git remote add origin git@bitbucket.org:iambigd/wp-iavogue.git  檢查遠端倉庫是否正確添加： 12bashgit remote -v  顯示內容12origin  git@bitbucket....</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/images/Avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">全端企鵝</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">35</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/KingKaiZhuang"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://www.instagram.com/zhuang_2024/" target="_blank" title="Instagram"><i class="fab fa-instagram" style="color: #E4405F;"></i></a><a class="social-icon" href="https://line.me/ti/p/EeWpQ7ef-e" target="_blank" title="LINE"><i class="fab fa-line" style="color: #00C300;"></i></a><a class="social-icon" href="https://www.facebook.com/profile.php?id=100002212333597" target="_blank" title="Facebook"><i class="fab fa-facebook" style="color: #4267B2;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><a target="_blank" rel="noopener" href="https://orca-biz.com/" alt="OrcaBiz 虎鯨數位行銷" >OrcaBiz 實習生</a>
+<p>🏫 STUST</p>
+<p>📖 目前正在準備 <strong>CPE</strong> 和 <strong>英文多益</strong>。</p>
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目錄</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A5%E9%A9%9F-1%EF%BC%9A%E9%80%A3%E7%B5%90%E5%B0%8D%E6%87%89%E9%81%B8%E5%96%AE"><span class="toc-number">1.</span> <span class="toc-text">步驟 1：連結對應選單</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AF%84%E4%BE%8B%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">範例：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A5%E9%A9%9F-2%EF%BC%9A%E7%B5%84%E7%B9%94%E9%81%B8%E5%96%AE%E5%B1%A4%E6%AC%A1%E7%B5%90%E6%A7%8B"><span class="toc-number">2.</span> <span class="toc-text">步驟 2：組織選單層次結構</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AF%84%E4%BE%8B%EF%BC%9A-1"><span class="toc-number">2.1.</span> <span class="toc-text">範例：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A5%E9%A9%9F-3%EF%BC%9A%E7%94%9F%E6%88%90-HTML-%E9%81%B8%E5%96%AE"><span class="toc-number">3.</span> <span class="toc-text">步驟 3：生成 HTML 選單</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A5%E9%A9%9F-4%EF%BC%9A%E9%A1%AF%E7%A4%BA%E5%92%8C%E6%A8%A3%E5%BC%8F"><span class="toc-number">4.</span> <span class="toc-text">步驟 4：顯示和樣式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A3%9C%E5%85%85-wp-get-nav-menu-items-%E5%BE%97%E5%88%B0%E7%9A%84%E7%B5%90%E6%A7%8B"><span class="toc-number">5.</span> <span class="toc-text">補充 wp_get_nav_menu_items() 得到的結構</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#menu-items-%E6%AF%8F%E5%80%8B%E9%A0%85%E7%9B%AE%E7%9A%84%E7%B5%90%E6%A7%8B%EF%BC%9A"><span class="toc-number">5.1.</span> <span class="toc-text">$menu_items 每個項目的結構：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AF%84%E4%BE%8B%EF%BC%9A-menu-items-%E7%9A%84%E5%85%A7%E5%AE%B9%E7%AF%84%E4%BE%8B"><span class="toc-number">5.2.</span> <span class="toc-text">範例：$menu_items 的內容範例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AA%AA%E6%98%8E%EF%BC%9A"><span class="toc-number">5.3.</span> <span class="toc-text">說明：</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/12/04/unity-scene-data/" title="Unity 場景切換以及 Data 共享"><img src="/images/unity-data-scene.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Unity 場景切換以及 Data 共享"/></a><div class="content"><a class="title" href="/2025/12/04/unity-scene-data/" title="Unity 場景切換以及 Data 共享">Unity 場景切換以及 Data 共享</a><time datetime="2025-12-03T16:00:00.000Z" title="發表於 2025-12-04 00:00:00">2025-12-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/12/01/streamlit-yolo/" title="Streamlit 結合 yolo 辨識圖片"><img src="/images/streamlit_yolo.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Streamlit 結合 yolo 辨識圖片"/></a><div class="content"><a class="title" href="/2025/12/01/streamlit-yolo/" title="Streamlit 結合 yolo 辨識圖片">Streamlit 結合 yolo 辨識圖片</a><time datetime="2025-11-30T16:00:00.000Z" title="發表於 2025-12-01 00:00:00">2025-12-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/26/next-js-v16-base/" title="Next.js v16 基本常識"><img src="/images/Gemini_Generated_Image_8zuhop8zuhop8zuh-1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Next.js v16 基本常識"/></a><div class="content"><a class="title" href="/2025/11/26/next-js-v16-base/" title="Next.js v16 基本常識">Next.js v16 基本常識</a><time datetime="2025-11-25T16:00:00.000Z" title="發表於 2025-11-26 00:00:00">2025-11-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/24/interest-and-yield/" title="利率＆殖利率"><img src="/images/image-12.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="利率＆殖利率"/></a><div class="content"><a class="title" href="/2025/11/24/interest-and-yield/" title="利率＆殖利率">利率＆殖利率</a><time datetime="2025-11-23T16:00:00.000Z" title="發表於 2025-11-24 00:00:00">2025-11-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/15/wp-restore-local/" title="如何用雲端備份在本地 Local 重建 WordPress"><img src="/images/Gemini_Generated_Image_vfctf8vfctf8vfct.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="如何用雲端備份在本地 Local 重建 WordPress"/></a><div class="content"><a class="title" href="/2025/11/15/wp-restore-local/" title="如何用雲端備份在本地 Local 重建 WordPress">如何用雲端備份在本地 Local 重建 WordPress</a><time datetime="2025-11-14T16:00:00.000Z" title="發表於 2025-11-15 00:00:00">2025-11-15</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2024 - 2026 By 全端企鵝</span></div><div class="footer_custom_text">StackPenguin | STUST</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="閱讀模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日夜模式切換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目錄"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到頂端"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js" type="module"></script><div class="js-pjax"><script>(() => {
+  const abcjsInit = () => {
+    const abcjsFn = () => {
+      setTimeout(() => {
+        const sheets = document.querySelectorAll(".abc-music-sheet")
+        for (let i = 0; i < sheets.length; i++) {
+          const ele = sheets[i]
+          if (ele.children.length > 0) continue
+
+          // Parse parameters from data-params attribute
+          let params = {}
+          const dp = ele.getAttribute("data-params")
+          if (dp) {
+            try {
+              params = JSON.parse(dp)
+            } catch (e) {
+              console.error("Failed to parse data-params:", e)
+            }
+          }
+
+          // Merge parsed parameters with the responsive option
+          // Ensures params content appears before responsive
+          const options = { ...params, responsive: "resize" }
+
+          // Render the music score using ABCJS.renderAbc
+          ABCJS.renderAbc(ele, ele.textContent, options)
+        }
+      }, 100)
+    }
+
+    if (typeof ABCJS === "object") {
+      abcjsFn()
+    } else {
+      btf.getScript("https://cdn.jsdelivr.net/npm/abcjs@6.6.0/dist/abcjs-basic-min.min.js").then(abcjsFn)
+    }
+  }
+
+  if (window.pjax) {
+    abcjsInit()
+  } else {
+    window.addEventListener("load", abcjsInit)
+  }
+
+  btf.addGlobalFn("encrypt", abcjsInit, "abcjs")
+})()</script></div><div class="aplayer no-destroy"  data-id="60198" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="false"> </div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/fireworks.min.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="true" data-click="false"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

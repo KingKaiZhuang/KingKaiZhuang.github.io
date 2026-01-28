@@ -1,0 +1,401 @@
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>CPU 排程演算法之等待時間計算 | FullStackPenguin</title><meta name="author" content="全端企鵝"><meta name="copyright" content="全端企鵝"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="這次的作業主要是要根據以下四個行程（Processes），分別使用不同的 CPU 排程演算法，計算每個演算法的平均等待時間（Average Waiting Time, WT）。    行程 到達時間 A 分割時間 Burst 優先順序    P1 0 8 3   P2 1 4 1   P3 2 9 4   P4 3 5 2   單位：時間單位 需要計算的排程演算法如下：  FCFS（First C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CPU 排程演算法之等待時間計算">
+<meta property="og:url" content="https://kingkaizhuang.github.io/2025/10/21/cpu-job-time/index.html">
+<meta property="og:site_name" content="FullStackPenguin">
+<meta property="og:description" content="這次的作業主要是要根據以下四個行程（Processes），分別使用不同的 CPU 排程演算法，計算每個演算法的平均等待時間（Average Waiting Time, WT）。    行程 到達時間 A 分割時間 Burst 優先順序    P1 0 8 3   P2 1 4 1   P3 2 9 4   P4 3 5 2   單位：時間單位 需要計算的排程演算法如下：  FCFS（First C">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://kingkaizhuang.github.io/images/CPU-%E6%8E%92%E7%A8%8B.png">
+<meta property="article:published_time" content="2025-10-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-01-28T03:08:27.797Z">
+<meta property="article:author" content="全端企鵝">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kingkaizhuang.github.io/images/CPU-%E6%8E%92%E7%A8%8B.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "CPU 排程演算法之等待時間計算",
+  "url": "https://kingkaizhuang.github.io/2025/10/21/cpu-job-time/",
+  "image": "https://kingkaizhuang.github.io/images/CPU-%E6%8E%92%E7%A8%8B.png",
+  "datePublished": "2025-10-20T16:00:00.000Z",
+  "dateModified": "2026-01-28T03:08:27.797Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "全端企鵝",
+      "url": "https://kingkaizhuang.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://kingkaizhuang.github.io/2025/10/21/cpu-job-time/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '複製成功',
+    error: '複製失敗',
+    noSupport: '瀏覽器不支援'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '剛剛',
+    min: '分鐘前',
+    hour: '小時前',
+    day: '天前',
+    month: '個月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '載入更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'CPU 排程演算法之等待時間計算',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/wave.css"><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 7.3.0"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+btf.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@latest/themes/blue/pace-theme-flash.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/Avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">35</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 時間軸</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分類</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/images/CPU-%E6%8E%92%E7%A8%8B.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">FullStackPenguin</span></a><a class="nav-page-title" href="/"><span class="site-name">CPU 排程演算法之等待時間計算</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首頁</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 時間軸</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分類</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">CPU 排程演算法之等待時間計算</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2025-10-20T16:00:00.000Z" title="發表於 2025-10-21 00:00:00">2025-10-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2026-01-28T03:08:27.797Z" title="更新於 2026-01-28 11:08:27">2026-01-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/operating-system/">operating-system</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">瀏覽量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>這次的作業主要是要根據以下四個行程（Processes），分別使用不同的 CPU 排程演算法，計算每個演算法的平均等待時間（Average Waiting Time, WT）。</p>
+<table>
+<thead>
+<tr>
+<th>行程</th>
+<th>到達時間 A</th>
+<th>分割時間 Burst</th>
+<th>優先順序</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>P1</td>
+<td>0</td>
+<td>8</td>
+<td>3</td>
+</tr>
+<tr>
+<td>P2</td>
+<td>1</td>
+<td>4</td>
+<td>1</td>
+</tr>
+<tr>
+<td>P3</td>
+<td>2</td>
+<td>9</td>
+<td>4</td>
+</tr>
+<tr>
+<td>P4</td>
+<td>3</td>
+<td>5</td>
+<td>2</td>
+</tr>
+</tbody></table>
+<p>單位：時間單位</p>
+<p>需要計算的排程演算法如下：</p>
+<ol>
+<li><p>FCFS（First Come First Serve，先來先服務）</p>
+</li>
+<li><p>SJF（Shortest Job First，非搶先）</p>
+</li>
+<li><p>SRTF（Shortest Remaining Time First，可搶先）</p>
+</li>
+<li><p>RR（Round Robin，時間片 q&#x3D;4）</p>
+</li>
+<li><p>Priority（分為非搶先與可搶先兩種）</p>
+</li>
+</ol>
+<h2 id="一、FCFS"><a href="#一、FCFS" class="headerlink" title="一、FCFS"></a>一、FCFS</h2><p><img src="/images/image-3-1024x604.png"></p>
+<p>計算等待時間：</p>
+<ul>
+<li><p>WT₁ &#x3D; 8 - 8 &#x3D; 0</p>
+</li>
+<li><p>WT₂ &#x3D; 12 - 5 &#x3D; 7</p>
+</li>
+<li><p>WT₃ &#x3D; 26 - 11 &#x3D; 15</p>
+</li>
+<li><p>WT₄ &#x3D; 17 - 8 &#x3D; 9</p>
+</li>
+</ul>
+<p>平均等待時間：<br>(0 + 7 + 15 + 9) &#x2F; 4 &#x3D; <strong>8.75</strong></p>
+<hr>
+<h2 id="二、SJF"><a href="#二、SJF" class="headerlink" title="二、SJF"></a>二、SJF</h2><p><img src="/images/image-4-1024x604.png"></p>
+<p>計算等待時間：</p>
+<ul>
+<li><p>WT₁ &#x3D; 8 - 8 &#x3D; 0</p>
+</li>
+<li><p>WT₂ &#x3D; 12 - 5 &#x3D; 7</p>
+</li>
+<li><p>WT₃ &#x3D; 26 - 11 &#x3D; 15</p>
+</li>
+<li><p>WT₄ &#x3D; 17 - 8 &#x3D; 9</p>
+</li>
+</ul>
+<p>平均等待時間：<br>(0 + 7 + 15 + 9) &#x2F; 4 &#x3D; <strong>7.75</strong></p>
+<hr>
+<h2 id="三、SRTF"><a href="#三、SRTF" class="headerlink" title="三、SRTF"></a>三、SRTF</h2><p><img src="/images/image-5-1024x669.png"></p>
+<p>P1 : 8 -&gt; 7 -&gt; 0</p>
+<p>P2 : 4 -&gt; 0</p>
+<p>P3 : 9 -&gt; 0</p>
+<p>P4 : 5 -&gt; 0</p>
+<p>計算等待時間：</p>
+<ul>
+<li><p>WT₁ &#x3D; 17 - 8 &#x3D; 9</p>
+</li>
+<li><p>WT₂ &#x3D; 5 - 5 &#x3D; 0</p>
+</li>
+<li><p>WT₃ &#x3D; 26 - 11 &#x3D; 15</p>
+</li>
+<li><p>WT₄ &#x3D; 10 - 8 &#x3D; 2</p>
+</li>
+</ul>
+<p>平均等待時間：<br>(9 + 0 + 15 + 2) &#x2F; 4 &#x3D; <strong>6.5</strong></p>
+<hr>
+<h2 id="四、RR（時間片-q-4）"><a href="#四、RR（時間片-q-4）" class="headerlink" title="四、RR（時間片 q &#x3D; 4）"></a>四、RR（時間片 q &#x3D; 4）</h2><p><img src="/images/image-6-1024x604.png"></p>
+<p>P1 : 8 -&gt; 4 -&gt; 0</p>
+<p>P2 : 4 -&gt; 0</p>
+<p>P3 : 9 -&gt; 5 -&gt; 1 -&gt; 0</p>
+<p>P4 : 5 -&gt; 1 -&gt; 0</p>
+<p>行程執行順序：P1 → P2 → P3 → P4 → P1 → P3 → P4 → P3</p>
+<p>計算等待時間：</p>
+<ul>
+<li><p>WT₁ &#x3D; 20 - 8 &#x3D; 12</p>
+</li>
+<li><p>WT₂ &#x3D; 8 - 5 &#x3D; 3</p>
+</li>
+<li><p>WT₃ &#x3D; 26 - 11 &#x3D; 15</p>
+</li>
+<li><p>WT₄ &#x3D; 25 - 8 &#x3D; 17</p>
+</li>
+</ul>
+<p>平均等待時間：<br>(12 + 3 + 15 + 17) &#x2F; 4 &#x3D; <strong>11.75</strong></p>
+<hr>
+<h2 id="五、Priority"><a href="#五、Priority" class="headerlink" title="五、Priority"></a>五、Priority</h2><h3 id="1-非搶先-Priority"><a href="#1-非搶先-Priority" class="headerlink" title="(1) 非搶先 Priority"></a>(1) 非搶先 Priority</h3><p><img src="/images/image-8-1024x604.png"></p>
+<p>行程執行順序：P1 → P2 → P4 → P3</p>
+<p>計算等待時間：</p>
+<ul>
+<li><p>WT₁ &#x3D; 8 - 8 &#x3D; 0</p>
+</li>
+<li><p>WT₂ &#x3D; 12 - 5 &#x3D; 7</p>
+</li>
+<li><p>WT₃ &#x3D; 26 - 11 &#x3D; 15</p>
+</li>
+<li><p>WT₄ &#x3D; 17 - 8 &#x3D; 9</p>
+</li>
+</ul>
+<p>平均等待時間：<br>(0 + 7 + 15 + 9) &#x2F; 4 &#x3D; <strong>7.75</strong></p>
+<hr>
+<h3 id="2-可搶先-Priority"><a href="#2-可搶先-Priority" class="headerlink" title="(2) 可搶先 Priority"></a>(2) 可搶先 Priority</h3><p><img src="/images/image-9-1024x604.png"></p>
+<p>P1 : 8 -&gt; 7 -&gt; 0</p>
+<p>P2 : 4 -&gt; 0</p>
+<p>P3 : 9 -&gt; 0</p>
+<p>P4 : 5 -&gt; 0</p>
+<p>行程執行順序：P1 → P2 → P4 -&gt; P1 → P3</p>
+<p>計算等待時間：</p>
+<ul>
+<li><p>WT₁ &#x3D; 17 - 8 &#x3D; 9</p>
+</li>
+<li><p>WT₂ &#x3D; 5 - 5 &#x3D; 0</p>
+</li>
+<li><p>WT₃ &#x3D; 26 - 11 &#x3D; 15</p>
+</li>
+<li><p>WT₄ &#x3D; 10 - 8 &#x3D; 2</p>
+</li>
+</ul>
+<p>平均等待時間：<br>(9 + 0 + 15 + 2) &#x2F; 4 &#x3D; <strong>6.5</strong></p>
+<hr>
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><table>
+<thead>
+<tr>
+<th>排程演算法</th>
+<th>平均等待時間 (WT)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>FCFS</td>
+<td>8.75</td>
+</tr>
+<tr>
+<td>SJF（非搶先）</td>
+<td>7.75</td>
+</tr>
+<tr>
+<td>SRTF（可搶先）</td>
+<td>6.5</td>
+</tr>
+<tr>
+<td>RR（q&#x3D;4）</td>
+<td>11.75</td>
+</tr>
+<tr>
+<td>Priority（非搶先）</td>
+<td>7.75</td>
+</tr>
+<tr>
+<td>Priority（可搶先）</td>
+<td>6.5</td>
+</tr>
+</tbody></table>
+<p>由結果可看出，<strong>可搶先型的 SRTF 與 Priority 演算法</strong>在此案例中具有最短的平均等待時間（6.5），效率最佳。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://kingkaizhuang.github.io">全端企鵝</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章連結: </span><span class="post-copyright-info"><a href="https://kingkaizhuang.github.io/2025/10/21/cpu-job-time/">https://kingkaizhuang.github.io/2025/10/21/cpu-job-time/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版權聲明: </span><span class="post-copyright-info">本部落格所有文章除特別聲明外，均採用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 授權協議。轉載請註明來源 <a href="https://kingkaizhuang.github.io" target="_blank">FullStackPenguin</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/images/CPU-%E6%8E%92%E7%A8%8B.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/10/26/yolov9-practice/" title="Yolov9 實作練習"><img class="cover" src="/images/YOLOv9.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Yolov9 實作練習</div></div><div class="info-2"><div class="info-item-1">內容全參考影片 : https://www.youtube.com/watch?v=tMwyxKttZd0&t=60s  首先建立一個Conda的虛擬環境，之後進入後先下載labelImg。 1(Labelimg) C:\Users\pudy6&gt;pip install labelImg  1(Labelimg) C:\Users\pudy6&gt;pip install labelImg  如果labelImg閃退，建議不用進到虛擬環境，直接去下載LabelImg。  建立一個dataset資料夾 123456789dataset├─images│  ├─test(測試集)│  ├─train(訓練集)│  └─val(驗證集)└─labels    ├─test    ├─train    └─val  123456789dataset├─images│  ├─test(測試集)│  ├─train(訓練集)│  └─val(驗證集)└─labels    ├─test    ├─train    └─val  8:1:1  點擊Open Dir打開訓練集的圖片資料夾。 ...</div></div></div></a><a class="pagination-related" href="/2025/10/20/pytorch-base/" title="Pytorch Quickstart"><img class="cover" src="/images/Pytorch.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Pytorch Quickstart</div></div><div class="info-2"><div class="info-item-1">程式碼來源：https://docs.pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html 123456import torch# 匯入 nn（neural network）子模組from torch import nnfrom torch.utils.data import DataLoaderfrom torchvision import datasetsfrom torchvision.transforms import ToTensor  123456import torch# 匯入 nn（neural network）子模組from torch import nnfrom torch.utils.data import DataLoaderfrom torchvision import datasetsfrom torchvision.transforms import ToTensor  nn 是用來「定義網路結構」的模組。 DataLoader 幫你自動把 dataset 切成一批一批（batc...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/images/Avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">全端企鵝</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">35</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/KingKaiZhuang"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://www.instagram.com/zhuang_2024/" target="_blank" title="Instagram"><i class="fab fa-instagram" style="color: #E4405F;"></i></a><a class="social-icon" href="https://line.me/ti/p/EeWpQ7ef-e" target="_blank" title="LINE"><i class="fab fa-line" style="color: #00C300;"></i></a><a class="social-icon" href="https://www.facebook.com/profile.php?id=100002212333597" target="_blank" title="Facebook"><i class="fab fa-facebook" style="color: #4267B2;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><a target="_blank" rel="noopener" href="https://orca-biz.com/" alt="OrcaBiz 虎鯨數位行銷" >OrcaBiz 實習生</a>
+<p>🏫 STUST</p>
+<p>📖 目前正在準備 <strong>CPE</strong> 和 <strong>英文多益</strong>。</p>
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目錄</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81FCFS"><span class="toc-number">1.</span> <span class="toc-text">一、FCFS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81SJF"><span class="toc-number">2.</span> <span class="toc-text">二、SJF</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81SRTF"><span class="toc-number">3.</span> <span class="toc-text">三、SRTF</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81RR%EF%BC%88%E6%99%82%E9%96%93%E7%89%87-q-4%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">四、RR（時間片 q &#x3D; 4）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81Priority"><span class="toc-number">5.</span> <span class="toc-text">五、Priority</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E9%9D%9E%E6%90%B6%E5%85%88-Priority"><span class="toc-number">5.1.</span> <span class="toc-text">(1) 非搶先 Priority</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%8F%AF%E6%90%B6%E5%85%88-Priority"><span class="toc-number">5.2.</span> <span class="toc-text">(2) 可搶先 Priority</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B5%90%E8%AB%96"><span class="toc-number">6.</span> <span class="toc-text">結論</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/12/04/unity-scene-data/" title="Unity 場景切換以及 Data 共享"><img src="/images/unity-data-scene.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Unity 場景切換以及 Data 共享"/></a><div class="content"><a class="title" href="/2025/12/04/unity-scene-data/" title="Unity 場景切換以及 Data 共享">Unity 場景切換以及 Data 共享</a><time datetime="2025-12-03T16:00:00.000Z" title="發表於 2025-12-04 00:00:00">2025-12-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/12/01/streamlit-yolo/" title="Streamlit 結合 yolo 辨識圖片"><img src="/images/streamlit_yolo.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Streamlit 結合 yolo 辨識圖片"/></a><div class="content"><a class="title" href="/2025/12/01/streamlit-yolo/" title="Streamlit 結合 yolo 辨識圖片">Streamlit 結合 yolo 辨識圖片</a><time datetime="2025-11-30T16:00:00.000Z" title="發表於 2025-12-01 00:00:00">2025-12-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/26/next-js-v16-base/" title="Next.js v16 基本常識"><img src="/images/Gemini_Generated_Image_8zuhop8zuhop8zuh-1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Next.js v16 基本常識"/></a><div class="content"><a class="title" href="/2025/11/26/next-js-v16-base/" title="Next.js v16 基本常識">Next.js v16 基本常識</a><time datetime="2025-11-25T16:00:00.000Z" title="發表於 2025-11-26 00:00:00">2025-11-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/24/interest-and-yield/" title="利率＆殖利率"><img src="/images/image-12.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="利率＆殖利率"/></a><div class="content"><a class="title" href="/2025/11/24/interest-and-yield/" title="利率＆殖利率">利率＆殖利率</a><time datetime="2025-11-23T16:00:00.000Z" title="發表於 2025-11-24 00:00:00">2025-11-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/15/wp-restore-local/" title="如何用雲端備份在本地 Local 重建 WordPress"><img src="/images/Gemini_Generated_Image_vfctf8vfctf8vfct.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="如何用雲端備份在本地 Local 重建 WordPress"/></a><div class="content"><a class="title" href="/2025/11/15/wp-restore-local/" title="如何用雲端備份在本地 Local 重建 WordPress">如何用雲端備份在本地 Local 重建 WordPress</a><time datetime="2025-11-14T16:00:00.000Z" title="發表於 2025-11-15 00:00:00">2025-11-15</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2024 - 2026 By 全端企鵝</span></div><div class="footer_custom_text">StackPenguin | STUST</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="閱讀模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日夜模式切換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目錄"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到頂端"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js" type="module"></script><div class="js-pjax"><script>(() => {
+  const abcjsInit = () => {
+    const abcjsFn = () => {
+      setTimeout(() => {
+        const sheets = document.querySelectorAll(".abc-music-sheet")
+        for (let i = 0; i < sheets.length; i++) {
+          const ele = sheets[i]
+          if (ele.children.length > 0) continue
+
+          // Parse parameters from data-params attribute
+          let params = {}
+          const dp = ele.getAttribute("data-params")
+          if (dp) {
+            try {
+              params = JSON.parse(dp)
+            } catch (e) {
+              console.error("Failed to parse data-params:", e)
+            }
+          }
+
+          // Merge parsed parameters with the responsive option
+          // Ensures params content appears before responsive
+          const options = { ...params, responsive: "resize" }
+
+          // Render the music score using ABCJS.renderAbc
+          ABCJS.renderAbc(ele, ele.textContent, options)
+        }
+      }, 100)
+    }
+
+    if (typeof ABCJS === "object") {
+      abcjsFn()
+    } else {
+      btf.getScript("https://cdn.jsdelivr.net/npm/abcjs@6.6.0/dist/abcjs-basic-min.min.js").then(abcjsFn)
+    }
+  }
+
+  if (window.pjax) {
+    abcjsInit()
+  } else {
+    window.addEventListener("load", abcjsInit)
+  }
+
+  btf.addGlobalFn("encrypt", abcjsInit, "abcjs")
+})()</script></div><div class="aplayer no-destroy"  data-id="60198" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="false"> </div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/fireworks.min.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="true" data-click="false"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

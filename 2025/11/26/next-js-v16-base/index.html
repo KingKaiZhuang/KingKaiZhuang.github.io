@@ -1,0 +1,407 @@
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Next.js v16 基本常識 | FullStackPenguin</title><meta name="author" content="全端企鵝"><meta name="copyright" content="全端企鵝"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Console.log 的使用方式在Next.js 16版，有一個新的開發技巧。 我們在Home裡面加上一個console.log，以往的經驗來說這是一個伺服器端的事件，所以在瀏覽器的Console中並不會出現這段輸出內容。 12345678const Home &#x3D; () &#x3D;&gt; &#123;    console.log(&quot;我會在伺服器端執行還是客戶端執行？&quot;);">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Next.js v16 基本常識">
+<meta property="og:url" content="https://kingkaizhuang.github.io/2025/11/26/next-js-v16-base/index.html">
+<meta property="og:site_name" content="FullStackPenguin">
+<meta property="og:description" content="Console.log 的使用方式在Next.js 16版，有一個新的開發技巧。 我們在Home裡面加上一個console.log，以往的經驗來說這是一個伺服器端的事件，所以在瀏覽器的Console中並不會出現這段輸出內容。 12345678const Home &#x3D; () &#x3D;&gt; &#123;    console.log(&quot;我會在伺服器端執行還是客戶端執行？&quot;);">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://kingkaizhuang.github.io/images/Gemini_Generated_Image_8zuhop8zuhop8zuh-1.png">
+<meta property="article:published_time" content="2025-11-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-01-28T03:08:27.793Z">
+<meta property="article:author" content="全端企鵝">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kingkaizhuang.github.io/images/Gemini_Generated_Image_8zuhop8zuhop8zuh-1.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Next.js v16 基本常識",
+  "url": "https://kingkaizhuang.github.io/2025/11/26/next-js-v16-base/",
+  "image": "https://kingkaizhuang.github.io/images/Gemini_Generated_Image_8zuhop8zuhop8zuh-1.png",
+  "datePublished": "2025-11-25T16:00:00.000Z",
+  "dateModified": "2026-01-28T03:08:27.793Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "全端企鵝",
+      "url": "https://kingkaizhuang.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://kingkaizhuang.github.io/2025/11/26/next-js-v16-base/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '複製成功',
+    error: '複製失敗',
+    noSupport: '瀏覽器不支援'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '剛剛',
+    min: '分鐘前',
+    hour: '小時前',
+    day: '天前',
+    month: '個月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '載入更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Next.js v16 基本常識',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/wave.css"><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 7.3.0"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+btf.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@latest/themes/blue/pace-theme-flash.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/Avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">35</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 時間軸</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分類</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/images/Gemini_Generated_Image_8zuhop8zuhop8zuh-1.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">FullStackPenguin</span></a><a class="nav-page-title" href="/"><span class="site-name">Next.js v16 基本常識</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首頁</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 時間軸</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分類</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Next.js v16 基本常識</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2025-11-25T16:00:00.000Z" title="發表於 2025-11-26 00:00:00">2025-11-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2026-01-28T03:08:27.793Z" title="更新於 2026-01-28 11:08:27">2026-01-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/next-js/">next-js</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">瀏覽量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="Console-log-的使用方式"><a href="#Console-log-的使用方式" class="headerlink" title="Console.log 的使用方式"></a>Console.log 的使用方式</h2><p>在Next.js 16版，有一個新的開發技巧。</p>
+<p>我們在Home裡面加上一個console.log，以往的經驗來說這是一個伺服器端的事件，所以在瀏覽器的Console中並不會出現這段輸出內容。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const Home = () =&gt; &#123;</span><br><span class="line">    console.log(&quot;我會在伺服器端執行還是客戶端執行？&quot;);</span><br><span class="line">    return (</span><br><span class="line">        &lt;div className=&quot;text-5xl&quot;&gt;Welcome to Next.js!&lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">export default Home</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const Home = () =&gt; &#123;</span><br><span class="line">    console.log(&quot;我會在伺服器端執行還是客戶端執行？&quot;);</span><br><span class="line">    return (</span><br><span class="line">        &lt;div className=&quot;text-5xl&quot;&gt;Welcome to Next.js!&lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default Home</span><br></pre></td></tr></table></figure>
+
+<p>正常來說只會在伺服器端看到。</p>
+<p><img src="/images/CleanShot-2025-11-26-at-21.17.46-1024x664.png"></p>
+<p>可以看到在瀏覽器一樣出現了標示Server的Console內容。</p>
+<p>不過不用擔心，這只是在開發的時候方便觀察而已。</p>
+<p><img src="/images/CleanShot-2025-11-26-at-21.16.14-1024x662.png"></p>
+<p>這個時候有趣的來了，我要來測試在Client端寫console.log會發生什麼事情，我在app底下建立components資料夾並建立一個hello.tsx檔案。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// components/hello.tsx</span><br><span class="line">&quot;use client&quot;</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">const Hello = () =&gt; &#123;</span><br><span class="line">    console.log(&quot;Hello 組件在客戶端執行&quot;);</span><br><span class="line">    return (</span><br><span class="line">        &lt;div&gt;Hello&lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">export default Hello</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// components/hello.tsx</span><br><span class="line">&quot;use client&quot;</span><br><span class="line"></span><br><span class="line">const Hello = () =&gt; &#123;</span><br><span class="line">    console.log(&quot;Hello 組件在客戶端執行&quot;);</span><br><span class="line">    return (</span><br><span class="line">        &lt;div&gt;Hello&lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default Hello</span><br></pre></td></tr></table></figure>
+
+<p>將hello的components引入到app&#x2F;page.tsx。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// app/page.tsx</span><br><span class="line">import Hello from &quot;@/components/hello&quot;</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">const Home = () =&gt; &#123;</span><br><span class="line">    console.log(&quot;我會在伺服器端執行還是客戶端執行？&quot;);</span><br><span class="line">    return (</span><br><span class="line">        &lt;main&gt;</span><br><span class="line">            &lt;div className=&quot;text-5xl&quot;&gt;Welcome to Next.js!&lt;/div&gt;</span><br><span class="line">            &lt;Hello /&gt;</span><br><span class="line">        &lt;/main&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">export default Home</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// app/page.tsx</span><br><span class="line">import Hello from &quot;@/components/hello&quot;</span><br><span class="line"></span><br><span class="line">const Home = () =&gt; &#123;</span><br><span class="line">    console.log(&quot;我會在伺服器端執行還是客戶端執行？&quot;);</span><br><span class="line">    return (</span><br><span class="line">        &lt;main&gt;</span><br><span class="line">            &lt;div className=&quot;text-5xl&quot;&gt;Welcome to Next.js!&lt;/div&gt;</span><br><span class="line">            &lt;Hello /&gt;</span><br><span class="line">        &lt;/main&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default Home</span><br></pre></td></tr></table></figure>
+
+<p>這時候到瀏覽器觀察。會發現有兩個一樣的log。</p>
+<p><img src="/images/CleanShot-2025-11-26-at-21.35.15-1024x667.png"></p>
+<p>你可能會問為什麼？我用一張圖給你看看。</p>
+<p>在Server端會先建立好static shell，之後在Client端渲染。</p>
+<p><img src="/images/image-13.png"></p>
+<p>React</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install babel-plugin-react-compiler@latest</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install babel-plugin-react-compiler@latest</span><br></pre></td></tr></table></figure>
+
+<p>在next.config.ts加上reactCompiler: true,</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import type &#123; NextConfig &#125; from &quot;next&quot;;</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">const nextConfig: NextConfig = &#123;</span><br><span class="line">  reactCompiler: true,</span><br><span class="line">  experimental: &#123;</span><br><span class="line">      turbopackFileSystemCacheForDev: true</span><br><span class="line">  &#125;</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">&#125;;</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">export default nextConfig;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import type &#123; NextConfig &#125; from &quot;next&quot;;</span><br><span class="line"></span><br><span class="line">const nextConfig: NextConfig = &#123;</span><br><span class="line">  reactCompiler: true,</span><br><span class="line">  experimental: &#123;</span><br><span class="line">      turbopackFileSystemCacheForDev: true</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">export default nextConfig;</span><br></pre></td></tr></table></figure>
+
+<p>因為我對React沒有很熟悉，所以我問了一下ChatGpt。</p>
+<p>babel-plugin-react-compiler 能做的事</p>
+<ol>
+<li><p>自動最佳化 React 重新渲染</p>
+</li>
+<li><p>自動 memo 化 computation</p>
+</li>
+<li><p>減少 performance bug</p>
+</li>
+<li><p>用更少的 hooks 寫法就能達到最佳性能</p>
+</li>
+<li><p>讓 React 程式碼更簡潔、效果更穩定</p>
+</li>
+<li><p>未來會成為 React 的標準性能工具（官方推薦）</p>
+</li>
+</ol>
+<h2 id="Router"><a href="#Router" class="headerlink" title="Router"></a>Router</h2><p><img src="/images/image-10.png"></p>
+<p>你會看到一個layout.tsk，可以想成是一個網站的佈局，像是header跟footer可以先放好位置，這樣每一個頁面就不必再重複渲染，然後{children}是每一個頁面的進入點，這邊舉個例子像這樣：</p>
+<p><img src="/images/%E6%9C%AA%E5%91%BD%E5%90%8D-2-1021x1024.png"></p>
+<p>Page是你的網站首頁的內容，一進去會先吃到app&#x2F;page.tsx然後傳到layout.tsx裡面的{children}這裡。</p>
+<p>以剛剛的例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// app/page.tsx</span><br><span class="line">import Hello from &quot;@/components/hello&quot;</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">const Home = () =&gt; &#123;</span><br><span class="line">    console.log(&quot;我會在伺服器端執行還是客戶端執行？&quot;);</span><br><span class="line">    return (</span><br><span class="line">        &lt;main&gt;</span><br><span class="line">            &lt;div className=&quot;text-5xl&quot;&gt;Welcome to Next.js!&lt;/div&gt;</span><br><span class="line">            &lt;Hello /&gt;</span><br><span class="line">        &lt;/main&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">export default Home</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// app/page.tsx</span><br><span class="line">import Hello from &quot;@/components/hello&quot;</span><br><span class="line"></span><br><span class="line">const Home = () =&gt; &#123;</span><br><span class="line">    console.log(&quot;我會在伺服器端執行還是客戶端執行？&quot;);</span><br><span class="line">    return (</span><br><span class="line">        &lt;main&gt;</span><br><span class="line">            &lt;div className=&quot;text-5xl&quot;&gt;Welcome to Next.js!&lt;/div&gt;</span><br><span class="line">            &lt;Hello /&gt;</span><br><span class="line">        &lt;/main&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default Home</span><br></pre></td></tr></table></figure>
+
+<p>觀察一下瀏覽器的 Elements，已經把app&#x2F;page.tsx的內容傳到{children}並顯示。</p>
+<p><img src="/images/CleanShot-2025-11-26-at-22.18.53-1024x667.png"></p>
+<blockquote>
+<p>補充：Components不能放在app&#x2F;資料夾內，app是放Page的地方。</p>
+</blockquote>
+<h3 id="新增一個-Route"><a href="#新增一個-Route" class="headerlink" title="新增一個 Route"></a>新增一個 Route</h3><p>直接在app&#x2F;建立一個資料夾，這邊建立一個about資料夾，跟一個page.tsx。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">app/about/page.tsx</span><br><span class="line">const Page = () =&gt; &#123;</span><br><span class="line">    return (</span><br><span class="line">        &lt;div&gt;Page&lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">export default Page</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">app/about/page.tsx</span><br><span class="line">const Page = () =&gt; &#123;</span><br><span class="line">    return (</span><br><span class="line">        &lt;div&gt;Page&lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default Page</span><br></pre></td></tr></table></figure>
+
+<p>只要在你的網頁打&#x2F;about路由就會看到Page了。這個在Next.js叫做Filebased routing system。</p>
+<p>以下是官方文件的Route示意圖：</p>
+<p><img src="/images/image-14-1024x336.png"></p>
+<h3 id="Nested-Routes-巢狀路由"><a href="#Nested-Routes-巢狀路由" class="headerlink" title="Nested Routes 巢狀路由"></a>Nested Routes 巢狀路由</h3><p>我建立了一個dashboard，並在dashboard在建立兩個資料夾分別是analytics跟users。</p>
+<p><img src="/images/image-15.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// analytics/page.tsx</span><br><span class="line">const Analytics = () =&gt; &#123;</span><br><span class="line">    return (</span><br><span class="line">        &lt;div&gt;Analytics&lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">export default Analytics</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// analytics/page.tsx</span><br><span class="line">const Analytics = () =&gt; &#123;</span><br><span class="line">    return (</span><br><span class="line">        &lt;div&gt;Analytics&lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default Analytics</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// users/page.tsx</span><br><span class="line">const Users = () =&gt; &#123;</span><br><span class="line">    return (</span><br><span class="line">        &lt;div&gt;Users&lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">export default Users</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// users/page.tsx</span><br><span class="line">const Users = () =&gt; &#123;</span><br><span class="line">    return (</span><br><span class="line">        &lt;div&gt;Users&lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default Users</span><br></pre></td></tr></table></figure>
+
+<p>進到 <a target="_blank" rel="noopener" href="http://localhost:3000/dashboard/analytics">http://localhost:3000/dashboard/analytics</a> 就可以看到 Analytics</p>
+<p><img src="/images/CleanShot-2025-11-27-at-10.34.45-1024x657.png"></p>
+<p>進到 <a target="_blank" rel="noopener" href="http://localhost:3000/dashboard/users">http://localhost:3000/dashboard/users</a> 就可以看到 Users</p>
+<p><img src="/images/CleanShot-2025-11-27-at-10.33.25-1024x657.png"></p>
+<p>那我們可能會有很多User，每個User都要有自己的Dashboard介面。</p>
+<p>因此先在users底下建立一個[id]資料夾，他可以根據你傳進來的params，對應到不同Users的頁面資料。</p>
+<p><img src="/images/image-17.png"></p>
+<p>將每個User外面包一個Link，對應到不同的使用者。將參數傳送到users&#x2F;[id]。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// users/page.tsx</span><br><span class="line">import Link from &quot;next/link&quot;</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">const Users = () =&gt; &#123;</span><br><span class="line">    return (</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;h1&gt;Dashboard Users&lt;/h1&gt;</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">            &lt;ul className=&quot;mt-10&quot;&gt;</span><br><span class="line">                &lt;li&gt;&lt;Link href=&quot;/dashboard/users/1&quot;&gt;User 1&lt;/Link&gt;&lt;/li&gt;</span><br><span class="line">                &lt;li&gt;&lt;Link href=&quot;/dashboard/users/2&quot;&gt;User 2&lt;/Link&gt;&lt;/li&gt;</span><br><span class="line">                &lt;li&gt;&lt;Link href=&quot;/dashboard/users/3&quot;&gt;User 3&lt;/Link&gt;&lt;/li&gt;</span><br><span class="line">                &lt;li&gt;&lt;Link href=&quot;/dashboard/users/4&quot;&gt;User 4&lt;/Link&gt;&lt;/li&gt;</span><br><span class="line">            &lt;/ul&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">export default Users</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// users/page.tsx</span><br><span class="line">import Link from &quot;next/link&quot;</span><br><span class="line"></span><br><span class="line">const Users = () =&gt; &#123;</span><br><span class="line">    return (</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;h1&gt;Dashboard Users&lt;/h1&gt;</span><br><span class="line"></span><br><span class="line">            &lt;ul className=&quot;mt-10&quot;&gt;</span><br><span class="line">                &lt;li&gt;&lt;Link href=&quot;/dashboard/users/1&quot;&gt;User 1&lt;/Link&gt;&lt;/li&gt;</span><br><span class="line">                &lt;li&gt;&lt;Link href=&quot;/dashboard/users/2&quot;&gt;User 2&lt;/Link&gt;&lt;/li&gt;</span><br><span class="line">                &lt;li&gt;&lt;Link href=&quot;/dashboard/users/3&quot;&gt;User 3&lt;/Link&gt;&lt;/li&gt;</span><br><span class="line">                &lt;li&gt;&lt;Link href=&quot;/dashboard/users/4&quot;&gt;User 4&lt;/Link&gt;&lt;/li&gt;</span><br><span class="line">            &lt;/ul&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default Users</span><br></pre></td></tr></table></figure>
+
+<p>收到了點擊Link之後傳過來的參數，並顯示使用者id。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// users/[id]/page.tsx</span><br><span class="line">const UserDetails = async (&#123; params &#125; : &#123; params: Promise&lt;&#123; id: string &#125;&gt; &#125;) =&gt; &#123;</span><br><span class="line">    const &#123; id &#125; = await params;</span><br><span class="line">    return (</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;h1&gt;User Details for User &#123;id&#125;&lt;/h1&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">export default UserDetails</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// users/[id]/page.tsx</span><br><span class="line">const UserDetails = async (&#123; params &#125; : &#123; params: Promise&lt;&#123; id: string &#125;&gt; &#125;) =&gt; &#123;</span><br><span class="line">    const &#123; id &#125; = await params;</span><br><span class="line">    return (</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;h1&gt;User Details for User &#123;id&#125;&lt;/h1&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default UserDetails</span><br></pre></td></tr></table></figure>
+
+<p>這邊我在學的時候第一次看到{params}這種語法，其實是簡化了以下的程式碼：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const UserDetails = async (props) =&gt; &#123;</span><br><span class="line">    const params = props.params;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const UserDetails = async (props) =&gt; &#123;</span><br><span class="line">    const params = props.params;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>補充：在 JavaScript 中，所有非同步行為（例如 fetch、資料庫、計時器）最後得到的都是 Promise 才會使用到async、await。這裡的 id其實還不需要用到 await 因為傳來的資料是同步的如下：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123; id: &quot;1&quot; &#125;</span><br><span class="line">or</span><br><span class="line">&#123; id: &quot;2&quot; &#125;</span><br><span class="line">or</span><br><span class="line">&#123; id: &quot;3&quot; &#125;</span><br><span class="line">or</span><br><span class="line">&#123; id: &quot;4&quot; &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123; id: &quot;1&quot; &#125;</span><br><span class="line">or</span><br><span class="line">&#123; id: &quot;2&quot; &#125;</span><br><span class="line">or</span><br><span class="line">&#123; id: &quot;3&quot; &#125;</span><br><span class="line">or</span><br><span class="line">&#123; id: &quot;4&quot; &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/CleanShot-2025-11-27-at-12.47.38-1024x664.png"></p>
+<h2 id="Layout-版面設定"><a href="#Layout-版面設定" class="headerlink" title="Layout 版面設定"></a>Layout 版面設定</h2><blockquote>
+<p>請注意！必須使用 layout.tsx 這個檔案名稱，否則 next.js會認不出來。</p>
+</blockquote>
+<p>我在app&#x2F;dashboard底下新增layout.tsx</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const Layout = (&#123; children &#125; : &#123; children: React.ReactNode&#125;) =&gt; &#123;</span><br><span class="line">    return (</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;div&gt;Dashboard Navbar&lt;/div&gt;</span><br><span class="line">            &#123;children&#125;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">export default Layout;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const Layout = (&#123; children &#125; : &#123; children: React.ReactNode&#125;) =&gt; &#123;</span><br><span class="line">    return (</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;div&gt;Dashboard Navbar&lt;/div&gt;</span><br><span class="line">            &#123;children&#125;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default Layout;</span><br></pre></td></tr></table></figure>
+
+<p>{ children } : { children: React.ReactNode} 的意思是：</p>
+<p>這個 component 的 props 有一個 children，而它的型別是 React.ReactNode</p>
+<p>React.ReactNode &#x3D; 可以被 React 放在畫面上的東西</p>
+<p>完整的說就是從 props 拿出 children，並且保證它是 React 可渲染的內容。</p>
+<h2 id="Route-Groups"><a href="#Route-Groups" class="headerlink" title="Route Groups"></a>Route Groups</h2><p>Route Groups 讓你能夠建立資料夾而且不會影響到 URL。</p>
+<p>如果你想要建立一個Layout.tsx，但是不想要當成一個路由，可以使用(admin)，這種括號的方式包起來。</p>
+<p><img src="/images/image" alt="An example folder structure using route groups"></p>
+<p>以我的資料夾來看：</p>
+<p>首頁 <a target="_blank" rel="noopener" href="http://localhost:3000/">http://localhost:3000</a> 會吃到 (root) 底下的page.tsx。</p>
+<p>about的話也是會忽略(root)資料夾，指向 <a target="_blank" rel="noopener" href="http://localhost:3000/about">http://localhost:3000/about</a></p>
+<p>dashboard也是相同的道理，外層(dashboard)不會吃，會吃內層的dashboard資料夾。</p>
+<p><img src="/images/CleanShot-2025-11-27-at-22.47.08-1024x588.png"></p>
+<p>我們可以分別在(dashboard)跟(root)設定不同的layout。並且把最外部原來的page.tsx移動到(root)。</p>
+<p>但是要注意，使用括號()的資料夾底下，只能在其中一個保留page.tsx，否則會出現以下錯誤。</p>
+<p><img src="/images/CleanShot-2025-11-27-at-22.43.19-1024x670.png"></p>
+<h2 id="Error-Handling-錯誤處理"><a href="#Error-Handling-錯誤處理" class="headerlink" title="Error Handling 錯誤處理"></a>Error Handling 錯誤處理</h2><p>當 Server Component 或 route segment 渲染失敗時，Next.js 會顯示你寫在 error.tsx 的 UI。</p>
+<p>而不是預設簡陋的錯誤頁。像是我在about的page寫一個Error，並在about底下建立一個error.tsx。</p>
+<p>並進入到about頁面觀察。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">// about/error.tsx</span><br><span class="line">&#x27;use client&#x27; // Error boundaries must be Client Components</span><br><span class="line"> </span><br><span class="line">import &#123; useEffect &#125; from &#x27;react&#x27;</span><br><span class="line"> </span><br><span class="line">export default function Error(&#123;</span><br><span class="line">  error,</span><br><span class="line">  reset,</span><br><span class="line">&#125;: &#123;</span><br><span class="line">  error: Error &amp; &#123; digest?: string &#125;</span><br><span class="line">  reset: () =&gt; void</span><br><span class="line">&#125;) &#123;</span><br><span class="line">  useEffect(() =&gt; &#123;</span><br><span class="line">    // Log the error to an error reporting service</span><br><span class="line">    console.error(error)</span><br><span class="line">  &#125;, [error])</span><br><span class="line"> </span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;h2&gt;Something went wrong!&lt;/h2&gt;</span><br><span class="line">      &lt;button</span><br><span class="line">        onClick=&#123;</span><br><span class="line">          // Attempt to recover by trying to re-render the segment</span><br><span class="line">          () =&gt; reset()</span><br><span class="line">        &#125;</span><br><span class="line">      &gt;</span><br><span class="line">        Try again</span><br><span class="line">      &lt;/button&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">// about/error.tsx</span><br><span class="line">&#x27;use client&#x27; // Error boundaries must be Client Components</span><br><span class="line"> </span><br><span class="line">import &#123; useEffect &#125; from &#x27;react&#x27;</span><br><span class="line"> </span><br><span class="line">export default function Error(&#123;</span><br><span class="line">  error,</span><br><span class="line">  reset,</span><br><span class="line">&#125;: &#123;</span><br><span class="line">  error: Error &amp; &#123; digest?: string &#125;</span><br><span class="line">  reset: () =&gt; void</span><br><span class="line">&#125;) &#123;</span><br><span class="line">  useEffect(() =&gt; &#123;</span><br><span class="line">    // Log the error to an error reporting service</span><br><span class="line">    console.error(error)</span><br><span class="line">  &#125;, [error])</span><br><span class="line"> </span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;h2&gt;Something went wrong!&lt;/h2&gt;</span><br><span class="line">      &lt;button</span><br><span class="line">        onClick=&#123;</span><br><span class="line">          // Attempt to recover by trying to re-render the segment</span><br><span class="line">          () =&gt; reset()</span><br><span class="line">        &#125;</span><br><span class="line">      &gt;</span><br><span class="line">        Try again</span><br><span class="line">      &lt;/button&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/CleanShot-2025-11-28-at-10.25.54-1024x578.png"></p>
+<p>可以看到在畫面有顯示文字，同時也可以在console中看到錯誤。</p>
+<blockquote>
+<p>Console只在「開發模式（npm run dev）」才會出現</p>
+<p>所以return的部分顯示在前端，useEffect的部分是顯示在後端。</p>
+</blockquote>
+<p><img src="/images/CleanShot-2025-11-28-at-10.28.43-1024x670.png"></p>
+<p>預設的狀態只能看到簡陋的一些文字，無法讓使用者了解目前的狀態。</p>
+<p>有了error.tsx，可以呈現一些相關的錯誤訊息給使用者，讓使用者知道目前網站的狀態。</p>
+<p>不用擔心重要的資訊外露，因為在client端不會顯示重要訊息，我是把它想成美化error頁面。</p>
+<p><img src="/images/CleanShot-2025-11-28-at-10.33.17-1024x670.png"></p>
+<h2 id="Loading-UI-載入畫面"><a href="#Loading-UI-載入畫面" class="headerlink" title="Loading UI 載入畫面"></a>Loading UI 載入畫面</h2><p>在Next.js改如何使用Loading的效果呢？</p>
+<p>以下是一個抓取api等待時間的loading效果展示。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const Page = async () =&gt; &#123;</span><br><span class="line">    const res = await fetch(&quot;https://jsonplaceholder.typicode.com/users/1&quot;);</span><br><span class="line">    const user = await res.json();</span><br><span class="line">    return (</span><br><span class="line">        &lt;div&gt;        </span><br><span class="line">             &lt;div&gt;&#123;user.name&#125;&lt;/div&gt;;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">export default Page</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const Page = async () =&gt; &#123;</span><br><span class="line">    const res = await fetch(&quot;https://jsonplaceholder.typicode.com/users/1&quot;);</span><br><span class="line">    const user = await res.json();</span><br><span class="line">    return (</span><br><span class="line">        &lt;div&gt;        </span><br><span class="line">             &lt;div&gt;&#123;user.name&#125;&lt;/div&gt;;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default Page</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/CleanShot-2025-11-28-at-12.17.25.gif"></p>
+<p>只要在app&#x2F;底下建立一個loading.tsx，就會有Loading的效果，它的作用範圍是<strong>全站</strong>（global loading UI）。</p>
+<blockquote>
+<p>只要任何 page.tsx 或 layout.tsx 在 await 資料，<br>Next.js 就會顯示 &#x2F;app&#x2F;loading.tsx 作為「Loading 過渡畫面」。<br>子路由可以用自己的 loading.tsx 覆蓋上層的。</p>
+</blockquote>
+<h2 id="Data-Fetching-資料截取"><a href="#Data-Fetching-資料截取" class="headerlink" title="Data Fetching 資料截取"></a>Data Fetching 資料截取</h2><p>第一種方式是透過前端渲染畫面。</p>
+<p>但是不推薦，會有延遲，而且原始碼很空SEO效果不好。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&quot;use client&quot;;</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">import &#123; useState,useEffect &#125; from &#x27;react&#x27;;</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">function album1() &#123;</span><br><span class="line">    const [albums, setAlbums] = useState([]);</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">    useEffect(() =&gt; &#123;</span><br><span class="line">        const fetchAlbums = async () =&gt; &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                const response = await fetch(&quot;https://jsonplaceholder.typicode.com/albums&quot;)</span><br><span class="line">                const data = await response.json();</span><br><span class="line">                setAlbums(data);</span><br><span class="line">            &#125; catch (error) &#123;</span><br><span class="line">                console.error(&quot;Error fetching albums:&quot;, error);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        fetchAlbums();</span><br><span class="line">    &#125;, []);</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">    return (</span><br><span class="line">        &lt;div className=&#x27;&#x27;&gt;</span><br><span class="line">            &#123;albums.map((album: &#123;id: number; title: string&#125;) =&gt; (</span><br><span class="line">                &lt;div key=&#123;album.id&#125; className=&#x27;&#x27;&gt;</span><br><span class="line">                    &lt;h3&gt;&#123;album.title&#125;&lt;/h3&gt;</span><br><span class="line">                    &lt;p&gt;Album ID: &#123;album.id&#125;&lt;/p&gt;</span><br><span class="line">                &lt;/div&gt;</span><br><span class="line">            ))&#125;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">export default album1;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&quot;use client&quot;;</span><br><span class="line"></span><br><span class="line">import &#123; useState,useEffect &#125; from &#x27;react&#x27;;</span><br><span class="line"></span><br><span class="line">function album1() &#123;</span><br><span class="line">    const [albums, setAlbums] = useState([]);</span><br><span class="line"></span><br><span class="line">    useEffect(() =&gt; &#123;</span><br><span class="line">        const fetchAlbums = async () =&gt; &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                const response = await fetch(&quot;https://jsonplaceholder.typicode.com/albums&quot;)</span><br><span class="line">                const data = await response.json();</span><br><span class="line">                setAlbums(data);</span><br><span class="line">            &#125; catch (error) &#123;</span><br><span class="line">                console.error(&quot;Error fetching albums:&quot;, error);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        fetchAlbums();</span><br><span class="line">    &#125;, []);</span><br><span class="line"></span><br><span class="line">    return (</span><br><span class="line">        &lt;div className=&#x27;&#x27;&gt;</span><br><span class="line">            &#123;albums.map((album: &#123;id: number; title: string&#125;) =&gt; (</span><br><span class="line">                &lt;div key=&#123;album.id&#125; className=&#x27;&#x27;&gt;</span><br><span class="line">                    &lt;h3&gt;&#123;album.title&#125;&lt;/h3&gt;</span><br><span class="line">                    &lt;p&gt;Album ID: &#123;album.id&#125;&lt;/p&gt;</span><br><span class="line">                &lt;/div&gt;</span><br><span class="line">            ))&#125;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default album1;</span><br></pre></td></tr></table></figure>
+
+<p>另一種方式是伺服器先跑完才放到前端，這種方式速度會更快，用更少的程式碼。</p>
+<blockquote>
+<p>本地開發npm run dev的時候會有Server Components HMR快取，代表會有更快的回應速度，減少呼叫api的次數。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">async function AlbumsPage() &#123;</span><br><span class="line">    const response = await fetch(&quot;https://jsonplaceholder.typicode.com/albums&quot;);</span><br><span class="line">    if (!response.ok) throw new Error(&quot;Failed to fetch data&quot;);</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">    const albums = await response.json();</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">    return (</span><br><span class="line">        &lt;main className=&quot;min-h-screen bg-slate-50 py-8&quot;&gt;</span><br><span class="line">            &lt;div className=&quot;max-w-4xl mx-auto px-4&quot;&gt;</span><br><span class="line">                &lt;h1 className=&quot;text-2xl font-semibold text-slate-900 mb-6&quot;&gt;</span><br><span class="line">                    Albums</span><br><span class="line">                &lt;/h1&gt;</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">                &lt;div className=&quot;grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4&quot;&gt;</span><br><span class="line">                    &#123;albums.map((album: &#123; id: number; title: string &#125;) =&gt; (</span><br><span class="line">                        &lt;div</span><br><span class="line">                            key=&#123;album.id&#125;</span><br><span class="line">                            className=&quot;bg-white rounded-lg border border-slate-200 p-4 shadow-sm </span><br><span class="line">                                       hover:shadow-md hover:-translate-y-0.5 </span><br><span class="line">                                       transition-transform transition-shadow duration-150&quot;</span><br><span class="line">                        &gt;</span><br><span class="line">                            &lt;h3 className=&quot;text-base font-semibold text-slate-900 mb-1&quot;&gt;</span><br><span class="line">                                &#123;album.title&#125;</span><br><span class="line">                            &lt;/h3&gt;</span><br><span class="line">                            &lt;p className=&quot;text-xs text-slate-500&quot;&gt;</span><br><span class="line">                                ID: &#123;album.id&#125;</span><br><span class="line">                            &lt;/p&gt;</span><br><span class="line">                        &lt;/div&gt;</span><br><span class="line">                    ))&#125;</span><br><span class="line">                &lt;/div&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        &lt;/main&gt;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">export default AlbumsPage;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">async function AlbumsPage() &#123;</span><br><span class="line">    const response = await fetch(&quot;https://jsonplaceholder.typicode.com/albums&quot;);</span><br><span class="line">    if (!response.ok) throw new Error(&quot;Failed to fetch data&quot;);</span><br><span class="line"></span><br><span class="line">    const albums = await response.json();</span><br><span class="line"></span><br><span class="line">    return (</span><br><span class="line">        &lt;main className=&quot;min-h-screen bg-slate-50 py-8&quot;&gt;</span><br><span class="line">            &lt;div className=&quot;max-w-4xl mx-auto px-4&quot;&gt;</span><br><span class="line">                &lt;h1 className=&quot;text-2xl font-semibold text-slate-900 mb-6&quot;&gt;</span><br><span class="line">                    Albums</span><br><span class="line">                &lt;/h1&gt;</span><br><span class="line"></span><br><span class="line">                &lt;div className=&quot;grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4&quot;&gt;</span><br><span class="line">                    &#123;albums.map((album: &#123; id: number; title: string &#125;) =&gt; (</span><br><span class="line">                        &lt;div</span><br><span class="line">                            key=&#123;album.id&#125;</span><br><span class="line">                            className=&quot;bg-white rounded-lg border border-slate-200 p-4 shadow-sm </span><br><span class="line">                                       hover:shadow-md hover:-translate-y-0.5 </span><br><span class="line">                                       transition-transform transition-shadow duration-150&quot;</span><br><span class="line">                        &gt;</span><br><span class="line">                            &lt;h3 className=&quot;text-base font-semibold text-slate-900 mb-1&quot;&gt;</span><br><span class="line">                                &#123;album.title&#125;</span><br><span class="line">                            &lt;/h3&gt;</span><br><span class="line">                            &lt;p className=&quot;text-xs text-slate-500&quot;&gt;</span><br><span class="line">                                ID: &#123;album.id&#125;</span><br><span class="line">                            &lt;/p&gt;</span><br><span class="line">                        &lt;/div&gt;</span><br><span class="line">                    ))&#125;</span><br><span class="line">                &lt;/div&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        &lt;/main&gt;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default AlbumsPage;</span><br></pre></td></tr></table></figure>
+
+<p>回到伺服器端跟客戶端之間的差別，伺服器端的方式有更多好處，像是載入的時間比較快，FCP表現更好。</p>
+<p><img src="/images/good-fcp-values-18.svg" alt="良好的 FCP 值為 1.8 秒或更短，不良的值為 3.0 秒以上，介於兩者之間的值則需要改善"></p>
+<p>也因為在server就先載入好，所以在瀏覽器可以查看到所有原始碼SEO相對也會比較好。</p>
+<p><img src="/images/image-18.png"></p>
+<blockquote>
+<p>參考 <a target="_blank" rel="noopener" href="https://www.youtube.com/@javascriptmastery">JavaScript Mastery</a> 的教學影片 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=I1V9YWqRIeI&t=1540s">https://www.youtube.com/watch?v=I1V9YWqRIeI&t=1540s</a></p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://kingkaizhuang.github.io">全端企鵝</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章連結: </span><span class="post-copyright-info"><a href="https://kingkaizhuang.github.io/2025/11/26/next-js-v16-base/">https://kingkaizhuang.github.io/2025/11/26/next-js-v16-base/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版權聲明: </span><span class="post-copyright-info">本部落格所有文章除特別聲明外，均採用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 授權協議。轉載請註明來源 <a href="https://kingkaizhuang.github.io" target="_blank">FullStackPenguin</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/images/Gemini_Generated_Image_8zuhop8zuhop8zuh-1.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/12/01/streamlit-yolo/" title="Streamlit 結合 yolo 辨識圖片"><img class="cover" src="/images/streamlit_yolo.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Streamlit 結合 yolo 辨識圖片</div></div><div class="info-2"><div class="info-item-1"> 許子恆老師的上課筆記  建立一個資料夾，我這邊取week13。 在week13資料夾中下指令。 他會自動建立基本的檔案，新版的python會使用pyproject.toml管理套件的版本。 1uv init  1uv init  12345678910111213141516// pyproject.toml[project]name = &quot;week13&quot;version = &quot;0.1.0&quot;description = &quot;Add your description here&quot;readme = &quot;README.md&quot;requires-python = &quot;&gt;=3.13&quot;dependencies = [    &quot;altair==4.0&quot;,    &quot;matplotlib&gt;=3.10.7&quot;,    &quot;pillow&gt;=12.0.0&quot;,    &quot;streamlit&gt;=1.51.0&quot;,    &qu...</div></div></div></a><a class="pagination-related" href="/2025/11/24/interest-and-yield/" title="利率＆殖利率"><img class="cover" src="/images/image-12.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">利率＆殖利率</div></div><div class="info-2"><div class="info-item-1">我是一點基礎概念都沒有的小菜機，希望從今天開始慢慢的增加一些有關投資的相關知識。 基金、股票、保險、定存 利率都是評估獲利的關鍵 利率和殖利率差異？ 利率 （通常以一年為計算單位）又稱年利率假設年利率是1%，代表存滿一年可以獲得1%的利息 如果定存時間只設定三個月（1&#x2F;4年）  假設將10000元放入銀行，年利率1%，放12個月跟放6個月分別如下：   通常時間越短的年利率也相對較低。 如果原本跟銀行講好的定存時間是一年，年利率1%，結果只存了六個月就要用這筆錢。 必須要提前解約，這時候利息變成：  殖利率（浮動）舉個例子像是100塊的本金可以拿到5%的利息。  但是本金有可能隨時變大變小，但是利息在一段時間是固定不變的。 假設有一個股票100塊，年利率5塊。  說不定隔天又漲10塊 參考影片：https://www.youtube.com/watch?v=yd3fZRrjzGM&list=PLrZrfGLGySzcZoVhb4idy5B0XI25ZhnF7&index=1 </div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/images/Avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">全端企鵝</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">35</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/KingKaiZhuang"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://www.instagram.com/zhuang_2024/" target="_blank" title="Instagram"><i class="fab fa-instagram" style="color: #E4405F;"></i></a><a class="social-icon" href="https://line.me/ti/p/EeWpQ7ef-e" target="_blank" title="LINE"><i class="fab fa-line" style="color: #00C300;"></i></a><a class="social-icon" href="https://www.facebook.com/profile.php?id=100002212333597" target="_blank" title="Facebook"><i class="fab fa-facebook" style="color: #4267B2;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><a target="_blank" rel="noopener" href="https://orca-biz.com/" alt="OrcaBiz 虎鯨數位行銷" >OrcaBiz 實習生</a>
+<p>🏫 STUST</p>
+<p>📖 目前正在準備 <strong>CPE</strong> 和 <strong>英文多益</strong>。</p>
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目錄</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Console-log-%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">Console.log 的使用方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Router"><span class="toc-number">2.</span> <span class="toc-text">Router</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E5%A2%9E%E4%B8%80%E5%80%8B-Route"><span class="toc-number">2.1.</span> <span class="toc-text">新增一個 Route</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Nested-Routes-%E5%B7%A2%E7%8B%80%E8%B7%AF%E7%94%B1"><span class="toc-number">2.2.</span> <span class="toc-text">Nested Routes 巢狀路由</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Layout-%E7%89%88%E9%9D%A2%E8%A8%AD%E5%AE%9A"><span class="toc-number">3.</span> <span class="toc-text">Layout 版面設定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Route-Groups"><span class="toc-number">4.</span> <span class="toc-text">Route Groups</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Error-Handling-%E9%8C%AF%E8%AA%A4%E8%99%95%E7%90%86"><span class="toc-number">5.</span> <span class="toc-text">Error Handling 錯誤處理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Loading-UI-%E8%BC%89%E5%85%A5%E7%95%AB%E9%9D%A2"><span class="toc-number">6.</span> <span class="toc-text">Loading UI 載入畫面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Data-Fetching-%E8%B3%87%E6%96%99%E6%88%AA%E5%8F%96"><span class="toc-number">7.</span> <span class="toc-text">Data Fetching 資料截取</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/12/04/unity-scene-data/" title="Unity 場景切換以及 Data 共享"><img src="/images/unity-data-scene.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Unity 場景切換以及 Data 共享"/></a><div class="content"><a class="title" href="/2025/12/04/unity-scene-data/" title="Unity 場景切換以及 Data 共享">Unity 場景切換以及 Data 共享</a><time datetime="2025-12-03T16:00:00.000Z" title="發表於 2025-12-04 00:00:00">2025-12-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/12/01/streamlit-yolo/" title="Streamlit 結合 yolo 辨識圖片"><img src="/images/streamlit_yolo.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Streamlit 結合 yolo 辨識圖片"/></a><div class="content"><a class="title" href="/2025/12/01/streamlit-yolo/" title="Streamlit 結合 yolo 辨識圖片">Streamlit 結合 yolo 辨識圖片</a><time datetime="2025-11-30T16:00:00.000Z" title="發表於 2025-12-01 00:00:00">2025-12-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/26/next-js-v16-base/" title="Next.js v16 基本常識"><img src="/images/Gemini_Generated_Image_8zuhop8zuhop8zuh-1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Next.js v16 基本常識"/></a><div class="content"><a class="title" href="/2025/11/26/next-js-v16-base/" title="Next.js v16 基本常識">Next.js v16 基本常識</a><time datetime="2025-11-25T16:00:00.000Z" title="發表於 2025-11-26 00:00:00">2025-11-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/24/interest-and-yield/" title="利率＆殖利率"><img src="/images/image-12.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="利率＆殖利率"/></a><div class="content"><a class="title" href="/2025/11/24/interest-and-yield/" title="利率＆殖利率">利率＆殖利率</a><time datetime="2025-11-23T16:00:00.000Z" title="發表於 2025-11-24 00:00:00">2025-11-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/15/wp-restore-local/" title="如何用雲端備份在本地 Local 重建 WordPress"><img src="/images/Gemini_Generated_Image_vfctf8vfctf8vfct.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="如何用雲端備份在本地 Local 重建 WordPress"/></a><div class="content"><a class="title" href="/2025/11/15/wp-restore-local/" title="如何用雲端備份在本地 Local 重建 WordPress">如何用雲端備份在本地 Local 重建 WordPress</a><time datetime="2025-11-14T16:00:00.000Z" title="發表於 2025-11-15 00:00:00">2025-11-15</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2024 - 2026 By 全端企鵝</span></div><div class="footer_custom_text">StackPenguin | STUST</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="閱讀模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日夜模式切換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目錄"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到頂端"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js" type="module"></script><div class="js-pjax"><script>(() => {
+  const abcjsInit = () => {
+    const abcjsFn = () => {
+      setTimeout(() => {
+        const sheets = document.querySelectorAll(".abc-music-sheet")
+        for (let i = 0; i < sheets.length; i++) {
+          const ele = sheets[i]
+          if (ele.children.length > 0) continue
+
+          // Parse parameters from data-params attribute
+          let params = {}
+          const dp = ele.getAttribute("data-params")
+          if (dp) {
+            try {
+              params = JSON.parse(dp)
+            } catch (e) {
+              console.error("Failed to parse data-params:", e)
+            }
+          }
+
+          // Merge parsed parameters with the responsive option
+          // Ensures params content appears before responsive
+          const options = { ...params, responsive: "resize" }
+
+          // Render the music score using ABCJS.renderAbc
+          ABCJS.renderAbc(ele, ele.textContent, options)
+        }
+      }, 100)
+    }
+
+    if (typeof ABCJS === "object") {
+      abcjsFn()
+    } else {
+      btf.getScript("https://cdn.jsdelivr.net/npm/abcjs@6.6.0/dist/abcjs-basic-min.min.js").then(abcjsFn)
+    }
+  }
+
+  if (window.pjax) {
+    abcjsInit()
+  } else {
+    window.addEventListener("load", abcjsInit)
+  }
+
+  btf.addGlobalFn("encrypt", abcjsInit, "abcjs")
+})()</script></div><div class="aplayer no-destroy"  data-id="60198" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="false"> </div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/fireworks.min.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="true" data-click="false"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
