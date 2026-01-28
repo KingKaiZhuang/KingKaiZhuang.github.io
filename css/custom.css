@@ -1,0 +1,64 @@
+#page-header #post-info {
+  bottom: 100px;
+}
+
+#post-info {
+  display: flex;
+  flex-direction: column;
+  /* 讓內容垂直排列 */
+  justify-content: center;
+  /* 置中對齊內容 */
+  align-items: center;
+  /* 置中對齊內容 */
+  text-align: center;
+  /* 文字置中 */
+}
+
+.post-title {
+  font-size: 2.5em;
+  margin-bottom: 30px;
+  /* 調整標題和元數據間的距離 */
+}
+
+#post-meta {
+  display: flex;
+  flex-direction: column;
+  /* 元數據垂直排列 */
+  align-items: center;
+  /* 元數據置中 */
+}
+
+.meta-firstline,
+.meta-secondline {
+  margin-bottom: 10px;
+  /* 增加每行之間的距離 */
+}
+
+/* Footer Color Customization - Tech Style */
+#footer {
+  background: #0a0a0a !important;
+  /* Deep black background */
+  color: #00f3ff !important;
+  /* Neon cyan text */
+  border-top: 1px solid #00f3ff;
+  /* Neon border */
+  box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+  /* Subtle glow */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  /* Clean tech font */
+}
+
+#footer::before {
+  background: transparent !important;
+}
+
+#footer a {
+  color: #fff !important;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+#footer a:hover {
+  color: #00f3ff !important;
+  text-shadow: 0 0 5px #00f3ff;
+}
