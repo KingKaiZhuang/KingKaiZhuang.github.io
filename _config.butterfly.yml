@@ -3,10 +3,10 @@
 ## 原始碼: https://github.com/hexojs/hexo/
 
 # 站點設置
-title: FullStackPenguin
+title: StackPenguin
 description: ""
 keywords:
-author: 全端企鵝
+author: StackPenguin
 language: zh-TW
 timezone: ""
 
@@ -214,9 +214,8 @@ aside:
   card_announcement:
     enable: true
     content: |
-      <a href="https://orca-biz.com/" alt="OrcaBiz 虎鯨數位行銷" >OrcaBiz 實習生</a>
       <p>🏫 STUST</p>
-      <p>📖 目前正在準備 <strong>CPE</strong> 和 <strong>英文多益</strong>。</p>
+      <p>📖 正在準備 <strong>CPE</strong> 和 <strong>多益</strong>。</p>
 
   card_recent_post:
     enable: true
