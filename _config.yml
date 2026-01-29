@@ -7,13 +7,13 @@ title: StackPenguin
 subtitle: ""
 description: ""
 keywords:
-author: 全端企鵝
+author: StackPenguin
 language: zh-TW
 # timezone: ""
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: https://kingkaizhuang.github.io/
+url: https://stackpenguin.com/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
