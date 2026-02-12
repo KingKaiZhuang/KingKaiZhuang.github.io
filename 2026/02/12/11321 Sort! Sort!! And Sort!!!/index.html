@@ -1,0 +1,245 @@
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>UVA 11321 Sort! Sort!! And Sort!!! | StackPenguin</title><meta name="author" content="StackPenguin"><meta name="copyright" content="StackPenguin"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="題目來源：UVA 11321 - Sort! Sort!! And Sort!!! 解題思路本題要求按照特定規則對一系列整數進行排序。規則如下：  優先比較餘數：將數字除以 $M$ 的餘數（num % M）由小到大排序。 餘數相同時： 奇偶數性質：奇數 (Odd) 優先於偶數 (Even)。 皆為奇數：數值較大者排在前面。 皆為偶數：數值較小者排在前面。    程式解說 模擬 C 語言的餘數運算：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UVA 11321 Sort! Sort!! And Sort!!!">
+<meta property="og:url" content="https://stackpenguin.com/2026/02/12/11321%20Sort!%20Sort!!%20And%20Sort!!!/index.html">
+<meta property="og:site_name" content="StackPenguin">
+<meta property="og:description" content="題目來源：UVA 11321 - Sort! Sort!! And Sort!!! 解題思路本題要求按照特定規則對一系列整數進行排序。規則如下：  優先比較餘數：將數字除以 $M$ 的餘數（num % M）由小到大排序。 餘數相同時： 奇偶數性質：奇數 (Odd) 優先於偶數 (Even)。 皆為奇數：數值較大者排在前面。 皆為偶數：數值較小者排在前面。    程式解說 模擬 C 語言的餘數運算：">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://stackpenguin.com/images/CPE.webp">
+<meta property="article:published_time" content="2026-02-12T06:25:56.000Z">
+<meta property="article:modified_time" content="2026-02-12T10:42:24.061Z">
+<meta property="article:author" content="StackPenguin">
+<meta property="article:tag" content="CPE">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://stackpenguin.com/images/CPE.webp"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "UVA 11321 Sort! Sort!! And Sort!!!",
+  "url": "https://stackpenguin.com/2026/02/12/11321%20Sort!%20Sort!!%20And%20Sort!!!/",
+  "image": "https://stackpenguin.com/images/CPE.webp",
+  "datePublished": "2026-02-12T06:25:56.000Z",
+  "dateModified": "2026-02-12T10:42:24.061Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "StackPenguin",
+      "url": "https://stackpenguin.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://stackpenguin.com/2026/02/12/11321%20Sort!%20Sort!!%20And%20Sort!!!/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '複製成功',
+    error: '複製失敗',
+    noSupport: '瀏覽器不支援'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '剛剛',
+    min: '分鐘前',
+    hour: '小時前',
+    day: '天前',
+    month: '個月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '載入更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'UVA 11321 Sort! Sort!! And Sort!!!',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/wave.css"><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 7.3.0"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+btf.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@latest/themes/blue/pace-theme-flash.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/Avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">30</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">35</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 時間軸</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分類</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/images/CPE_sub.webp);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">StackPenguin</span></a><a class="nav-page-title" href="/"><span class="site-name">UVA 11321 Sort! Sort!! And Sort!!!</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首頁</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 時間軸</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分類</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">UVA 11321 Sort! Sort!! And Sort!!!</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2026-02-12T06:25:56.000Z" title="發表於 2026-02-12 14:25:56">2026-02-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2026-02-12T10:42:24.061Z" title="更新於 2026-02-12 18:42:24">2026-02-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/">程式解題</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/CPE49%E9%A1%8C/">CPE49題</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">瀏覽量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>題目來源：<a target="_blank" rel="noopener" href="https://onlinejudge.org/external/113/11321.pdf">UVA 11321 - Sort! Sort!! And Sort!!!</a></p>
+<h2 id="解題思路"><a href="#解題思路" class="headerlink" title="解題思路"></a>解題思路</h2><p>本題要求按照特定規則對一系列整數進行排序。規則如下：</p>
+<ol>
+<li><strong>優先比較餘數</strong>：將數字除以 $M$ 的餘數（<code>num % M</code>）由小到大排序。</li>
+<li><strong>餘數相同時</strong>：<ul>
+<li><strong>奇偶數性質</strong>：奇數 (Odd) 優先於偶數 (Even)。</li>
+<li><strong>皆為奇數</strong>：數值較<strong>大</strong>者排在前面。</li>
+<li><strong>皆為偶數</strong>：數值較<strong>小</strong>者排在前面。</li>
+</ul>
+</li>
+</ol>
+<h2 id="程式解說"><a href="#程式解說" class="headerlink" title="程式解說"></a>程式解說</h2><ol>
+<li><strong>模擬 C 語言的餘數運算</strong>：Python 的 <code>%</code> 運算子在處理負數時與 C&#x2F;C++ 不同（例如：<code>-10 % 3</code> 在 Python 是 <code>2</code>，在 C 是 <code>-1</code>）。題目要求的是 C 語言風格的餘數，因此需要針對負數做修正。</li>
+</ol>
+<h2 id="程式碼"><a href="#程式碼" class="headerlink" title="程式碼"></a>程式碼</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">sort_key</span>(<span class="params">num</span>):</span><br><span class="line">	r=mod(num,m)</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span> num%<span class="number">2</span>!=<span class="number">0</span>:</span><br><span class="line">		isOdd=<span class="number">0</span></span><br><span class="line">		last=-num</span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		isOdd=<span class="number">1</span></span><br><span class="line">		last=num</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> (r,isOdd,last)</span><br><span class="line">	</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">mod</span>(<span class="params">x,m</span>):</span><br><span class="line">	mo=x%m</span><br><span class="line">	<span class="keyword">if</span> x&lt;<span class="number">0</span> <span class="keyword">and</span> mo&gt;<span class="number">0</span>:</span><br><span class="line">		mo=x%m-m</span><br><span class="line">	<span class="keyword">return</span> mo</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">	n,m=<span class="built_in">map</span>(<span class="built_in">int</span>,<span class="built_in">input</span>().split())</span><br><span class="line">	<span class="built_in">print</span>(n,m)</span><br><span class="line">	<span class="keyword">if</span> n==<span class="number">0</span> <span class="keyword">and</span> m==<span class="number">0</span>:</span><br><span class="line">		<span class="keyword">break</span></span><br><span class="line">	numList=[]</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">		number=<span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line">		numList.append(number)</span><br><span class="line">	</span><br><span class="line">	numList.sort(key=sort_key)</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> numList:</span><br><span class="line">		<span class="built_in">print</span>(i)</span><br></pre></td></tr></table></figure>
+
+<h2 id="補充：Python-與-C-的-Modulo-差異"><a href="#補充：Python-與-C-的-Modulo-差異" class="headerlink" title="補充：Python 與 C 的 Modulo 差異"></a>補充：Python 與 C 的 Modulo 差異</h2><p>在解這題時，需特別注意 Python 與 C&#x2F;C++ 對於負數取餘數的定義不同：</p>
+<ul>
+<li><strong>Python</strong>: <code>-10 % 3 = 2</code> (結果符號通常與<strong>除數</strong>相同)</li>
+<li><strong>C&#x2F;C++</strong>: <code>-10 % 3 = -1</code> (結果符號通常與<strong>被除數</strong>相同)</li>
+</ul>
+<p>為了符合題目的測資要求（題目是基於 C 語言行為），當 <code>n &lt; 0</code> 且計算出的餘數 <code>&gt; 0</code> 時，我們需要減去 <code>m</code> 來調整回 C 語言的結果。</p>
+<blockquote>
+<p>簡單想法：在 Python 中，<code>%</code> 可以想成「加上多少個除數，才能變回正的倍數？」；而此題需要的是「直接對數值截斷」的餘數概念。</p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://stackpenguin.com">StackPenguin</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章連結: </span><span class="post-copyright-info"><a href="https://stackpenguin.com/2026/02/12/11321%20Sort!%20Sort!!%20And%20Sort!!!/">https://stackpenguin.com/2026/02/12/11321%20Sort!%20Sort!!%20And%20Sort!!!/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版權聲明: </span><span class="post-copyright-info">本部落格所有文章除特別聲明外，均採用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 授權協議。轉載請註明來源 <a href="https://stackpenguin.com" target="_blank">StackPenguin</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CPE/">CPE</a></div><div class="post-share"><div class="social-share" data-image="/images/CPE.webp" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/12/04/unity-scene-data/" title="Unity 場景切換以及 Data 共享"><img class="cover" src="/images/unity-data-scene.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Unity 場景切換以及 Data 共享</div></div><div class="info-2"><div class="info-item-1">這一篇文章主要是想分享 Unity的場景切換，那切換到不同的場景，要怎麼樣使用上一個場景所帶來的資料。 SongSelect Scene 按下Start按鈕開始，要把資料帶到下一個遊戲頁面。  MusicData.cs1234567891011121314using System.Collections;using System.Collections.Generic;using UnityEngine;&lt;div&gt;&lt;/div&gt;[CreateAssetMenu(fileName = &quot;MusicData&quot;, menuName = &quot;Rhythm/MusicData&quot;)]public class MusicData : ScriptableObject&#123;    public string musicName;    public string author;    public AudioClip audioClip;    public Sprite coverImage;    public int bpm...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相關推薦</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2024/09/16/UVA-10041-Vito-s-Family/" title="UVA 10041 - Vito&#39;s Family"><img class="cover" src="/images/CPE.webp" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-16</div><div class="info-item-2">UVA 10041 - Vito&#39;s Family</div></div><div class="info-2"><div class="info-item-1">題目來源：UVA 10041 - Vito’s Family 題目描述Vito 的家族住在同一條街上，但每個人的住址可能不同。Vito 想找到一個住址，使得該住址到家族成員所有住址的總距離最小。給定每位家族成員的住址，找出這個最佳的住址，並計算最小總距離。 解題思路本題的核心在於如何選擇一個最佳住址，使得所有成員到該住址的總距離最小。最佳的住址是所有家族成員住址的中位數，因為中位數在統計學中能最小化絕對差距的總和。 步驟： 輸入測試案例數量。 輸入家族成員數量與其住址。 對住址進行排序，找出中位數作為最佳住址。 計算每個住址與中位數之間的距離總和。 輸出最小總距離。  程式碼1234567891011121314151617181920212223242526272829303132333435#include &lt;iostream&gt;#include &lt;algorithm&gt;#include &lt;vector&gt;using namespace std;int main()&#123;    int testCases;    cin &gt;&gt; ...</div></div></div></a><a class="pagination-related" href="/2024/09/17/UVA-10420-List-of-Conquests/" title="UVA 10420 - List of Conquests"><img class="cover" src="/images/CPE.webp" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-17</div><div class="info-item-2">UVA 10420 - List of Conquests</div></div><div class="info-2"><div class="info-item-1">題目描述題要求我們統計來自不同國家的名字出現次數。輸入包括多行，每行以一個國家名稱開頭，後接一個人名。我們只需要統計每個國家出現的次數，而不需要考慮人名。  題目來源：UVA 10420 - List of Conquests  解題思路 輸入處理：每行的輸入以國家名稱開頭，後面跟著人名。我們只需要提取每行中的國家名稱並忽略後面的內容。 統計國家出現次數：我們可以使用 map 來儲存國家名稱和對應的出現次數。 排序與輸出：map 會自動根據國家名稱字典序進行排序，因此輸出時會直接按順序列出。  步驟： 讀取輸入行數：首先讀取輸入的總行數。 讀取每行的國家名稱：使用 getline() 函數讀取整行，並透過 find() 函數找到第一個空格來提取國家名稱。 統計國家出現次數：利用 map 來儲存每個國家的出現次數。 輸出結果：遍歷 map，輸出國家名稱及其出現次數。  程式碼1234567891011121314151617181920212223242526272829#include &lt;iostream&gt;#include &lt;map&gt;#include &l...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/images/Avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">StackPenguin</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">30</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">35</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/KingKaiZhuang"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://www.instagram.com/zhuang_2024/" target="_blank" title="Instagram"><i class="fab fa-instagram" style="color: #E4405F;"></i></a><a class="social-icon" href="https://line.me/ti/p/EeWpQ7ef-e" target="_blank" title="LINE"><i class="fab fa-line" style="color: #00C300;"></i></a><a class="social-icon" href="https://www.facebook.com/profile.php?id=100002212333597" target="_blank" title="Facebook"><i class="fab fa-facebook" style="color: #4267B2;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><p>🏫 STUST</p>
+<p>📖 正在準備 <strong>CPE</strong> 和 <strong>多益</strong>。</p>
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目錄</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E9%A1%8C%E6%80%9D%E8%B7%AF"><span class="toc-number">1.</span> <span class="toc-text">解題思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A8%8B%E5%BC%8F%E8%A7%A3%E8%AA%AA"><span class="toc-number">2.</span> <span class="toc-text">程式解說</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A8%8B%E5%BC%8F%E7%A2%BC"><span class="toc-number">3.</span> <span class="toc-text">程式碼</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A3%9C%E5%85%85%EF%BC%9APython-%E8%88%87-C-%E7%9A%84-Modulo-%E5%B7%AE%E7%95%B0"><span class="toc-number">4.</span> <span class="toc-text">補充：Python 與 C 的 Modulo 差異</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/02/12/11321%20Sort!%20Sort!!%20And%20Sort!!!/" title="UVA 11321 Sort! Sort!! And Sort!!!"><img src="/images/CPE.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="UVA 11321 Sort! Sort!! And Sort!!!"/></a><div class="content"><a class="title" href="/2026/02/12/11321%20Sort!%20Sort!!%20And%20Sort!!!/" title="UVA 11321 Sort! Sort!! And Sort!!!">UVA 11321 Sort! Sort!! And Sort!!!</a><time datetime="2026-02-12T06:25:56.000Z" title="發表於 2026-02-12 14:25:56">2026-02-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/12/04/unity-scene-data/" title="Unity 場景切換以及 Data 共享"><img src="/images/unity-data-scene.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Unity 場景切換以及 Data 共享"/></a><div class="content"><a class="title" href="/2025/12/04/unity-scene-data/" title="Unity 場景切換以及 Data 共享">Unity 場景切換以及 Data 共享</a><time datetime="2025-12-03T16:00:00.000Z" title="發表於 2025-12-04 00:00:00">2025-12-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/12/01/streamlit-yolo/" title="Streamlit 結合 yolo 辨識圖片"><img src="/images/streamlit_yolo.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Streamlit 結合 yolo 辨識圖片"/></a><div class="content"><a class="title" href="/2025/12/01/streamlit-yolo/" title="Streamlit 結合 yolo 辨識圖片">Streamlit 結合 yolo 辨識圖片</a><time datetime="2025-11-30T16:00:00.000Z" title="發表於 2025-12-01 00:00:00">2025-12-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/26/next-js-v16-base/" title="Next.js v16 基本常識"><img src="/images/Gemini_Generated_Image_8zuhop8zuhop8zuh-1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Next.js v16 基本常識"/></a><div class="content"><a class="title" href="/2025/11/26/next-js-v16-base/" title="Next.js v16 基本常識">Next.js v16 基本常識</a><time datetime="2025-11-25T16:00:00.000Z" title="發表於 2025-11-26 00:00:00">2025-11-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/24/interest-and-yield/" title="利率＆殖利率"><img src="/images/image-12.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="利率＆殖利率"/></a><div class="content"><a class="title" href="/2025/11/24/interest-and-yield/" title="利率＆殖利率">利率＆殖利率</a><time datetime="2025-11-23T16:00:00.000Z" title="發表於 2025-11-24 00:00:00">2025-11-24</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2024 - 2026 By StackPenguin</span></div><div class="footer_custom_text">StackPenguin | STUST</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="閱讀模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日夜模式切換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目錄"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到頂端"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js" type="module"></script><div class="js-pjax"><script>(() => {
+  const abcjsInit = () => {
+    const abcjsFn = () => {
+      setTimeout(() => {
+        const sheets = document.querySelectorAll(".abc-music-sheet")
+        for (let i = 0; i < sheets.length; i++) {
+          const ele = sheets[i]
+          if (ele.children.length > 0) continue
+
+          // Parse parameters from data-params attribute
+          let params = {}
+          const dp = ele.getAttribute("data-params")
+          if (dp) {
+            try {
+              params = JSON.parse(dp)
+            } catch (e) {
+              console.error("Failed to parse data-params:", e)
+            }
+          }
+
+          // Merge parsed parameters with the responsive option
+          // Ensures params content appears before responsive
+          const options = { ...params, responsive: "resize" }
+
+          // Render the music score using ABCJS.renderAbc
+          ABCJS.renderAbc(ele, ele.textContent, options)
+        }
+      }, 100)
+    }
+
+    if (typeof ABCJS === "object") {
+      abcjsFn()
+    } else {
+      btf.getScript("https://cdn.jsdelivr.net/npm/abcjs@6.6.0/dist/abcjs-basic-min.min.js").then(abcjsFn)
+    }
+  }
+
+  if (window.pjax) {
+    abcjsInit()
+  } else {
+    window.addEventListener("load", abcjsInit)
+  }
+
+  btf.addGlobalFn("encrypt", abcjsInit, "abcjs")
+})()</script></div><div class="aplayer no-destroy"  data-id="60198" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="false"> </div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/fireworks.min.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="true" data-click="false"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
